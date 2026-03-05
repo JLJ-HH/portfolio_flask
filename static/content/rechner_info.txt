@@ -1,0 +1,11 @@
+SmartCalc – Wissenschaftlicher Rechner mit Python & Tkinter
+
+Dieser Rechner ist kein einfaches "eval()"-Tool, sondern eine robuste Desktop-Applikation mit Fokus auf mathematische Präzision und Sicherheit.
+
+Technische Highlights:
+• Sicherer Rechen-Parser: Eigenentwickelte Logik mit Whitelist-Validierung. Verhindert Code-Injection durch striktes Filtern erlaubter Zeichen.
+• Erweiterte Mathematik: Unterstützung für komplexe Operationen wie Trigonometrie (sin, cos), Wurzeln (√) und Potenzen (^) mittels RegEx-Mapping.
+• Dynamisches UI-Management: Vollständiger Dark- & Light-Mode Support sowie ein modales Fenster für Shortcuts zur Steigerung der User-Experience.
+• Verlaufs-Speicher: Ein RAM-basiertes Datenmanagement erlaubt das Einsehen vergangener Berechnungen in einem separaten, synchronisierten Fenster.
+
+Die modulare Architektur trennt strikt zwischen GUI (View), Berechnungslogik (Logic) und Datenverwaltung (Data).

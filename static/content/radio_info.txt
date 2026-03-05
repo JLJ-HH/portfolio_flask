@@ -1,0 +1,11 @@
+Milo Radio – Die moderne Progressive Web App (PWA)
+
+Dieses Projekt ist weit mehr als ein einfacher Audioplayer. Es ist eine performante Single-Page-Application (SPA), die echtes Radio-Feeling mit modernster Web-Technologie verbindet.
+
+Die Highlights:
+• Offline-First & PWA: Dank Service-Worker (sw.js) und Web-Manifest ist die App installierbar und bleibt auch ohne stabile Internetverbindung einsatzbereit.
+• Intelligentes Metadaten-Handling: Über einen PHP-Proxy (metadata.php) werden ICY-Streams gepollt, um aktuelle Songtitel in Echtzeit anzuzeigen.
+• Dynamisches Management: Ein PIN-geschützter Admin-Bereich erlaubt die volle Kontrolle (CRUD) über die 69 integrierten Sender direkt im Browser.
+• User-Zentriert: Ein Favoriten-System auf Basis von LocalStorage sorgt dafür, dass die persönliche Auswahl des Nutzers dauerhaft gespeichert bleibt.
+
+Technisch setzt das Projekt auf eine saubere MVC-Architektur mit ES6-Modulen, was den Code modular und wartbar macht.

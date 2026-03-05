@@ -1,0 +1,42 @@
+[
+    {
+        "title": "Milo Radio App",
+        "image": "/static/images/milo.png",
+        "live_url": "https://jlj-hh.github.io/milo-radio/",
+        "info_file": "radio_info.txt",
+        "tech": "HTML, CSS, JS, Flask",
+        "struct_file": "radio_structure.txt"
+    },
+    {
+        "title": "Scrum Quiz App",
+        "image": "/static/images/psmi.png",
+        "live_url": "https://jlj-hh.github.io/scrum_quiz2/",
+        "info_text": "Interaktives Quiz zur Vorbereitung auf Zertifizierungen.",
+        "tech": "HTML, CSS, JavaScript",
+        "struct_text": "Scrum Quiz\n ├─ Question Engine\n ├─ LocalStorage\n └─ Score Calculation"
+    },
+    {
+        "title": "Python Scientific Calc",
+        "image": "/static/images/calculator.png",
+        "live_url": "https://github.com/JLJ-HH/calculator",
+        "info_file": "rechner_info.txt",
+        "tech": "Python, Tkinter",
+        "struct_file": "rechner_structure.txt"
+    },
+    {
+        "title": "",
+        "image": "",
+        "live_url": "",
+        "info_file": "",
+        "tech": "",
+        "struct_file": ""
+    },
+    {
+        "title": "",
+        "image": "",
+        "live_url": "",
+        "info_file": "",
+        "tech": "",
+        "struct_file": ""
+    }
+]

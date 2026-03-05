@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block page_title %}Home - José Luis{% endblock %}
+{% block content %}
+<div class="row align-items-center min-vh-75">
+    <div class="col-md-8 mx-auto text-center py-5">
+        <h1 class="display-4 fw-bold mb-4">Hey! Schön dass du da bist</h1>
+        
+        <p class="lead mb-5">
+            Ich bin José Luis, Azubi Anwendungsentwickler aus Hamburg. 
+            Hier kriegst du Einblicke in meine Projekte und kannst mir direkt schreiben.
+        </p>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-semibold">Meine Projekte</h5>
+                        <p class="card-text">Live-Demos, Tech-Stacks & Strukturpläne</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-semibold">Kontakt</h5>
+                        <p class="card-text">Funktionsfähiges Formular – ich antworte schnell!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-start">
+                        <h5 class="card-title fw-semibold">GitHub</h5>
+                        <p class="card-text">Alle Repos & Source-Code zum Anschauen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-grid gap-3 col-lg-6 mx-auto">
+            <p class="fs-5 fw-semibold text-center mb-3">Schau dich gerne um!</p>
+            <a href="/projects" class="btn btn-primary btn-lg">Projekte entdecken</a>
+            <a href="/about" class="btn btn-outline-light btn-lg">Über mich</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

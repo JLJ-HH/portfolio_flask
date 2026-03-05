@@ -1,0 +1,61 @@
+/* ============================================================
+   GitHub-Link Styling: rechts neben Formular (horizontal)
+   ============================================================ */
+.social-links {
+  flex: 1 1 30%;
+  display: flex;
+  justify-content: flex-start; /* Start, damit es am linken Rand der rechten Spalte bleibt */
+  align-items: center;
+  gap: 25px; /* Abstand zwischen Icon und Text */
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Icon-Styling */
+.social-links img {
+  width: 100px;
+  height: 100px;
+  transition: transform 0.3s ease;
+}
+
+.social-links img:hover {
+  transform: scale(1.1);
+}
+
+/* Text direkt neben dem Icon */
+.social-links a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: #3cb371; /* hellgrün wirkt edel auf dunklem Hintergrund */
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px; /* vorher 15px */
+  letter-spacing: 0.5px;
+}
+
+/* leichte Hover-Wirkung */
+.social-links a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Anpassung für Smartphone */
+@media (max-width: 700px) {
+  .social-links {
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 25px;
+    gap: 10px;
+  }
+
+  .social-links img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .social-links a {
+    flex-direction: column;
+    font-size: 17px;
+  }
+}

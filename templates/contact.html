@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block page_title %}Contact{% endblock %}
+
+{% block content %}
+    {# Hier binden wir das neue, saubere HTML-Template ein #}
+    {% include "contact_form.html" %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+    {# github.css kannst du evtl. weglassen, wenn alles in contact.css steht #}
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+{% endblock %}

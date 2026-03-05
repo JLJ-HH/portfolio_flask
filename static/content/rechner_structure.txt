@@ -1,0 +1,27 @@
+===========================================================
+STRUKTURPLAN: SmartCalc (Python/Tkinter)
+===========================================================
+
+📂 SmartCalc_Project
+│
+├── 📄 main.py               # App-Controller & Tkinter Mainloop
+│
+├── 📁 modules/              # Modulare Logik-Einheiten
+│   ├── 📄 gui_controller.py # [View] Grid-Layout (42+ Buttons) & Themes
+│   ├── 📄 parser_engine.py  # [Logic] Whitelist-Check & RegEx-Preprocessing
+│   └── 📄 history_manager.py # [Data] RAM-Storage & Toplevel-UI Kapselung
+│
+└── 📁 assets/
+    └── 📄 shortcuts.json    # Konfiguration für Keyboard-Support
+
+===========================================================
+FEATURES IM DETAIL
+===========================================================
+Feature      | Umsetzung                | Technik
+-------------|--------------------------|------------------
+Security     | Injektions-Schutz        | Whitelist-Validierung
+Math-Engine  | Komplexe Formeln         | RegEx Preprocessing
+UI-Themes    | Dark/Light Mode          | Tkinter Config-Mapping
+Verlauf      | Session-History          | Toplevel-Windows (OOP)
+Keyboard     | Volle Steuerung          | Event-Bindings (<Return>)
+===========================================================

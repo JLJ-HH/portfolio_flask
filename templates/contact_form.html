@@ -1,0 +1,48 @@
+<div class="contact-wrapper">
+    <form id="contactForm" class="fade-in" method="POST">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }} fade-in">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <div class="left-col">
+            <label for="name">Name*</label>
+            <input type="text" id="name" name="name" placeholder="Dein Name" required>
+            
+            <label for="company" class="mt-15">Unternehmen (optional)</label>
+            <input type="text" id="company" name="company" placeholder="Dein Unternehmen">
+        </div>
+
+        <div class="right-col">
+            <label for="email">E-Mail*</label>
+            <input type="email" id="email" name="email" placeholder="deine@email.de" required>
+            
+            <label for="subject" class="mt-15">Betreff*</label>
+            <input type="text" id="subject" name="subject" placeholder="Worum geht es?" required>
+            
+            <label class="privacy-label">
+                <input type="checkbox" id="privacy" required>
+                Ich stimme der Verarbeitung meiner Daten zu.*
+            </label>
+        </div>
+
+        <div class="message-col">
+            <label for="message">Nachricht*</label>
+            <textarea id="message" name="message" rows="6" placeholder="Schreibe deine Nachricht..." required></textarea>
+        </div>
+
+        <button type="submit">Senden</button>
+    </form>
+
+    <div class="social-links fade-in">
+        <a href="https://github.com/JLJ-HH" target="_blank" rel="noopener">
+            <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
+            <span>Hier geht es zu meinen Repositories</span>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,199 @@
+/* ===============================
+   GLOBAL & BODY
+   =============================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background-color: #0b132b
+}
+
+/* Container für Zentrierung des Inhalts */
+.page-container .content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 2%;
+    max-width: 95vw;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   KONTAKT-LAYOUT (Formular + GitHub nebeneinander)
+   ============================================================ */
+.contact-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* ===============================
+   FORMULAR STYLING (Glassmorphism)
+   =============================== */
+#contactForm {
+    flex: 1 1 75%;
+    max-width: 1000px;
+    width: 100%;
+    
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                url("../images/wald.jpg") center/cover no-repeat;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    
+    padding: 45px;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 25px 35px;
+    color: #fff;
+    
+    /* Für Parallax-JS */
+    transition: background-position 0.2s ease-out, transform 0.3s ease;
+}
+
+#contactForm h2 {
+    grid-column: span 2;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+/* ===============================
+   INPUTS, LABELS & BUTTONS
+   =============================== */
+label {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+input, textarea {
+    width: 100%;
+    padding: 14px 18px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.message-col { grid-column: span 2; }
+
+.privacy-label {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+.privacy-label input { width: auto; margin: 0; }
+.privacy-label a { color: #b8f5c2; text-decoration: none; font-weight: 700; }
+
+button {
+    grid-column: span 2;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #3cb371;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #2e8b57;
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ===============================
+   GITHUB / SOCIAL SECTION
+   =============================== */
+.social-links {
+    flex: 1 1 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-links img {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-links img:hover { transform: scale(1.15) rotate(5deg); }
+
+.social-links a {
+    color: #b8f5c2;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ===============================
+   RESPONSIVE (Mobile)
+   =============================== */
+@media (max-width: 900px) {
+    .contact-wrapper {
+        flex-direction: column;
+        gap: 40px;
+    }
+    
+    #contactForm {
+        grid-template-columns: 1fr;
+        padding: 30px 20px;
+        flex: 1 1 100%;
+    }
+    
+    #contactForm h2, .left-col, .right-col, .message-col, .privacy-label, button {
+        grid-column: 1;
+    }
+
+    .social-links { order: -1; } /* GitHub Icon auf Handy oben anzeigen */
+}
+
+/* Animation */
+.fade-in {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}

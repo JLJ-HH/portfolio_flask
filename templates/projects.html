@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block page_title %}Projekte - José Luis{% endblock %}
+
+{% block content %}
+<div class="slider-wrapper py-5">
+    <div id="slider" class="slider fade-in">
+        {% for p in projects %}
+        <div class="item">
+            <img src="{{ p.image }}" alt="{{ p.title }}" class="card-image">
+            <div class="card-footer">
+                <button class="card-btn live-link" onclick="event.stopPropagation(); window.open('{{ p.live_url }}','_blank')">Live-Link</button>
+                <button class="card-btn structure" onclick="event.stopPropagation(); toggleOverlay(this, '.card-structure')">Strukturplan</button>
+                <button class="card-btn info" onclick="event.stopPropagation(); toggleOverlay(this, '.card-info')">Info</button>
+            </div>
+
+            <div class="card-info">
+                <span class="close-info" onclick="event.stopPropagation(); toggleOverlay(this, '.card-info');">&times;</span>
+                <h3 style="margin: 0 0 10px 0; color: #333;">{{ p.title }}</h3>
+                <p style="font-size: 0.9rem; line-height: 1.5; white-space: pre-line;">{{ p.description }}</p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 10px 0;">
+                <small><strong>Tech-Stack:</strong> {{ p.tech }}</small>
+            </div>
+
+            <div class="card-structure">
+                <span class="close-info" onclick="event.stopPropagation(); toggleOverlay(this, '.card-structure');">&times;</span>
+                <h3 style="margin: 0 0 10px 0; color: #4d96ff;">Strukturplan</h3>
+                <pre class="structure-text">{{ p.structure }}</pre>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button type="button" id="prev">&lt;</button>
+    <button type="button" id="next">&gt;</button>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/slider.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+{% endblock %}

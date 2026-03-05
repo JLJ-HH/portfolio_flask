@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="about-split-viewport fade-in">
+    <section class="visual-side">
+        <img src="{{ url_for('static', filename='images/OIP.png') }}" alt="Luis">
+    </section>
+
+    <section class="text-side">
+        <div class="content-box">
+            <div class="text-body">
+                {% if about_text and about_text.strip() %}
+                    {{ about_text|safe }}
+                {% else %}
+                    <p>Ich bin Luis und möchte <strong>Fullstack-Entwickler</strong> werden!</p>
+                {% endif %}
+            </div>
+            
+            <div class="action-bar">
+                <a href="{{ url_for('contact') }}" class="btn-mega">Kontakt</a>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

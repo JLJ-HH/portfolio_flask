@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mein Portfolio{% endblock %}</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Eigene Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-container">
+        <!-- Bootstrap Navbar - RESPONSIV -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="{{ url_for('home') }}">Mein Portfolio</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link{% if request.endpoint == 'home' %} active fw-semibold{% endif %}" href="{{ url_for('home') }}">Home</a>
+                        <a class="nav-link{% if request.endpoint == 'about' %} active fw-semibold{% endif %}" href="{{ url_for('about') }}">About Me</a>
+                        <a class="nav-link{% if request.endpoint == 'projects' %} active fw-semibold{% endif %}" href="{{ url_for('projects') }}">Projects</a>
+                        <a class="nav-link{% if request.endpoint == 'contact' %} active fw-semibold{% endif %}" href="{{ url_for('contact') }}">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Page Title ENTFERNT - Navbar zeigt Position -->
+
+        <!-- Hauptinhalt -->
+        <main class="content container my-5">
+            {% block content %}{% endblock %}
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container text-center">
+                <p class="mb-0">© 2026 José Luis Juárez.</p>
+                <p>Softwareentwickler in Ausbildung</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/layout.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
