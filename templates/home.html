@@ -1,48 +1,46 @@
 {% extends "base.html" %}
 {% block page_title %}Home - José Luis{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="row align-items-center min-vh-75">
-    <div class="col-md-8 mx-auto text-center py-5">
-        <h1 class="display-4 fw-bold mb-4">Hey! Schön dass du da bist</h1>
+<div class="home-hero fade-in">
+    <div class="container">
+        <h1>Hey! Schön dass du da bist</h1>
         
-        <p class="lead mb-5">
-            Ich bin José Luis, Azubi Anwendungsentwickler aus Hamburg. 
-            Hier kriegst du Einblicke in meine Projekte und kannst mir direkt schreiben.
+        <p class="lead">
+            Ich bin <strong>José Luis Juárez</strong>, angehender Anwendungsentwickler aus Hamburg. 
+            Hier erhältst du Einblicke in meine Projekte, meine Arbeitsweise und kannst direkt mit mir in Kontakt treten.
         </p>
 
         <div class="row g-4 mb-5">
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-start">
-                        <h5 class="card-title fw-semibold">Meine Projekte</h5>
-                        <p class="card-text">Live-Demos, Tech-Stacks & Strukturpläne</p>
-                    </div>
+                <div class="home-feature-card">
+                    <h5>Meine Projekte</h5>
+                    <p>Entdecke Live-Demos, Tech-Stacks und die Architektur hinter meinen Entwicklungen.</p>
                 </div>
             </div>
             
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-start">
-                        <h5 class="card-title fw-semibold">Kontakt</h5>
-                        <p class="card-text">Funktionsfähiges Formular – ich antworte schnell!</p>
-                    </div>
+                <div class="home-feature-card">
+                    <h5>Kontakt</h5>
+                    <p>Nutze das Formular für Anfragen oder professionellen Austausch – ich antworte zeitnah!</p>
                 </div>
             </div>
             
             <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm">
-                    <div class="card-body text-start">
-                        <h5 class="card-title fw-semibold">GitHub</h5>
-                        <p class="card-text">Alle Repos & Source-Code zum Anschauen</p>
-                    </div>
+                <div class="home-feature-card">
+                    <h5>Code & Repos</h5>
+                    <p>Alle Quellcodes und Repositories findest du direkt auf meinem GitHub-Profil verlinkt.</p>
                 </div>
             </div>
         </div>
 
-        <div class="d-grid gap-3 col-lg-6 mx-auto">
-            <p class="fs-5 fw-semibold text-center mb-3">Schau dich gerne um!</p>
-            <a href="/projects" class="btn btn-primary btn-lg">Projekte entdecken</a>
-            <a href="/about" class="btn btn-outline-light btn-lg">Über mich</a>
+        <div class="home-cta-group">
+            <a href="/projects" class="btn-premium btn-premium-primary">Projekte entdecken</a>
+            <a href="/about" class="btn-premium btn-premium-outline">Über mich</a>
         </div>
     </div>
 </div>

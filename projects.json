@@ -2,7 +2,7 @@
     {
         "title": "Milo Radio App",
         "image": "/static/images/milo.png",
-        "live_url": "https://jlj-hh.github.io/milo-radio/",
+        "live_url": "http://radio.jljuarez.de/",
         "info_file": "radio_info.txt",
         "tech": "HTML, CSS, JS, Flask",
         "struct_file": "radio_structure.txt"

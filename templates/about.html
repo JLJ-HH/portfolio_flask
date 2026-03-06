@@ -5,25 +5,23 @@
 {% endblock %}
 
 {% block content %}
-<div class="about-split-viewport fade-in">
-    <section class="visual-side">
-        <img src="{{ url_for('static', filename='images/OIP.png') }}" alt="Luis">
-    </section>
-
-    <section class="text-side">
-        <div class="content-box">
-            <div class="text-body">
-                {% if about_text and about_text.strip() %}
-                    {{ about_text|safe }}
-                {% else %}
-                    <p>Ich bin Luis und möchte <strong>Fullstack-Entwickler</strong> werden!</p>
-                {% endif %}
-            </div>
+<div class="about-hero-container">
+    <div class="about-hero-image">
+        <img src="{{ url_for('static', filename='images/OIP.png') }}" alt="José Luis Juárez">
+    </div>
+    
+    <div class="about-hero-content">
+        <div class="about-text-minimal">
+            {% if about_text and about_text.strip() %}
+                {{ about_text|safe }}
+            {% else %}
+                <p>José Luis Juárez. Anwendungsentwickler.</p>
+            {% endif %}
             
-            <div class="action-bar">
-                <a href="{{ url_for('contact') }}" class="btn-mega">Kontakt</a>
+            <div class="about-cta-minimal">
+                <a href="{{ url_for('contact') }}" class="btn-minimal">Kontakt aufnehmen</a>
             </div>
         </div>
-    </section>
+    </div>
 </div>
 {% endblock %}
