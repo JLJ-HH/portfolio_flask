@@ -11,17 +11,7 @@
     </div>
     
     <div class="about-hero-content">
-        <div class="about-text-minimal">
-            {% if about_text and about_text.strip() %}
-                {{ about_text|safe }}
-            {% else %}
-                <p>José Luis Juárez. Anwendungsentwickler.</p>
-            {% endif %}
-            
-            <div class="about-cta-minimal">
-                <a href="{{ url_for('contact') }}" class="btn-minimal">Kontakt aufnehmen</a>
-            </div>
-        </div>
+        <div class="about-text-minimal">{% if about_text and about_text.strip() %}{{ about_text|safe }}{% else %}<p>José Luis Juárez. Anwendungsentwickler.</p>{% endif %}<div class="about-cta-minimal"><a href="{{ url_for('contact') }}" class="btn-minimal">Kontakt aufnehmen</a></div></div>
     </div>
 </div>
 {% endblock %}

@@ -47,8 +47,11 @@ def get_content_file(filename, convert_markdown=False):
         if os.path.exists(filepath):
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
-                if convert_markdown and markdown2:
-                    return markdown2.markdown(content)
+                if convert_markdown:
+                    if markdown2:
+                        return markdown2.markdown(content, extras=["break-on-newline"])
+                    # Fallback: simple line break preservation if markdown2 is missing
+                    return content.replace('\n', '<br>\n')
                 return content
         return "Inhalt wird bald ergänzt..."
     except Exception as e:
