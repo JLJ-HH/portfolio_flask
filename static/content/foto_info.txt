@@ -1,0 +1,11 @@
+Interactive Foto-Gallery – Dynamischer 3D-Slider & Zoom
+
+Diese Foto-Gallery ist weit mehr als eine einfache Bildersammlung. Es ist eine interaktive Web-Applikation, die durch cineastische Animationen und ein nahtloses Nutzererlebnis besticht.
+
+Die Highlights:
+• Dynamischer 3D-Slider: Eine JavaScript-gesteuerte Engine berechnet Position, Skalierung und Unschärfe der Karten in Echtzeit, um einen beeindruckenden räumlichen Effekt zu erzielen.
+• Intelligentes Zoom-System: Ein Vollbild-Overlay mit Click-to-Zoom ermöglicht es, Details der Bilder ohne Qualitätsverlust und perfekt proportional zu betrachten.
+• JSON-Driven Content: Die gesamte Galerie wird dynamisch über eine zentrale Konfigurationsdatei (gallery.json) gesteuert, was das Hinzufügen neuer Inhalte zum Kinderspiel macht.
+• Responsive Design: Dank präziser Media Queries und Touch-Swipe-Unterstützung fühlt sich die Galerie auf Smartphones genauso flüssig an wie auf dem Desktop.
+
+Technisch setzt das Projekt auf Vanilla JavaScript für maximale Performance und nutzt fortgeschrittene CSS-Techniken (Object-fit, Flexbox, Transitions) für ein modernes Look & Feel.

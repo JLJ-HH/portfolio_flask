@@ -1,27 +1,30 @@
-===========================================================
-STRUKTURPLAN: SmartCalc (Python/Tkinter)
-===========================================================
-
-📂 SmartCalc_Project
+📂 calculator (SmartCalc Desktop App)
 │
-├── 📄 main.py               # App-Controller & Tkinter Mainloop
+├── 📄 smartCalc-temp_verlauf.py  # [Main] App-Entry, GUI & OOP-Logic
+├── 📄 strukturplan.txt           # [Doc] Interner Logik-Entwurf
 │
-├── 📁 modules/              # Modulare Logik-Einheiten
-│   ├── 📄 gui_controller.py # [View] Grid-Layout (42+ Buttons) & Themes
-│   ├── 📄 parser_engine.py  # [Logic] Whitelist-Check & RegEx-Preprocessing
-│   └── 📄 history_manager.py # [Data] RAM-Storage & Toplevel-UI Kapselung
+├── ⚙️ class RechenParser          # [Logic] Whitelist-Check & RegEx Preprocessing
+│   ├── 🛠️ berechne()             # Kern-Algorithmus zur Ausdrucksauswertung
+│   └── 🛠️ erlaubte_zeichen       # Sicherheits-Layer gegen Code-Injection
 │
-└── 📁 assets/
-    └── 📄 shortcuts.json    # Konfiguration für Keyboard-Support
+├── ⚙️ class VerlaufManager        # [Data] RAM-Storage & Toplevel-UI Kapselung
+│   ├── 🛠️ speichern()            # Persistenz innerhalb der Session
+│   └── 🛠️ anzeigen()             # Dynamisches Fenster für Rechenhistorie
+│
+└── ⚙️ class TaschenrechnerGUI     # [View/Controller] Tkinter Mainloop & Events
+    ├── 🛠️ _gui_bauen()           # Dynamisches Grid mit 42+ Funktionen
+    ├── 🛠️ toggle_dark()          # Dynamisches Theme-Changer Logic
+    └── 🛠️ tastatur()             # Event-Binding für physische Tastaturen
 
 ===========================================================
 FEATURES IM DETAIL
 ===========================================================
-Feature      | Umsetzung                | Technik
--------------|--------------------------|------------------
-Security     | Injektions-Schutz        | Whitelist-Validierung
-Math-Engine  | Komplexe Formeln         | RegEx Preprocessing
-UI-Themes    | Dark/Light Mode          | Tkinter Config-Mapping
-Verlauf      | Session-History          | Toplevel-Windows (OOP)
-Keyboard     | Volle Steuerung          | Event-Bindings (<Return>)
+Feature       | Umsetzung                 | Technik
+--------------|---------------------------|-------------------
+Security      | Injektions-Schutz         | Whitelist-Validierung
+Math-Engine   | Komplexe Formeln          | RegEx Mapping & math lib
+UI-Themes     | Dark/Light Mode           | Tkinter Config-Mapping
+Verlauf       | Session-History           | RAM-Buffer & Toplevels
+Keyboard      | Volle Steuerung           | Tkinter Key-Bindings
+Architektur   | Modulares OOP             | Python Classes
 ===========================================================

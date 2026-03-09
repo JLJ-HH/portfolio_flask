@@ -1,0 +1,28 @@
+📂 foto-gallery (Interactive 3D Slider)
+│
+├── 📄 index.html         # [View] Grundstruktur & Overlay-Container
+├── 📄 struktur-plan.txt  # [Doc] Internes Feature-Log
+│
+├── 📁 js/
+│   └── 📄 main.js        # [Controller] 3D-Logik, JSON-Fetch & Touch-Events
+│
+├── 📁 css/
+│   └── 📄 style.css      # [Design] Slider-Layout, Blur-Effekte & Responsive
+│
+├── 📁 data/
+│   └── 📄 gallery.json   # [Daten] Bildpfade, Titel & Metadaten
+│
+└── 📁 images/            # [Assets] Optimierte Galerie-Bilder
+
+===========================================================
+FEATURES IM DETAIL
+===========================================================
+Feature         | Umsetzung                | Technik
+----------------|--------------------------|------------------
+3D Slider       | Scale/Blur/Translate     | JS Real-time Calculation
+Dynamic Loading | Fetch API                | JSON Data Management
+Click-to-Zoom   | Modal Overlay            | CSS + Event-Handling
+Touch Control   | Swipe-Logik              | TouchStart/End Events
+Responsive      | Adaptive Layout          | Media Queries
+Visuals         | Glassmorphism-Effekte    | Backdrop-filter / Alpha
+===========================================================

@@ -2,7 +2,7 @@
     {
         "title": "Milo Radio App",
         "image": "/static/images/milo.png",
-        "live_url": "http://radio.jljuarez.de/",
+        "live_url": "https://milo-radio.de/",
         "info_file": "radio_info.txt",
         "tech": "HTML, CSS, JS, Flask",
         "struct_file": "radio_structure.txt"
@@ -11,12 +11,12 @@
         "title": "Scrum Quiz App",
         "image": "/static/images/psmi.png",
         "live_url": "https://jlj-hh.github.io/scrum_quiz2/",
-        "info_text": "Interaktives Quiz zur Vorbereitung auf Zertifizierungen.",
+        "info_file": "scrum_info.txt",
         "tech": "HTML, CSS, JavaScript",
-        "struct_text": "Scrum Quiz\n ├─ Question Engine\n ├─ LocalStorage\n └─ Score Calculation"
+        "struct_file": "scrum_structure.txt"
     },
     {
-        "title": "Python Scientific Calc",
+        "title": "SmartCalc \u2013 Taschenrechner",
         "image": "/static/images/calculator.png",
         "live_url": "https://github.com/JLJ-HH/calculator",
         "info_file": "rechner_info.txt",
@@ -24,12 +24,12 @@
         "struct_file": "rechner_structure.txt"
     },
     {
-        "title": "",
-        "image": "",
-        "live_url": "",
-        "info_file": "",
-        "tech": "",
-        "struct_file": ""
+        "title": "Interactive Foto-Gallery",
+        "image": "/static/images/gallery.png",
+        "live_url": "https://jlj-hh.github.io/foto-gallery/",
+        "info_file": "foto_info.txt",
+        "tech": "HTML, CSS, JavaScript",
+        "struct_file": "foto_structure.txt"
     },
     {
         "title": "",
