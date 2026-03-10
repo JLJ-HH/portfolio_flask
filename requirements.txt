@@ -1,0 +1,4 @@
+Flask==3.0.0
+Flask-Mail==0.9.1
+markdown2==2.4.10
+configparser==6.0.0

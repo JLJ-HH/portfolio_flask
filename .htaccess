@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /
+
+# 1. Statische Dateien (Bilder, CSS, JS) direkt ausliefern
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(static/.*)$ $1 [L]
+
+# 2. Alles andere an die Flask-App leiten
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ app.cgi/$1 [L,QSA]
