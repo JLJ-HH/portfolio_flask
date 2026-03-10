@@ -32,9 +32,9 @@
         "struct_file": "foto_structure.txt"
     },
     {
-        "title": "Contact Manager Pro",
-        "image": "/static/images/contact_manager.png",
-        "live_url": "https://github.com/JLJ-HH/contact-manager",
+        "title": "Contact Manager",
+        "image": "/static/images/contact.png",
+        "live_url": "https://jlj-hh.github.io/contact-manager/",
         "info_file": "contact_manager_info.txt",
         "tech": "Python, Tkinter",
         "struct_file": "contact_manager_structure.txt"
