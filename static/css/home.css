@@ -17,13 +17,9 @@
   line-height: 1.1;
 }
 
-.home-hero .lead {
-  font-size: 1.25rem;
-  color: #edf2f4;
-  max-width: 700px;
-  margin: 0 auto 3rem auto;
-  line-height: 1.7;
-  font-weight: 300;
+.home-hero .lead strong {
+  color: #3cb371;
+  font-weight: 600;
 }
 
 /* Glassmorphism Cards */
