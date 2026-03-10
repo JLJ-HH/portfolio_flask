@@ -1,0 +1,22 @@
+📂 contact-manager (Python Desktop App)
+│
+├── 📄 contact_manager.py # [Main/UI] Tkinter-Oberfläche & Event-Handling
+├── 📄 data_manager.py    # [Logik] Datenhaltung, Validierung & Dateizugriff
+├── 📄 settings.ini       # [Konfig] Sicherheits-Einstellungen & Lösch-Codes
+├── 📄 contacts.txt       # [Daten] Strukturierte Speicherung der Kontakte
+│
+└── 📄 README.md          # Projektdokumentation und Installationsanleitung
+
+
+===========================================================
+FEATURES IM DETAIL
+===========================================================
+Feature         | Umsetzung                | Technik
+----------------|--------------------------|------------------
+GUI             | Tkinter                  | Python Standard Lib
+Suche           | Echtzeit-Filter          | Event-Binding (KeyRelease)
+Responsivität   | Dynamisches Grid         | Grid-Gewichtung & Configure
+Sicherheit      | PIN-Abfrage              | Simpledialog & Logic-Check
+Validierung     | Input-Check              | String-Handling
+Daten-Handhabung| CRUD (Erstellen, Lesen, Aktualisieren, Löschen)
+===========================================================

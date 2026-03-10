@@ -1,0 +1,12 @@
+Contact Manager – Intuitive Kontaktverwaltung mit Python & Tkinter
+
+Dieses Projekt ist eine leistungsstarke Desktop-Anwendung zur effizienten Verwaltung von Kontaktinformationen. Es kombiniert eine benutzerfreundliche grafische Oberfläche mit einer robusten Datenlogik.
+
+Die Highlights:
+• Moderne GUI: Basierend auf Tkinter bietet die App eine übersichtliche Oberfläche mit dynamischem Layout, das sich an die Fenstergröße anpasst (Responsivität).
+• Intelligente Suche: Kontakte können in Echtzeit gefiltert werden, was das schnelle Auffinden von Informationen selbst in großen Listen ermöglicht.
+• Sicherheits-Features: Sensible Aktionen wie das Löschen von Kontakten sind durch einen konfigurierbaren Sicherheits-Code geschützt.
+• Saubere Architektur: Die strikte Trennung von UI (contact_manager.py) und Datenlogik (data_manager.py) sorgt für hohe Wartbarkeit und einfache Erweiterbarkeit.
+• Persistenz: Daten werden sicher in einer strukturierten Textdatei gespeichert, inklusive automatischer Sortierung beim Speichern.
+
+Technisch demonstriert das Projekt den Einsatz von Python für Desktop-Anwendungen, die Handhabung von Konfigurationsdateien (INI) und fortgeschrittene GUI-Konzepte wie Event-Binding und Grid-Management.
