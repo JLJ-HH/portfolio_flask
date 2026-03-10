@@ -1,42 +1,42 @@
 [
-    {
-        "title": "Milo Radio App",
-        "image": "/static/images/milo.png",
-        "live_url": "https://milo-radio.de/",
-        "info_file": "radio_info.txt",
-        "tech": "HTML, CSS, JS, Flask",
-        "struct_file": "radio_structure.txt"
-    },
-    {
-        "title": "Scrum Quiz App",
-        "image": "/static/images/psmi.png",
-        "live_url": "https://jlj-hh.github.io/scrum_quiz2/",
-        "info_file": "scrum_info.txt",
-        "tech": "HTML, CSS, JavaScript",
-        "struct_file": "scrum_structure.txt"
-    },
-    {
-        "title": "SmartCalc \u2013 Taschenrechner",
-        "image": "/static/images/calculator.png",
-        "live_url": "https://github.com/JLJ-HH/calculator",
-        "info_file": "rechner_info.txt",
-        "tech": "Python, Tkinter",
-        "struct_file": "rechner_structure.txt"
-    },
-    {
-        "title": "Interactive Foto-Gallery",
-        "image": "/static/images/gallery.png",
-        "live_url": "https://jlj-hh.github.io/foto-gallery/",
-        "info_file": "foto_info.txt",
-        "tech": "HTML, CSS, JavaScript",
-        "struct_file": "foto_structure.txt"
-    },
-    {
-        "title": "Contact Manager",
-        "image": "/static/images/contact.png",
-        "live_url": "https://jlj-hh.github.io/contact-manager/",
-        "info_file": "contact_manager_info.txt",
-        "tech": "Python, Tkinter",
-        "struct_file": "contact_manager_structure.txt"
-    }
+  {
+    "title": "Milo Radio App",
+    "image": "/static/images/milo.png",
+    "live_url": "https://milo-radio.de/",
+    "info_file": "radio_info.txt",
+    "tech": "HTML, CSS, JS, PHP, JSON",
+    "struct_file": "radio_structure.txt"
+  },
+  {
+    "title": "Scrum Quiz App",
+    "image": "/static/images/psmi.png",
+    "live_url": "https://jlj-hh.github.io/scrum_quiz2/",
+    "info_file": "scrum_info.txt",
+    "tech": "HTML, CSS, JavaScript",
+    "struct_file": "scrum_structure.txt"
+  },
+  {
+    "title": "SmartCalc \u2013 Taschenrechner",
+    "image": "/static/images/calculator.png",
+    "live_url": "https://github.com/JLJ-HH/calculator",
+    "info_file": "rechner_info.txt",
+    "tech": "Python, Tkinter",
+    "struct_file": "rechner_structure.txt"
+  },
+  {
+    "title": "Interactive Foto-Gallery",
+    "image": "/static/images/gallery.png",
+    "live_url": "https://jlj-hh.github.io/foto-gallery/",
+    "info_file": "foto_info.txt",
+    "tech": "HTML, CSS, JavaScript",
+    "struct_file": "foto_structure.txt"
+  },
+  {
+    "title": "Contact Manager",
+    "image": "/static/images/contact.png",
+    "live_url": "https://jlj-hh.github.io/contact-manager/",
+    "info_file": "contact_manager_info.txt",
+    "tech": "Python, Tkinter",
+    "struct_file": "contact_manager_structure.txt"
+  }
 ]

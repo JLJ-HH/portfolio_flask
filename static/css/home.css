@@ -3,118 +3,122 @@
    ================================================= */
 
 .home-hero {
-    padding: 6rem 0;
-    text-align: center;
+  padding: 6rem 0;
+  text-align: center;
 }
 
 .home-hero h1 {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: #ffffff;
-    margin-bottom: 1.5rem;
-    letter-spacing: -1px;
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1.5px;
+  line-height: 1.1;
 }
 
 .home-hero .lead {
-    font-size: 1.25rem;
-    color: #edf2f4;
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
-    line-height: 1.7;
-    font-weight: 300;
+  font-size: 1.25rem;
+  color: #edf2f4;
+  max-width: 700px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.7;
+  font-weight: 300;
 }
 
 /* Glassmorphism Cards */
 .home-feature-card {
-    background: rgba(28, 37, 65, 0.4);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 16px;
-    padding: 2.5rem;
-    height: 100%;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-align: left;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: rgba(28, 37, 65, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 2.5rem;
+  height: 100%;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  text-align: left;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .home-feature-card:hover {
-    transform: translateY(-10px);
-    background: rgba(28, 37, 65, 0.6);
-    border-color: rgba(60, 179, 113, 0.3);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: translateY(-10px);
+  background: rgba(28, 37, 65, 0.6);
+  border-color: rgba(60, 179, 113, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
 }
 
 .home-feature-card h5 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #3cb371;
-    margin-bottom: 1rem;
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #3cb371;
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
 }
 
 .home-feature-card p {
-    color: #edf2f4;
-    font-size: 1rem;
-    line-height: 1.6;
-    margin-bottom: 0;
+  color: #edf2f4;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0;
 }
 
 /* CTA Buttons */
 .home-cta-group {
-    margin-top: 4rem;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
+  margin-top: 4rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .btn-premium {
-    padding: 0.9rem 2.5rem;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: inline-block;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .btn-premium-primary {
-    background-color: #3cb371;
-    color: #ffffff;
-    border: 2px solid #3cb371;
+  background-color: #3cb371;
+  color: #ffffff;
+  border: 2px solid #3cb371;
 }
 
 .btn-premium-primary:hover {
-    background-color: transparent;
-    color: #3cb371;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(60, 179, 113, 0.3);
-    border-color: #3cb371;
+  background-color: transparent;
+  color: #3cb371;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(60, 179, 113, 0.3);
+  border-color: #3cb371;
 }
 
 .btn-premium-outline {
-    background-color: transparent;
-    color: #ffffff;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: transparent;
+  color: #ffffff;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .btn-premium-outline:hover {
-    border-color: #ffffff;
-    background-color: rgba(255, 255, 255, 0.05);
-    transform: translateY(-3px);
+  border-color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(-3px);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-    .home-hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .home-cta-group {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn-premium {
-        width: 100%;
-        max-width: 300px;
-    }
+  .home-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .home-cta-group {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-premium {
+    width: 100%;
+    max-width: 300px;
+  }
 }
