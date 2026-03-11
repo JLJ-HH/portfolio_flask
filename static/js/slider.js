@@ -83,5 +83,36 @@
             if (!anyOpen) card.style.zIndex = "1000";
         }
     };
+    // =================================================
+    // SEQUENTIELLER GLOW-EFFEKT
+    // =================================================
+
+    function runGlowSequence(card) {
+        const buttons = [
+            card.querySelector('.live-link'),
+            card.querySelector('.structure'),
+            card.querySelector('.info')
+        ];
+
+        buttons.forEach((btn, index) => {
+            if (!btn) return;
+            setTimeout(() => {
+                btn.classList.add('glow');
+                setTimeout(() => {
+                    btn.classList.remove('glow');
+                }, 300); // Wie lange ein Button leuchtet
+            }, index * 200); // Verzögerung zwischen den Buttons
+        });
+    }
+
+    // Event-Listener für Klicks auf die Karte (aber nicht auf die Buttons selbst)
+    items.forEach(item => {
+        item.addEventListener('click', function(e) {
+            // Wenn der Klick NICHT auf einem Button oder dem Close-X war
+            if (!e.target.closest('.card-btn') && !e.target.closest('.close-info')) {
+                runGlowSequence(this);
+            }
+        });
+    });
 
 })();
