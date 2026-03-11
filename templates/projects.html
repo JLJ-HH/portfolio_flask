@@ -6,7 +6,14 @@
     <div id="slider" class="slider fade-in">
         {% for p in projects %}
         <div class="item">
+            {% if p.video %}
+            <video class="card-image" autoplay loop muted playsinline>
+                <source src="{{ p.video }}" type="video/mp4">
+                Ihr Browser unterstützt das Video-Tag nicht.
+            </video>
+            {% else %}
             <img src="{{ p.image }}" alt="{{ p.title }}" class="card-image">
+            {% endif %}
             <div class="card-footer">
                 <button class="card-btn live-link" onclick="event.stopPropagation(); window.open('{{ p.live_url }}','_blank')">Live-Link</button>
                 <button class="card-btn structure" onclick="event.stopPropagation(); toggleOverlay(this, '.card-structure')">Strukturplan</button>

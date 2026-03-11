@@ -18,6 +18,7 @@
   {
     "title": "SmartCalc \u2013 Taschenrechner",
     "image": "/static/images/calculator.png",
+    "video": "/static/videos/calculator.mp4",
     "live_url": "https://github.com/JLJ-HH/calculator",
     "info_file": "rechner_info.txt",
     "tech": "Python, Tkinter",

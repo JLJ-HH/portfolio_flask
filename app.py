@@ -100,6 +100,7 @@ def projects():
         processed_projects.append({
             "title": p["title"],
             "image": p["image"],
+            "video": p.get("video"),
             "live_url": p["live_url"],
             "tech": p["tech"],
             # Fallback: Entweder direkter Text aus JSON oder aus Datei laden
