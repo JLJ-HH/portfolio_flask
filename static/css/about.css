@@ -50,7 +50,7 @@
 
 /* --- TEXT SIDEBAR (30%) --- */
 .about-hero-content {
-  flex: 1.5; /* Increased from 1 to give more space for text */
+  flex: 2; /* Increased from 1.5 to provide more horizontal space for text */
   background-color: #1c2541;
   display: flex;
   align-items: center; /* Changed back to center for better alignment with fixed height */
@@ -101,7 +101,7 @@
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
   .about-hero-container {
     flex-direction: column;
     min-height: auto;
