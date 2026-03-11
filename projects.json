@@ -24,12 +24,12 @@
     "struct_file": "rechner_structure.txt"
   },
   {
-    "title": "Interactive Foto-Gallery",
-    "image": "/static/images/gallery.png",
-    "live_url": "https://jlj-hh.github.io/foto-gallery/",
-    "info_file": "foto_info.txt",
-    "tech": "HTML, CSS, JavaScript",
-    "struct_file": "foto_structure.txt"
+    "title": "Portfolio-Flask",
+    "image": "/static/images/hero-image.png",
+    "live_url": "https://jljuarez.de/",
+    "info_file": "portfolio_info.txt",
+    "tech": "Python (Flask), Jinja2, CSS, JS",
+    "struct_file": "portfolio_structure.txt"
   },
   {
     "title": "Contact Manager",

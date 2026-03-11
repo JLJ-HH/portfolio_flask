@@ -1,0 +1,11 @@
+Portfolio-Flask – Modernes Webdesign & Architektur
+
+Diese Portfolio-Anwendung ist das Schaufenster meiner Arbeit und gleichzeitig ein Beweis für meine Fähigkeiten in der Fullstack-Entwicklung. Sie vereint ein ästhetisches Design mit einer robusten technischen Architektur.
+
+Die Highlights:
+• Dynamische Content-Verwaltung: Inhalte wie Projektdaten und der "About Me" Text werden über JSON und Markdown gesteuert, was eine Trennung von Logik und Inhalt ermöglicht.
+• Premium Design System: Ein konsequentes Dark-Mode-Konzept mit CSS-Gradients, Glassmorphism-Effekten und flüssigen Animationen sorgt für eine hochwertige Nutzererfahrung.
+• Automatisierte Kontakt-Engine: Ein integriertes Formular mit Flask-Mail Anbindung ermöglicht die direkte und sichere Kommunikation.
+• Responsive Architektur: Durch intelligente CSS-Breakpoints und ein flexibles Container-Modell passt sich die App perfekt an alle Endgeräte an – vom Smartphone bis zum 4K-Monitor.
+
+Technisch basiert die App auf Python und Flask, nutzt Jinja2 für das Templating und implementiert moderne SEO- sowie Performance-Standards.

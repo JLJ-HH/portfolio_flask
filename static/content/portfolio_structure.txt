@@ -1,0 +1,31 @@
+📂 portfolio_flask (Modern Flask App)
+│
+├── 📄 app.py               # [Server] Flask-Routing, Mail-Setup & Logic
+├── 📄 projects.json        # [Daten] Zentrale Datenquelle für alle Projekte
+├── 📄 config.ini           # [Config] Geheime Schlüssel & Mail-Server Daten
+│
+├── 📁 templates/           # [Views] Jinja2 Templates
+│   ├── 📄 base.html        # Grundgerüst mit Navbar & Footer
+│   ├── 📄 projects.html    # Dynamische Projekt-Cards
+│   └── 📄 about.html       # Premium "About Me" Layout
+│
+├── 📁 static/
+│   ├── 📁 css/             # [Design] Modulares Styling (layout, home, about)
+│   ├── 📁 js/              # [Logik] Interaktive Elemente & Animationen
+│   ├── 📁 content/         # [Content] Markdown & Text-Dateien
+│   └── 📁 images/          # [Assets] Optimierte Grafiken & Icons
+│
+└── 📄 requirements.txt     # [Dependencies] Flask, Flask-Mail, Markdown2
+
+===========================================================
+TECHNISCHE FEATURES
+===========================================================
+Feature         | Umsetzung                | Technik
+----------------|--------------------------|------------------
+Server-Backend  | Flask framework          | Python 3.x
+Templating      | Jinja2 Engines           | Dynamic HTML Injection
+Data Flow       | JSON Integration         | Project Data Management
+Styling         | Vanilla CSS              | CSS Variables / Flexbox
+Mail-System     | SMTP Integration         | Flask-Mail
+SEO / UX        | Meta Tags & Semantics    | HTML5 Standards
+===========================================================
