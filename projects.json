@@ -25,7 +25,7 @@
   },
   {
     "title": "Portfolio-Flask",
-    "image": "/static/images/hero-image.png",
+    "image": "/static/images/OIP.png",
     "live_url": "https://jljuarez.de/",
     "info_file": "portfolio_info.txt",
     "tech": "Python (Flask), Jinja2, CSS, JS",
@@ -33,7 +33,7 @@
   },
   {
     "title": "Contact Manager",
-    "image": "/static/images/contact.png",
+    "image": "/static/images/müde3.png",
     "live_url": "https://jlj-hh.github.io/contact-manager/",
     "info_file": "contact_manager_info.txt",
     "tech": "Python, Tkinter",
