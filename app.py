@@ -4,6 +4,7 @@ import configparser
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
 from calculator.routes import calculator_bp
+from contact_manager.routes import contact_manager_bp
 
 # Falls du Markdown-Formatierung im Text nutzen willst: pip install markdown2
 try:
@@ -26,6 +27,7 @@ app.secret_key = config['APP']['SECRET_KEY']
 
 # Blueprint Registrierung
 app.register_blueprint(calculator_bp, url_prefix='/taschenrechner')
+app.register_blueprint(contact_manager_bp, url_prefix='/contact-manager')
 
 # Mail-Setup aus der Config
 app.config.update(
@@ -103,9 +105,14 @@ def projects():
     for p in raw_projects:
         # Falls es der Taschenrechner ist, nutzen wir den Blueprint-Pfad
         live_url = p["live_url"]
-        if p["title"] == "SmartCalc – Taschenrechner":
+        if p["title"].strip() == "SmartCalc – Taschenrechner":
             try:
                 live_url = url_for('calculator.index')
+            except Exception:
+                pass
+        elif p["title"].strip() == "Contact Manager":
+            try:
+                live_url = url_for('contact_manager.index')
             except Exception:
                 pass
 

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Manager Pro | Web</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('contact_manager.static', filename='css/style.css') }}"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="background-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+      <header>
+        <div class="header-top">
+          <button id="theme-toggle" class="btn-icon" title="Modus wechseln">
+            <span class="mode-icon">🌓</span>
+          </button>
+        </div>
+        <h1>CONTACT MANAGER <span class="highlight">Livi</span></h1>
+        <p class="subtitle">Moderne Kontaktverwaltung für Profis</p>
+      </header>
+
+      <main>
+        <section class="form-section">
+          <div class="glass-card">
+            <h2>Kontakt Details</h2>
+            <form id="contact-form">
+              <input type="hidden" id="contact-index" />
+              <div class="input-grid">
+                <div class="input-group">
+                  <label for="vorname">Vorname</label>
+                  <input type="text" id="vorname" placeholder="Max" required />
+                </div>
+                <div class="input-group">
+                  <label for="nachname">Nachname</label>
+                  <input
+                    type="text"
+                    id="nachname"
+                    placeholder="Mustermann"
+                    required
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="strasse">Straße</label>
+                  <input type="text" id="strasse" placeholder="Hauptstraße 1" />
+                </div>
+                <div class="input-group">
+                  <label for="plz">PLZ</label>
+                  <input type="text" id="plz" placeholder="12345" />
+                </div>
+                <div class="input-group">
+                  <label for="email">E-Mail</label>
+                  <input
+                    type="email"
+                    id="email"
+                    placeholder="max@beispiel.de"
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="rufnummer">Telefon</label>
+                  <input
+                    type="tel"
+                    id="rufnummer"
+                    placeholder="+49 123 456789"
+                  />
+                </div>
+                <div class="input-group">
+                  <label for="mobil">Mobil</label>
+                  <input type="tel" id="mobil" placeholder="+49 170 1234567" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" id="submit-btn" class="btn btn-primary">
+                  Hinzufügen
+                </button>
+                <button type="button" id="reset-btn" class="btn btn-secondary">
+                  Neu / Leer
+                </button>
+                <div class="danger-zone">
+                  <button
+                    type="button"
+                    id="delete-btn"
+                    class="btn btn-secondary hidden"
+                    style="color: var(--accent)"
+                  >
+                    Löschen
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="search-section">
+          <div class="search-box glass-card">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Nach Namen oder Nummer suchen..."
+            />
+            <button
+              id="show-all-btn"
+              class="btn-text"
+              title="Alle Kontakte anzeigen"
+            >
+              Alle anzeigen
+            </button>
+            <span class="search-icon">🔍</span>
+          </div>
+        </section>
+
+        <section class="list-section hidden" id="list-section">
+          <div id="contact-results" class="results-grid">
+            <!-- Namens-Kacheln werden hier gerendert -->
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('contact_manager.static', filename='js/main.js') }}"></script>
+  </body>
+</html>

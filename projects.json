@@ -35,7 +35,7 @@
   {
     "title": "Contact Manager",
     "image": "/static/images/müde3.png",
-    "live_url": "https://jljuarez504.pythonanywhere.com/",
+    "live_url": "/contact-manager",
     "info_file": "contact_manager_info.txt",
     "tech": "Python, Tkinter",
     "struct_file": "contact_manager_structure.txt"
