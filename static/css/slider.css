@@ -2,7 +2,6 @@
    BODY / LAYOUT
    ================================================= */
 body {
-    min-height: 100vh;
     margin: 0;
     font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 
@@ -10,13 +9,6 @@ body {
     --color-1: #4adb92; /* Hell */
     --color-2: #3cb371; /* Medium (Original) */
     --color-3: #2c8b5a; /* Dunkel */
-
-    /* Farb-Set 2 (Cyan, Lime, Teal) - Zum Tauschen einkommentieren */
-    /*
-    --color-1: #00f7ff;
-    --color-2: #adff00;
-    --color-3: #00ffcc;
-    */
 }
 
 /* =================================================
@@ -259,6 +251,10 @@ body {
 }
 
 @media (max-width: 768px) {
+  .slider-wrapper {
+    min-height: 480px; /* Solid base for mobile */
+    margin: 20px 0;
+  }
   .slider {
     width: 90%;
     height: 440px;
@@ -281,8 +277,8 @@ body {
 
   .card-info,
   .card-structure {
-    width: 105%;
-    left: -2.5%;
+    width: 95%;
+    left: 2.5%;
     bottom: 75px;
     padding: 15px 0 0 0;
     max-height: 400px;
