@@ -1,0 +1,251 @@
+/* =============================================================================
+   style.css - Main Styling for SmartCalc
+   =============================================================================
+   Designed with a modern, glassmorphism-inspired aesthetic and full 
+   responsiveness for mobile and desktop platforms.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. Design Tokens & Variables
+   ----------------------------------------------------------------------------- */
+:root {
+    /* Color Palette - Light Mode */
+    --bg-primary: #f8f9fa;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --display-bg: #ffffff;
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --accent: #4d96ff;
+    
+    /* Button Colors */
+    --btn-bg: #e0e6ed;
+    --btn-text: #2d3436;
+    --btn-operator: #ffeaa7;
+    --btn-success: #55efc4;
+    --btn-danger: #fab1a0;
+    --btn-warning: #ffeaa7;
+    --btn-sci: #d1d8e0;
+
+    /* Shadow & Border */
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    --radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode {
+    /* Color Palette - Dark Mode */
+    --bg-primary: #1e272e;
+    --card-bg: rgba(45, 52, 54, 0.95);
+    --display-bg: #1e272e;
+    --text-main: #f5f6fa;
+    --text-muted: #b2bec3;
+    --accent: #0984e3;
+
+    /* Button Colors (Dark) */
+    --btn-bg: #353b48;
+    --btn-text: #f5f6fa;
+    --btn-operator: #485460;
+    --btn-success: #05c46b;
+    --btn-danger: #ff5e57;
+    --btn-warning: #ffa801;
+    --btn-sci: #2f3640;
+    
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* -----------------------------------------------------------------------------
+   2. Global Reset
+   ----------------------------------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    transition: var(--transition);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+   3. Layout Containers
+   ----------------------------------------------------------------------------- */
+.container {
+    display: flex;
+    gap: 20px;
+    max-width: 900px;
+    width: 100%;
+}
+
+.calculator {
+    flex: 1.5;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.history-panel {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    max-height: 700px;
+}
+
+/* -----------------------------------------------------------------------------
+   4. Calculator Components
+   ----------------------------------------------------------------------------- */
+.calculator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calculator-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.display-container input {
+    width: 100%;
+    padding: 20px;
+    font-size: 2.2rem;
+    text-align: right;
+    border: none;
+    border-radius: 12px;
+    background: var(--display-bg);
+    color: var(--text-main);
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+    outline: none;
+}
+
+/* Button Grids */
+.button-grid, .scientific-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.scientific-grid {
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--btn-bg);
+}
+
+/* Base Button Styles */
+.btn {
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.btn:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Button Variants */
+.btn-operator { background: var(--btn-operator); }
+.btn-success { background: var(--btn-success); }
+.btn-danger { background: var(--btn-danger); }
+.btn-warning { background: var(--btn-warning); }
+.btn-sci { background: var(--btn-sci); font-size: 0.9rem; }
+.btn-constant { background: var(--accent); color: white; }
+
+#btn-equals {
+    grid-column: span 1; /* Keep it single for now or make it span based on grid */
+}
+
+/* -----------------------------------------------------------------------------
+   5. History Panel
+   ----------------------------------------------------------------------------- */
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.history-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-item {
+    background: var(--btn-bg);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.history-item .expr { color: var(--text-muted); display: block; }
+.history-item .res { font-weight: 600; font-size: 1.1rem; }
+
+.empty-msg {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+   6. UI Elements
+   ----------------------------------------------------------------------------- */
+.icon-btn, .text-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.text-btn {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--btn-danger);
+}
+
+/* -----------------------------------------------------------------------------
+   7. Responsiveness
+   ----------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .button-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .scientific-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

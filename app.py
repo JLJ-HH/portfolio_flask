@@ -3,6 +3,7 @@ import json
 import configparser
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
+from calculator.routes import calculator_bp
 
 # Falls du Markdown-Formatierung im Text nutzen willst: pip install markdown2
 try:
@@ -22,6 +23,9 @@ if not config.read(config_path, encoding='utf-8'):
 
 app = Flask(__name__)
 app.secret_key = config['APP']['SECRET_KEY']
+
+# Blueprint Registrierung
+app.register_blueprint(calculator_bp, url_prefix='/taschenrechner')
 
 # Mail-Setup aus der Config
 app.config.update(
@@ -97,11 +101,19 @@ def projects():
 
     processed_projects = []
     for p in raw_projects:
+        # Falls es der Taschenrechner ist, nutzen wir den Blueprint-Pfad
+        live_url = p["live_url"]
+        if p["title"] == "SmartCalc – Taschenrechner":
+            try:
+                live_url = url_for('calculator.index')
+            except Exception:
+                pass
+
         processed_projects.append({
             "title": p["title"],
             "image": p["image"],
             "video": p.get("video"),
-            "live_url": p["live_url"],
+            "live_url": live_url,
             "tech": p["tech"],
             # Fallback: Entweder direkter Text aus JSON oder aus Datei laden
             "description": p.get("info_text") or get_content_file(p.get("info_file")),

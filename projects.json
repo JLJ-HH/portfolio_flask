@@ -19,7 +19,7 @@
     "title": "SmartCalc \u2013 Taschenrechner",
     "image": "/static/images/calculator.png",
     "video": "/static/videos/calculator.mp4",
-    "live_url": "https://github.com/JLJ-HH/calculator",
+    "live_url": "/taschenrechner",
     "info_file": "rechner_info.txt",
     "tech": "Python, Tkinter",
     "struct_file": "rechner_structure.txt"
@@ -35,7 +35,7 @@
   {
     "title": "Contact Manager",
     "image": "/static/images/müde3.png",
-    "live_url": "https://jlj-hh.github.io/contact-manager/",
+    "live_url": "https://jljuarez504.pythonanywhere.com/",
     "info_file": "contact_manager_info.txt",
     "tech": "Python, Tkinter",
     "struct_file": "contact_manager_structure.txt"
