@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scrum PSM1 Quiz</title>
+  <link rel="stylesheet" href="{{ url_for('scrum_quiz.static', filename='css/style.css') }}" />
+</head>
+<body>
+
+  <div class="container" id="startPage" role="region" aria-label="Language Selection">
+    <h1 tabindex="0">Willkommen zum Scrum PSM1 Quiz</h1>
+    <h2>Choose your language / Wähle deine Sprache</h2>
+    <div style="margin-bottom: 20px;">
+      <label for="questionCountInput" style="display:inline-block; border:none; background:none; padding:0; margin-bottom:10px; width:auto;">
+        Anzahl der Fragen / Number of questions (1-120):
+      </label>
+      <input type="number" id="questionCountInput" min="1" max="120" value="30" style="width: 80px; padding: 10px; border-radius: 8px; border: 2px solid #0078d4; font-size: 1.1rem; text-align: center;" />
+    </div>
+    <button type="button" id="btnDe" onclick="startQuiz('de')">Deutsch</button>
+    <button type="button" id="btnEn" onclick="startQuiz('en')">English</button>
+  </div>
+
+  <div class="container hidden" id="quizPage" role="region" aria-live="polite" aria-atomic="true">
+  <h1 id="quizTitle" tabindex="-1"></h1>
+  <div id="timer" aria-live="polite" aria-atomic="true"></div>
+  <div id="progress" aria-live="polite" aria-atomic="true"></div>
+  <form id="quizForm" aria-label="Scrum Quiz Fragen" role="form"></form>
+  <nav id="navigationButtons" aria-label="Quiz Navigation" style="margin-top:20px;"></nav>
+  <button id="submitBtn" type="button" onclick="checkAnswers()" style="display:none;">Submit</button>
+  <div id="result" role="status" aria-live="polite"></div>
+  <div id="feedback" role="alert"></div>
+  <button id="repeatBtn" type="button" onclick="startQuiz(currentLang)" style="display:none; margin-top: 20px;">Quiz wiederholen / Repeat Quiz</button>
+  <button id="backBtn" type="button" onclick="backToStart()">Zurück zur Sprache wählen</button>
+</div>
+
+  <script src="{{ url_for('scrum_quiz.static', filename='js/quiz.js') }}"></script>
+</body>
+</html>

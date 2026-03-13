@@ -1,0 +1,602 @@
+[
+  {
+    "question": "What are the three pillars of empirical process control in Scrum?",
+    "answers": ["Transparency, Inspection, Adaptation", "Planning, Monitoring, Execution", "Documentation, Coordination, Delivery", "Analysis, Testing, Acceptance"],
+    "correct": 0
+  },
+  {
+    "question": "Who is responsible for managing the Product Backlog?",
+    "answers": ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"],
+    "correct": 1
+  },
+  {
+    "question": "What is the maximum duration of a Sprint?",
+    "answers": ["1 month", "3 months", "1 week", "2 months"],
+    "correct": 0
+  },
+  {
+    "question": "Which Scrum role ensures Scrum is understood and enacted?",
+    "answers": ["Product Owner", "Developers", "Scrum Master", "Project Manager"],
+    "correct": 2
+  },
+  {
+    "question": "What is included in the Increment?",
+    "answers": ["Only code", "Done functionality that meets the Sprint Goal", "Project plans", "Only test cases"],
+    "correct": 1
+  },
+  {
+    "question": "What is the Scrum Team's most important commitment?",
+    "answers": ["Complete work on time", "Achieve the Sprint Goal", "Maintain project documentation", "Hold daily status meetings"],
+    "correct": 1
+  },
+  {
+    "question": "Which artifact improves transparency and enables inspection?",
+    "answers": ["Sprint Review", "Product Backlog", "Definition of Done", "Sprint Backlog"],
+    "correct": 2
+  },
+  {
+    "question": "When does Sprint Planning take place?",
+    "answers": ["At the start of every Sprint", "At the end of a Sprint", "After many sprints", "Only with project plan changes"],
+    "correct": 0
+  },
+  {
+    "question": "Who may add or change requirements during a Sprint?",
+    "answers": ["Scrum Master", "Stakeholders", "Product Owner", "Development Team"],
+    "correct": 2
+  },
+  {
+    "question": "How is a Scrum Sprint ended?",
+    "answers": ["When Sprint Goal is no longer achievable, it is cancelled", "Automatically after 2 weeks", "When the Product Backlog is empty", "After the project manager meeting"],
+    "correct": 0
+  },
+  {
+    "question": "What does the Definition of Done (DoD) describe in Scrum?",
+    "answers": ["The list of product requirements", "Acceptance criteria for a Product Backlog Item", "The team rules", "Sprint duration"],
+    "correct": 1
+  },
+  {
+    "question": "Which role is responsible for the Sprint Backlog?",
+    "answers": ["Product Owner", "Scrum Master", "Development Team", "Stakeholders"],
+    "correct": 2
+  },
+  {
+    "question": "What is the goal of a Sprint Review?",
+    "answers": ["Incrementally improve the product", "Detail the project plan", "Conduct code reviews", "Evaluate the Scrum framework"],
+    "correct": 0
+  },
+  {
+    "question": "How often is the Daily Scrum held?",
+    "answers": ["Once a month", "Daily", "Every two weeks", "After every Sprint"],
+    "correct": 1
+  },
+  {
+    "question": "Who facilitates the Daily Scrum?",
+    "answers": ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"],
+    "correct": 2
+  },
+  {
+    "question": "Which is NOT a Scrum artifact?",
+    "answers": ["Product Backlog", "Sprint Backlog", "Burndown Chart", "Project Plan"],
+    "correct": 3
+  },
+  {
+    "question": "What does a Sprint Goal describe?",
+    "answers": ["The work to be done in the sprint", "Project costs", "Delivery dates", "Team roles"],
+    "correct": 0
+  },
+  {
+    "question": "What is the usual maximum duration of a Sprint?",
+    "answers": ["1 month", "3 months", "1 week", "2 months"],
+    "correct": 0
+  },
+  {
+    "question": "What is meant by 'Concept of Empiricism' in Scrum?",
+    "answers": ["Planning before execution", "Continuous learning and adaptation cycles", "Documentation", "Project management"],
+    "correct": 1
+  },
+  {
+    "question": "Which role is responsible for maximizing product value?",
+    "answers": ["Scrum Master", "Product Manager", "Product Owner", "Project Manager"],
+    "correct": 2
+  },
+  {
+    "question": "What is the main responsibility of the Scrum Master?",
+    "answers": ["Maintain the Product Backlog", "Coach the team and remove impediments", "Write code", "Create project plans"],
+    "correct": 1
+  },
+  {
+    "question": "What describes a Sprint Retrospective?",
+    "answers": ["Review of the product increment", "Reflection and process improvement", "Planning new requirements", "Management meeting"],
+    "correct": 1
+  },
+  {
+    "question": "How many roles are there in a Scrum Team?",
+    "answers": ["2", "3", "4", "5"],
+    "correct": 1
+  },
+  {
+    "question": "What is a Product Backlog Item (PBI)?",
+    "answers": ["A risk", "A requirement or task", "A test case", "A meeting"],
+    "correct": 1
+  },
+  {
+    "question": "Which of the following statements is true about Scrum?",
+    "answers": ["Scrum is a detailed planning process", "Scrum is an agile development framework", "Scrum is a project management tool", "Scrum is a programming language"],
+    "correct": 1
+  },
+  {
+    "question": "Who agrees on the scope of a Sprint?",
+    "answers": ["The customer", "The Scrum Team", "The project manager", "The Product Owner alone"],
+    "correct": 1
+  },
+  {
+    "question": "How is progress typically represented in Scrum?",
+    "answers": ["Gantt chart", "Burndown chart", "Critical path", "Risk list"],
+    "correct": 1
+  },
+  {
+    "question": "What is an impediment?",
+    "answers": ["A code bug", "An obstacle blocking work", "A new requirement", "A project role"],
+    "correct": 1
+  },
+  {
+    "question": "How long should a Daily Scrum last at most?",
+    "answers": ["15 minutes", "30 minutes", "1 hour", "5 minutes"],
+    "correct": 0
+  },
+  {
+    "question": "What is the Sprint Backlog?",
+    "answers": ["List of tasks to be completed in the sprint", "All product requirements", "Project plan", "Risk list"],
+    "correct": 0
+  },
+  {
+    "question": "Who can cancel a Sprint?",
+    "answers": ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"],
+    "correct": 1
+  },
+  {
+    "question": "What is the result of a Sprint?",
+    "answers": ["A done increment", "A plan", "A presentation", "A prototype"],
+    "correct": 0
+  },
+  {
+    "question": "What characteristics should a Scrum Team ideally have?",
+    "answers": ["Hierarchical and specialized", "Self-organizing and cross-functional", "Only developers", "Large and distributed"],
+    "correct": 1
+  },
+  {
+    "question": "What does the transparency pillar in the empirical process describe?",
+    "answers": ["All information is accessible to everyone involved", "Strict control", "Documentation of plans", "Confidentiality of all data"],
+    "correct": 0
+  },
+  {
+    "question": "What happens in the Sprint Review?",
+    "answers": ["Presentation of the increment and gathering feedback", "Planning the next project", "Code testing", "Team meeting"],
+    "correct": 0
+  },
+  {
+    "question": "Which statement best describes an Increment in Scrum?",
+    "answers": ["An unfinished work amount", "A potentially shippable product", "A list of requirements", "A Scrum meeting"],
+    "correct": 1
+  },
+  {
+    "question": "Which activity is not part of Scrum?",
+    "answers": ["Sprint Planning", "Version control", "Sprint Retrospective", "Daily Scrum"],
+    "correct": 1
+  },
+  {
+    "question": "What does the Product Owner ensure?",
+    "answers": ["Schedule adherence", "Maximizing product value", "Technical implementation", "Testing"],
+    "correct": 1
+  },
+  {
+    "question": "Which is NOT a Scrum artifact?",
+    "answers": ["Sprint Backlog", "Product Backlog", "Release Notes", "Increment"],
+    "correct": 2
+  },
+  {
+    "question": "How long should Sprint Planning last at most for a one-month Sprint?",
+    "answers": ["8 hours", "4 hours", "2 hours", "1 hour"],
+    "correct": 1
+  },
+  {
+    "question": "What is the main function of the Scrum Master?",
+    "answers": ["Maintain Product Backlog", "Promote Scrum process and remove impediments", "Write code", "Team management"],
+    "correct": 1
+  },
+  {
+    "question": "What do you call the Scrum Team with Product Owner, Scrum Master, and Developers combined?",
+    "answers": ["Agile group", "Scrum Team", "Manager group", "Project team"],
+    "correct": 1
+  },
+  {
+    "question": "What is the timebox for the Daily Scrum?",
+    "answers": ["15 minutes", "30 minutes", "1 hour", "10 minutes"],
+    "correct": 0
+  },
+  {
+    "question": "What follows after each Sprint?",
+    "answers": ["Sprint Review", "Sprint Planning", "Sprint closing report", "Product acceptance"],
+    "correct": 0
+  },
+  {
+    "question": "What does the Adaptation pillar in empirical process describe?",
+    "answers": ["Adjusting plans and workflows as needed", "Creating documentation", "Holding meetings", "Controlling the team"],
+    "correct": 0
+  },
+  {
+    "question": "Who can participate in Sprint Planning?",
+    "answers": ["Scrum Team and Stakeholders", "Only Product Owner", "Only Development Team", "Project Manager"],
+    "correct": 0
+  },
+  {
+    "question": "What does ‘Cross-functional’ mean for Scrum Teams?",
+    "answers": ["Multiple teams work together", "Team members have diverse skills", "Teams are hierarchical", "Teams are specialized on one task"],
+    "correct": 1
+  },
+  {
+    "question": "What is NOT a responsibility of the Scrum Master?",
+    "answers": ["Coaching the team", "Explaining Scrum rules", "Maintaining the Product Backlog", "Removing impediments"],
+    "correct": 2
+  },
+  {
+    "question": "How does Scrum handle changes during a Sprint?",
+    "answers": ["Accepts them immediately", "Ignores them", "Questions and evaluates them in next Sprint Planning", "Cancels Sprint immediately"],
+    "correct": 2
+  },
+  {
+    "question": "What is the goal of Release Planning in Scrum?",
+    "answers": ["Overall project planning", "Focus on goals and scope of a release", "Evaluating staff", "Setting budget"],
+    "correct": 1
+  },
+  {
+    "question": "What does 'Timeboxing' mean in Scrum?",
+    "answers": ["A maximum time duration for events", "A break schedule", "A schedule for project meetings", "An unnecessary constraint"],
+    "correct": 0
+  },
+  {
+    "question": "Which Scrum event aims to improve team processes?",
+    "answers": ["Sprint Planning", "Sprint Review", "Sprint Retrospective", "Daily Scrum"],
+    "correct": 2
+  },
+  {
+    "question": "Which statement about Product Owners is true?",
+    "answers": ["Responsible for writing code", "Manages and prioritizes the Product Backlog", "Coordinates daily team tasks", "Writes technical specifications"],
+    "correct": 1
+  },
+  {
+    "question": "What is meant by 'Definition of Done' in Scrum?",
+    "answers": ["The list of acceptance criteria for Product Backlog Items", "The schedule", "Team rules", "Project budget"],
+    "correct": 0
+  },
+  {
+    "question": "What is called the output of a Sprint?",
+    "answers": ["Sprint Backlog", "Product Increment", "Sprint Goal", "Release Plan"],
+    "correct": 1
+  },
+  {
+    "question": "How long should a Sprint normally last?",
+    "answers": ["One day", "One week to one month", "Three months", "Six months"],
+    "correct": 1
+  },
+  {
+    "question": "What is a Burndown Chart?",
+    "answers": ["A chart showing remaining work", "A schedule", "A list of risks", "A Scrum Master report"],
+    "correct": 0
+  },
+  {
+    "question": "Who are the members of the Scrum Team?",
+    "answers": ["Project team", "Scrum Team", "Development team", "Management team"],
+    "correct": 1
+  },
+  {
+    "question": "What does 'Cross-functional team' mean in Scrum?",
+    "answers": ["Team members from different departments", "Team with only developers", "Vertically organized team", "Team distributed across locations"],
+    "correct": 0
+  },
+  {
+    "question": "Who is responsible for removing impediments?",
+    "answers": ["Scrum Master", "Product Owner", "Team leader", "Project manager"],
+    "correct": 0
+  },
+  {
+    "question": "What is NOT a requirement for a successful Scrum Team?",
+    "answers": ["Self-organization", "Commitment", "Hierarchical structure", "Cross-functionality"],
+    "correct": 2
+  },
+  {
+    "question": "Which best describes a Scrum Sprint?",
+    "answers": ["Unlimited duration", "Time-boxed development cycle", "Flexible never-ending process", "Ad-hoc project duration"],
+    "correct": 1
+  },
+  {
+    "question": "What does 'Empirical process control' mean in Scrum?",
+    "answers": ["Planning and documentation", "Inspection, adaptation and transparency", "Hierarchical control", "Risk management"],
+    "correct": 1
+  },
+  {
+    "question": "What is the purpose of the Sprint Backlog?",
+    "answers": ["Document product requirements", "List of tasks for the current Sprint", "List of all stakeholders", "Project plan"],
+    "correct": 1
+  },
+  {
+    "question": "When is the Product Backlog updated?",
+    "answers": ["Once a year", "Continuously", "After every Sprint Review", "Only upon customer request"],
+    "correct": 1
+  },
+  {
+    "question": "Which is NOT a Scrum event?",
+    "answers": ["Sprint Planning", "Daily Scrum", "Sprint Retrospective", "Project closure meeting"],
+    "correct": 3
+  },
+  {
+    "question": "How is the velocity of a Scrum Team measured?",
+    "answers": ["UX analysis", "Velocity - completed story points per Sprint", "Bug reports", "Dashboard metrics"],
+    "correct": 1
+  },
+  {
+    "question": "What happens when a Sprint is cancelled?",
+    "answers": ["Sprint ends immediately and team waits for instructions", "All planned tasks are cancelled", "Product Increment remains incomplete", "Team immediately starts next Sprint"],
+    "correct": 0
+  },
+  {
+    "question": "Who typically creates the Product Backlog?",
+    "answers": ["Scrum Master", "Product Owner", "Development Team", "Stakeholders"],
+    "correct": 1
+  },
+  {
+    "question": "What is the goal of Sprint Planning?",
+    "answers": ["Set overall project goals", "Agree on the work to be done in the Sprint and create Sprint Backlog", "Evaluate team", "Define software architecture"],
+    "correct": 1
+  },
+  {
+    "question": "What is the purpose of a Sprint Review?",
+    "answers": ["Coordinate with stakeholders and collect feedback", "Create new Sprint plan", "Organize team development", "Review code"],
+    "correct": 0
+  },
+  {
+    "question": "How does Scrum define success?",
+    "answers": ["On-time delivery", "Maximized product value and customer satisfaction", "Low cost", "Complete documentation"],
+    "correct": 1
+  },
+  {
+    "question": "What is the sum of all Product Backlog Items called?",
+    "answers": ["Sprint Backlog", "Product Backlog", "Release Plan", "Project Plan"],
+    "correct": 1
+  },
+  {
+    "question": "How often should Scrum Teams inspect their work process?",
+    "answers": ["Annually", "After every Sprint", "Monthly", "Only at project end"],
+    "correct": 1
+  },
+  {
+    "question": "Which is NOT a Scrum role?",
+    "answers": ["Scrum Master", "Product Owner", "Project Manager", "Development Team"],
+    "correct": 2
+  },
+  {
+    "question": "What is NOT included in the Sprint Backlog?",
+    "answers": ["Tasks to be done", "Sprint goal", "Product requirements for future Sprints", "Team improvement ideas"],
+    "correct": 2
+  },
+  {
+    "question": "How long does a typical Daily Scrum last?",
+    "answers": ["15 minutes", "30 minutes", "1 hour", "45 minutes"],
+    "correct": 0
+  },
+  {
+    "question": "Who is responsible for agreeing on the Sprint Goal?",
+    "answers": ["Scrum Master", "Product Owner", "The whole Scrum Team", "Project Manager"],
+    "correct": 2
+  },
+  {
+    "question": "What is the best description of a Scrum Increment?",
+    "answers": ["Unfinished work", "Potentially shippable product functionality", "Project plan", "Test documentation"],
+    "correct": 1
+  },
+  {
+    "question": "Which statement best describes Scrum?",
+    "answers": ["A process model", "An agile framework", "Project management software", "A programming language toolkit"],
+    "correct": 1
+  },
+  {
+    "question": "How does the Scrum Master support the Development Team?",
+    "answers": ["By assigning tasks", "By removing impediments and protecting the process", "By writing the Product Backlog", "By doing tests"],
+    "correct": 1
+  },
+  {
+    "question": "One of the Scrum goals is to:",
+    "answers": ["Optimize project costs", "Deliver a working increment at the end of each Sprint", "Create a project plan", "Increase documentation quality"],
+    "correct": 1
+  },
+  {
+    "question": "When is the Product Backlog updated?",
+    "answers": ["Only at project start", "Continuously throughout the project", "Only after Sprint Reviews", "Whenever the team decides"],
+    "correct": 1
+  },
+  {
+    "question": "Which statement is correct about Scrum Teams?",
+    "answers": ["They consist only of developers", "They are cross-functional and self-organizing", "They have a hierarchical structure", "They always have more than 10 members"],
+    "correct": 1
+  },
+  {
+    "question": "What is an 'Impediment' in Scrum?",
+    "answers": ["A product defect", "An obstacle blocking the team", "A new requirement", "A meeting"],
+    "correct": 1
+  },
+  {
+    "question": "What is the maximum duration of a Sprint?",
+    "answers": ["1 month", "3 months", "2 months", "Unlimited"],
+    "correct": 0
+  },
+  {
+    "question": "What is the central source of requirements in Scrum?",
+    "answers": ["Sprint Backlog", "Product Backlog", "Release Plan", "Project documents"],
+    "correct": 1
+  },
+  {
+    "question": "Who is responsible for prioritizing the Product Backlog?",
+    "answers": ["Scrum Master", "Product Owner", "Project Manager", "Team Lead"],
+    "correct": 1
+  },
+  {
+    "question": "Who participates in the Daily Scrum?",
+    "answers": ["All stakeholders", "Development Team", "Product Owner and Scrum Master", "The whole company"],
+    "correct": 1
+  },
+  {
+    "question": "Which is true about the role of the Product Owner?",
+    "answers": ["Manages the team", "Maximizes product value", "Writes code", "Plans release dates"],
+    "correct": 1
+  },
+  {
+    "question": "What are the five values of Scrum?",
+    "answers": ["Courage, Focus, Commitment, Respect, Openness", "Trust, Speed, Quality, Planning, Control", "Transparency, Inspection, Adaptation, Analysis, Design", "Discipline, Efficiency, Hierarchy, Order, Structure"],
+    "correct": 0
+  },
+  {
+    "question": "Who is responsible for ensuring the Scrum Team adheres to the Scrum rules?",
+    "answers": ["Product Owner", "Development Team", "Scrum Master", "Stakeholders"],
+    "correct": 2
+  },
+  {
+    "question": "What is the commitment for the Product Backlog?",
+    "answers": ["Definition of Done", "Sprint Goal", "Product Goal", "Release Plan"],
+    "correct": 2
+  },
+  {
+    "question": "Who decides how work in the Sprint is performed?",
+    "answers": ["Scrum Master", "Product Owner", "The Developers", "The Project Manager"],
+    "correct": 2
+  },
+  {
+    "question": "Which event is the last opportunity in the Sprint to make adaptations?",
+    "answers": ["Sprint Planning", "Daily Scrum", "Sprint Review", "Sprint Retrospective"],
+    "correct": 3
+  },
+  {
+    "question": "What is the purpose of the Daily Scrum?",
+    "answers": ["Status report to the Product Owner", "Inspect progress toward the Sprint Goal", "Task assignment by the Scrum Master", "Detailed technical discussion"],
+    "correct": 1
+  },
+  {
+    "question": "What happens to unfinished Product Backlog items at the end of a Sprint?",
+    "answers": ["They are marked as done", "They are automatically moved to the next Sprint", "They return to the Product Backlog", "They are deleted"],
+    "correct": 2
+  },
+  {
+    "question": "Who is responsible for sizing Product Backlog items?",
+    "answers": ["Product Owner", "Scrum Master", "The Developers", "Stakeholders"],
+    "correct": 2
+  },
+  {
+    "question": "What is the main responsibility of the Developers in the Scrum Team?",
+    "answers": ["Prioritizing the Product Backlog", "Delivering a done Increment by the end of the Sprint", "Removing impediments for the team", "Managing stakeholders"],
+    "correct": 1
+  },
+  {
+    "question": "How many Product Owners can a Scrum Team have?",
+    "answers": ["Exactly one", "Two (one for business, one for IT)", "As many as needed", "One per stakeholder"],
+    "correct": 0
+  },
+  {
+    "question": "When is a Sprint finished?",
+    "answers": ["When all tasks are completed", "When the time-box expires", "When the Product Owner says so", "When Quality Assurance agrees"],
+    "correct": 1
+  },
+  {
+    "question": "Which role can tell the team how to work on the Sprint Backlog?",
+    "answers": ["The Scrum Master", "The Product Owner", "No one except the Developers themselves", "The IT Manager"],
+    "correct": 2
+  },
+  {
+    "question": "What is the commitment for the Increment?",
+    "answers": ["Sprint Goal", "Definition of Done", "Product Goal", "Acceptance Protocol"],
+    "correct": 1
+  },
+  {
+    "question": "How is the Sprint Goal created?",
+    "answers": ["Given by the Product Owner", "Set by the Scrum Master", "Jointly by the whole Scrum Team during Sprint Planning", "By the customer in the Sprint Review"],
+    "correct": 2
+  },
+  {
+    "question": "What does self-management mean in Scrum?",
+    "answers": ["Everyone works without coordination", "The team internally decides who does what, when, and how", "There is no Scrum Master", "Management intervenes daily"],
+    "correct": 1
+  },
+  {
+    "question": "What is the primary focus of the Product Owner?",
+    "answers": ["Improving team dynamics", "Maximizing the value of the product", "Technical excellence", "Adhering to Scrum events"],
+    "correct": 1
+  },
+  {
+    "question": "What type of process control is Scrum based on?",
+    "answers": ["Predictive process control", "Empirical process control", "Hierarchical process control", "Waterfall process control"],
+    "correct": 1
+  },
+  {
+    "question": "What is the maximum time-box for a Sprint Review for a one-month Sprint?",
+    "answers": ["2 hours", "4 hours", "8 hours", "15 minutes"],
+    "correct": 1
+  },
+  {
+    "question": "Who should participate in the Sprint Review?",
+    "answers": ["Only the Scrum Team", "The Scrum Team and key stakeholders", "Only the Product Owner and stakeholders", "Only the Developers"],
+    "correct": 1
+  },
+  {
+    "question": "Which Scrum value means recognizing each other as capable, independent people?",
+    "answers": ["Openness", "Respect", "Commitment", "Courage"],
+    "correct": 1
+  },
+  {
+    "question": "What is the purpose of the Sprint?",
+    "answers": ["To create a detailed project plan", "To deliver an Increment of valuable functionality", "To work more overtime", "To meet all requirements at once"],
+    "correct": 1
+  },
+  {
+    "question": "What does 'Product Backlog refinement' describe?",
+    "answers": ["Testing the finished product", "Adding detail, estimates, and order to items in the Product Backlog", "Annual strategy meeting", "Deleting old requirements"],
+    "correct": 1
+  },
+  {
+    "question": "When does the next Sprint begin?",
+    "answers": ["After a short planning break", "Immediately after the conclusion of the previous Sprint", "Always on Mondays", "When new requirements exist"],
+    "correct": 1
+  },
+  {
+    "question": "Who bears responsibility for managing the Product Backlog?",
+    "answers": ["Scrum Master", "Stakeholders", "Product Owner", "Team Lead"],
+    "correct": 2
+  },
+  {
+    "question": "What is the commitment for the Sprint Backlog?",
+    "answers": ["Product Goal", "Definition of Done", "Sprint Goal", "Working hours"],
+    "correct": 2
+  },
+  {
+    "question": "How is the Definition of Done (DoD) established?",
+    "answers": ["Determined by the customer", "If not provided by the organization, the Scrum Team must establish it", "By the Scrum Master alone", "By the Project Management Office"],
+    "correct": 1
+  },
+  {
+    "question": "What is the maximum time-box for a Sprint Retrospective for a one-month Sprint?",
+    "answers": ["30 minutes", "1 hour", "3 hours", "4 hours"],
+    "correct": 2
+  },
+  {
+    "question": "Who in the Scrum Team is responsible for quality?",
+    "answers": ["Only the testers", "The Product Owner", "The entire Scrum Team", "Only the Developers"],
+    "correct": 2
+  },
+  {
+    "question": "What statement about Scrum Team size is correct according to the Scrum Guide?",
+    "answers": ["Always exactly 7 people", "Typically 10 or fewer people", "At least 15 people", "Any size"],
+    "correct": 1
+  },
+  {
+    "question": "Which is not a formal Scrum event?",
+    "answers": ["The Sprint", "Sprint Refinement", "Daily Scrum", "Sprint Review"],
+    "correct": 1
+  }
+]

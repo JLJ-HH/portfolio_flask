@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
 from calculator.routes import calculator_bp
 from contact_manager.routes import contact_manager_bp
+from scrum_quiz.routes import scrum_quiz_bp
 
 # Falls du Markdown-Formatierung im Text nutzen willst: pip install markdown2
 try:
@@ -28,6 +29,7 @@ app.secret_key = config['APP']['SECRET_KEY']
 # Blueprint Registrierung
 app.register_blueprint(calculator_bp, url_prefix='/taschenrechner')
 app.register_blueprint(contact_manager_bp, url_prefix='/contact-manager')
+app.register_blueprint(scrum_quiz_bp, url_prefix='/scrum-quiz')
 
 # Mail-Setup aus der Config
 app.config.update(
@@ -113,6 +115,11 @@ def projects():
         elif p["title"].strip() == "Contact Manager":
             try:
                 live_url = url_for('contact_manager.index')
+            except Exception:
+                pass
+        elif p["title"].strip() == "Scrum Quiz App":
+            try:
+                live_url = url_for('scrum_quiz.index')
             except Exception:
                 pass
 

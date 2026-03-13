@@ -10,7 +10,7 @@
   {
     "title": "Scrum Quiz App",
     "image": "/static/images/psmi.png",
-    "live_url": "https://jlj-hh.github.io/scrum_quiz2/",
+    "live_url": "/scrum-quiz",
     "info_file": "scrum_info.txt",
     "tech": "HTML, CSS, JavaScript",
     "struct_file": "scrum_structure.txt"
