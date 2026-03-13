@@ -18,7 +18,7 @@
   {
     "title": "SmartCalc \u2013 Taschenrechner",
     "image": "/static/images/calculator.png",
-    "video": "/static/videos/calculator.mp4",
+    "video": "/static/videos/smart.mp4",
     "live_url": "/taschenrechner",
     "info_file": "rechner_info.txt",
     "tech": "Python (Flask), Jinja2, CSS, JS",
