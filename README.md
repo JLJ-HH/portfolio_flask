@@ -30,6 +30,7 @@ Diese Architektur ermöglicht es, spezialisierte Projekte in separaten Verzeichn
 ## Autor
 
 **José Luis Juárez** - Angehender Anwendungsentwickler aus Hamburg.
+
 [GitHub Profil](https://github.com/Luis-Juarez-Juarez)
 
 [Strato Portfolio](https://jljuarez.de/)
