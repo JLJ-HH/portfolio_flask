@@ -21,5 +21,6 @@ Willkommen auf meinem Portfolio-Projekt! Diese Anwendung dient als digitale Visi
 
 **José Luis Juárez** - Angehender Anwendungsentwickler aus Hamburg.
 [GitHub Profil](https://github.com/Luis-Juarez-Juarez)
+
 [Strato Portfolio](https://jljuarez.de/)
 
