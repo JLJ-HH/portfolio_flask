@@ -1,31 +1,34 @@
-📂 portfolio_flask (Modern Flask App)
+📂 portfolio_flask (Modular Flask Ecosystem)
 │
-├── 📄 app.py               # [Server] Flask-Routing, Mail-Setup & Logic
-├── 📄 projects.json        # [Daten] Zentrale Datenquelle für alle Projekte
-├── 📄 config.ini           # [Config] Geheime Schlüssel & Mail-Server Daten
+├── 📄 app.py               # [Core] Zentrale Steuerung & Blueprint-Registrierung
+├── 📄 projects.json        # [Daten] Datenquelle für das dynamische Showcase
+├── 📄 config.ini           # [Config] System-Einstellungen & Geheimnisse
 │
-├── 📁 templates/           # [Views] Jinja2 Templates
-│   ├── 📄 base.html        # Grundgerüst mit Navbar & Footer
-│   ├── 📄 projects.html    # Dynamische Projekt-Cards
-│   └── 📄 about.html       # Premium "About Me" Layout
+├── 📁 calculator/          # [Modul] SmartCalc (Algebra & Logik)
+├── 📁 contact_manager/      # [Modul] Livio (REST-API & Kontakt-Details)
+├── 📁 scrum_quiz/          # [Modul] Scrum PSM1 Quiz (Dynamic Engine)
+│
+├── 📁 templates/           # [Views] Globale Jinja2 Templates
+│   ├── 📄 base.html        # Shell mit Navigation & Footer
+│   └── 📄 projects.html    # Loop für modulare Projekt-Kacheln
 │
 ├── 📁 static/
-│   ├── 📁 css/             # [Design] Modulares Styling (layout, home, about)
-│   ├── 📁 js/              # [Logik] Interaktive Elemente & Animationen
-│   ├── 📁 content/         # [Content] Markdown & Text-Dateien
-│   └── 📁 images/          # [Assets] Optimierte Grafiken & Icons
+│   ├── 📁 css/             # [Global Styles] Layout & Themes
+│   ├── 📁 content/         # [Content] MD-Files für dynamische Texte
+│   └── 📁 images/          # [Assets] Projekt-Illustrationen & Icons
 │
-└── 📄 requirements.txt     # [Dependencies] Flask, Flask-Mail, Markdown2
+└── 📄 requirements.txt     # [Dependencies] Flask-Stack
 
 ===========================================================
 TECHNISCHE FEATURES
 ===========================================================
 Feature         | Umsetzung                | Technik
 ----------------|--------------------------|------------------
-Server-Backend  | Flask framework          | Python 3.x
-Templating      | Jinja2 Engines           | Dynamic HTML Injection
+Modularität     | Flask Blueprints         | Modulare Routen-Struktur
+Routing         | Dynamische Mount-Points  | app.register_blueprint()
 Data Flow       | JSON Integration         | Project Data Management
-Styling         | Vanilla CSS              | CSS Variables / Flexbox
+Styling         | Vanilla CSS              | CSS Variables / Glassmorphism
 Mail-System     | SMTP Integration         | Flask-Mail
-SEO / UX        | Meta Tags & Semantics    | HTML5 Standards
+Architektur     | Hub & Spoke Modell       | Zentraler App-Kern
 ===========================================================
+

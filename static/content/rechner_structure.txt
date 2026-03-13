@@ -1,30 +1,23 @@
-📂 calculator (SmartCalc Desktop App)
+📂 calculator (SmartCalc Web App)
 │
-├── 📄 smartCalc-temp_verlauf.py  # [Main] App-Entry, GUI & OOP-Logic
-├── 📄 strukturplan.txt           # [Doc] Interner Logik-Entwurf
+├── 📄 routes.py         # [Backend] Flask-Logik, Math-Parser & API-Endpoints
+├── 📁 templates/        # [View] HTML-Struktur (Jinja2)
+│   └── 📄 index.html    # Haupt-Interface des Taschenrechners
+├── 📁 static/           # [Assets] CSS & JavaScript
+│   ├── 📁 css/          # Layout & Theme-Styling
+│   └── 📁 js/           # Script.js: API-Aufrufe & UI-Interaktion
 │
-├── ⚙️ class RechenParser          # [Logic] Whitelist-Check & RegEx Preprocessing
-│   ├── 🛠️ berechne()             # Kern-Algorithmus zur Ausdrucksauswertung
-│   └── 🛠️ erlaubte_zeichen       # Sicherheits-Layer gegen Code-Injection
-│
-├── ⚙️ class VerlaufManager        # [Data] RAM-Storage & Toplevel-UI Kapselung
-│   ├── 🛠️ speichern()            # Persistenz innerhalb der Session
-│   └── 🛠️ anzeigen()             # Dynamisches Fenster für Rechenhistorie
-│
-└── ⚙️ class TaschenrechnerGUI     # [View/Controller] Tkinter Mainloop & Events
-    ├── 🛠️ _gui_bauen()           # Dynamisches Grid mit 42+ Funktionen
-    ├── 🛠️ toggle_dark()          # Dynamisches Theme-Changer Logic
-    └── 🛠️ tastatur()             # Event-Binding für physische Tastaturen
+└── 📄 README.md         # Dokumentation & mathematische Spezifikationen
 
 ===========================================================
 FEATURES IM DETAIL
 ===========================================================
-Feature       | Umsetzung                 | Technik
---------------|---------------------------|-------------------
-Security      | Injektions-Schutz         | Whitelist-Validierung
-Math-Engine   | Komplexe Formeln          | RegEx Mapping & math lib
-UI-Themes     | Dark/Light Mode           | Tkinter Config-Mapping
-Verlauf       | Session-History           | RAM-Buffer & Toplevels
-Keyboard      | Volle Steuerung           | Tkinter Key-Bindings
-Architektur   | Modulares OOP             | Python Classes
-===========================================================
+Feature             | Umsetzung                 | Technik
+--------------------|---------------------------|-------------------
+Security            | Injektions-Schutz         | Whitelist & RegEx
+Math-Engine         | Komplexe Berechnungen     | Python / math lib
+Web-Interface       | Glassmorphism / Responsive| HTML5 / CSS3
+History Management  | RESTful API Access        | Flask / JS Fetch
+Theme Support       | Dark/Light Mode Switch    | CSS Vars / JS Logic
+Architektur         | Modulare Web-Struktur     | Flask Blueprints
+===========================================================

@@ -1,11 +1,12 @@
-SmartCalc – Wissenschaftlicher Rechner mit Python & Tkinter
+SmartCalc – Wissenschaftlicher Web-Rechner mit Python & Flask
 
-Dieser wissenschaftliche Taschenrechner ist weit mehr als ein einfaches Rechen-Tool. Es ist eine robuste Desktop-Applikation, die durch mathematische Präzision, Sicherheit und ein durchdachtes Nutzererlebnis überzeugt.
+Dieser wissenschaftliche Taschenrechner hat sich von einer Desktop-Anwendung zu einer modernen Web-App entwickelt. Er bietet mathematische Präzision gepaart mit einem eleganten Web-UI.
 
 Die Highlights:
-• Sicherer Rechen-Parser: Eine eigenentwickelte Logik mit Whitelist-Validierung sorgt für maximale Stabilität und verhindert Code-Injection durch strikte Filterung der Eingaben.
-• Erweiterte Mathematik: Volle Unterstützung für komplexe Operationen wie Trigonometrie (sin, cos, tan), Logarithmen (log, ln), Wurzeln (√) und Potenzen (^) mittels präzisem RegEx-Mapping.
-• Dynamisches UI-Management: Ein hochwertiger Dark- & Light-Mode sowie ein interaktives Shortcut-Overlay optimieren den Workflow und die Usability.
-• Intelligenter Verlauf: Ein RAM-basiertes Session-Management erlaubt das Einsehen und Verwalten vergangener Berechnungen in einem separaten, synchronisierten Fenster.
+• Sicherer Rechen-Parser: Eine serverseitige Logik mit Whitelist-Validierung und RegEx-Preprocessing verhindert Code-Injection und sorgt für Stabilität.
+• Erweiterte Mathematik: Volle Unterstützung für komplexe Operationen wie Trigonometrie (sin, cos, tan), Logarithmen (log, ln), Wurzeln (√) und Potenzen (^).
+• Modernes Web-UI: Ein intuitives Glassmorphism-Design, das für Desktop und Mobile optimiert ist, inklusive Dark- & Light-Mode Support.
+• Intelligenter Verlauf: Eine REST-API gesteuerte Historie ermöglicht das Einsehen und Verwalten vergangener Berechnungen direkt im Browser.
+• Performance: Durch die serverseitige Berechnung in Python bleibt das Interface flüssig und zuverlässig.
 
-Technisch setzt das Projekt auf eine saubere, objektorientierte Architektur (OOP), die GUI, Berechnungslogik und Datenverwaltung modular voneinander trennt.
+Technisch demonstriert das Projekt die Portierung komplexer mathematischer Logik in eine moderne Web-Umgebung mittels Flask, Jinja2 und Vanilla JS.

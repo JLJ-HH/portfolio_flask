@@ -1,12 +1,13 @@
-Contact Manager – Intuitive Kontaktverwaltung mit Python & Tkinter
+Contact Manager Livio – Moderne Web-Kontaktverwaltung mit Python & Flask
 
-Dieses Projekt ist eine leistungsstarke Desktop-Anwendung zur effizienten Verwaltung von Kontaktinformationen. Es kombiniert eine benutzerfreundliche grafische Oberfläche mit einer robusten Datenlogik.
+Dieses Projekt hat sich von einer Desktop-Anwendung zu einer modernen Web-App entwickelt. Es kombiniert ein elegantes Glassmorphism-Frontend mit einer leistungsstarken RESTful API im Backend.
 
 Die Highlights:
-• Moderne GUI: Basierend auf Tkinter bietet die App eine übersichtliche Oberfläche mit dynamischem Layout, das sich an die Fenstergröße anpasst (Responsivität).
-• Intelligente Suche: Kontakte können in Echtzeit gefiltert werden, was das schnelle Auffinden von Informationen selbst in großen Listen ermöglicht.
-• Sicherheits-Features: Sensible Aktionen wie das Löschen von Kontakten sind durch einen konfigurierbaren Sicherheits-Code geschützt.
-• Saubere Architektur: Die strikte Trennung von UI (contact_manager.py) und Datenlogik (data_manager.py) sorgt für hohe Wartbarkeit und einfache Erweiterbarkeit.
-• Persistenz: Daten werden sicher in einer strukturierten Textdatei gespeichert, inklusive automatischer Sortierung beim Speichern.
+• Modernes Web-UI: Ein responsives Design mit Glassmorphism-Effekten, flüssigen Animationen und Interaktivität.
+• Dark- & Lightmode: Ein integrierter Theme-Toggle ermöglicht den Wechsel zwischen verschiedenen Farbmodi.
+• Intelligente Suche: Echtzeit-Filterung der Kontakte direkt im Browser für maximale Geschwindigkeit.
+• Toggle-Ansicht: Die Kontaktliste lässt sich flexibel ein- und ausblenden ("Alle anzeigen" Toggle), um den Fokus zu wahren.
+• RESTful Backend: Die gesamte Datenlogik wird über eine Flask-API gesteuert, was eine saubere Trennung von UI und Daten ermöglicht.
+• Persistenz: Kontakte werden sicher auf dem Server gespeichert und automatisch alphabetisch sortiert.
 
-Technisch demonstriert das Projekt den Einsatz von Python für Desktop-Anwendungen, die Handhabung von Konfigurationsdateien (INI) und fortgeschrittene GUI-Konzepte wie Event-Binding und Grid-Management.
+Technisch demonstriert das Projekt die Transformation klassischer Logik in eine moderne Web-Architektur unter Nutzung von Python (Flask), Jinja2 und modernem JavaScript.

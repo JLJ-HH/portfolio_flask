@@ -1,22 +1,23 @@
-📂 contact-manager (Python Desktop App)
+📂 contact_manager_livio (Flask Web App)
 │
-├── 📄 contact_manager.py # [Main/UI] Tkinter-Oberfläche & Event-Handling
-├── 📄 data_manager.py    # [Logik] Datenhaltung, Validierung & Dateizugriff
-├── 📄 settings.ini       # [Konfig] Sicherheits-Einstellungen & Lösch-Codes
-├── 📄 contacts.txt       # [Daten] Strukturierte Speicherung der Kontakte
+├── 📄 routes.py         # [Backend] Flask-Logik, REST-API & Daten-Handling
+├── 📁 templates/        # [View] HTML-Strukturen (Jinja2)
+│   └── 📄 cm_index.html # Hauptseite der Web-App
+├── 📁 static/           # [Assets] CSS & JavaScript für das Frontend
+│   ├── 📁 css/          # Glassmorphism-Styles & Themes
+│   └── 📁 js/           # Main.js: API-Interaktion & DOM-Logik
 │
-└── 📄 README.md          # Projektdokumentation und Installationsanleitung
-
+└── 📄 README.md         # Projektdokumentation & API-Beschreibung
 
 ===========================================================
 FEATURES IM DETAIL
 ===========================================================
-Feature         | Umsetzung                | Technik
-----------------|--------------------------|------------------
-GUI             | Tkinter                  | Python Standard Lib
-Suche           | Echtzeit-Filter          | Event-Binding (KeyRelease)
-Responsivität   | Dynamisches Grid         | Grid-Gewichtung & Configure
-Sicherheit      | PIN-Abfrage              | Simpledialog & Logic-Check
-Validierung     | Input-Check              | String-Handling
-Daten-Handhabung| CRUD (Erstellen, Lesen, Aktualisieren, Löschen)
+Feature             | Umsetzung                | Technik
+--------------------|--------------------------|------------------
+Web-Interface       | Glassmorphism / Flexbox  | HTML5 / CSS3
+Theme Toggle        | CSS-Variablen & JS       | Vanilla JS
+Suche & Filter      | Client-Side Filtering    | JavaScript (Array-Methods)
+REST API            | Blueprint & JSON-Routes  | Flask / Python
+Show/Hide Toggle    | Dynamisches DOM-Handling | JS List Toggling
+Daten-Persistenz    | Server-Side File-Access  | Python File I/O
 ===========================================================

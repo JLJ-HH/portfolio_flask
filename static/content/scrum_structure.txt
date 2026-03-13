@@ -3,6 +3,7 @@
 ├── 📄 index.html        # [View] Struktur der Quiz-Oberfläche & Sprachauswahl
 ├── 📄 style.css         # [Design] Modernes UI & Responsive Layout
 ├── 📄 quiz.js           # [Controller] Quiz-Logik, Event-Handling & Scoring
+├── 📄 README.md         # [Doku] Projektdokumentation & Features
 │
 ├── 📄 questions_de.json # [Daten] Fragenkatalog in deutscher Sprache
 └── 📄 questions_en.json # [Daten] Fragenkatalog in englischer Sprache
@@ -10,11 +11,12 @@
 ===========================================================
 FEATURES IM DETAIL
 ===========================================================
-Feature         | Umsetzung                | Technik
-----------------|--------------------------|------------------
-Mehrsprachigkeit | Dynamischer JSON-Import | questions_*.json
-Quiz Engine      | DOM-Manipulation         | Vanilla JavaScript
-Responsive       | Flexbox / Media Queries  | CSS3
-Scoring          | Echtzeit-Berechnung      | JS Logic
-Feedback         | Sofortige Auswertung     | CSS Classes
+Feature             | Umsetzung                | Technik
+--------------------|--------------------------|------------------
+Mehrsprachigkeit    | Dynamischer JSON-Import | questions_*.json
+Fragenanzahl        | Dynamische Limitierung   | Input Handling
+Timer               | Dynamische Berechnung    | JS Timing API
+Repeat Function     | State-Reset              | Reset Logic
+Responsive Design   | Flexbox / Media Queries  | CSS3
+Echtzeit Feedback   | Sofortige Auswertung     | CSS / JS classes
 ===========================================================

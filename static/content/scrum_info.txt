@@ -3,9 +3,12 @@ Scrum Quiz – Interaktive Vorbereitung auf PSM1-Zertifizierungen
 Dieses Projekt ist ein interaktives Quiz-Tool, das speziell dafür entwickelt wurde, Scrum-Wissen zu testen und sich gezielt auf Prüfungen wie die Professional Scrum Master I (PSM I) vorzubereiten.
 
 Die Highlights:
-• Mehrsprachig: Bietet Unterstützung für Deutsch und Englisch (questions_de.json / questions_en.json), um ein breites Spektrum an Lernenden abzudecken.
-• Dynamische Engine: Eine JavaScript-basierte Logik (quiz.js) verwaltet den Fragen-Pool, berechnet die Ergebnisse in Echtzeit und bietet direktes Feedback.
-• Modernes Design: Ein minimalistisches, reaktionsfähiges UI (style.css), das sowohl auf Desktops als auch auf mobilen Geräten eine optimale Lernerfahrung bietet.
-• Client-Side: Die gesamte Logik läuft im Browser, was eine schnelle Performance und einfache Bereitstellung über GitHub Pages ermöglicht.
+• Mehrsprachig: Bietet Unterstützung für Deutsch und Englisch (questions_de.json / questions_en.json).
+• Konfigurierbar: Die Anzahl der Fragen kann individuell (1-120) festgelegt werden.
+• Dynamischer Timer: Der Zeitdruck passt sich automatisch an die gewählte Fragenanzahl an.
+• Quiz wiederholen: Ermöglicht das sofortige erneute Starten mit denselben Einstellungen.
+• Dynamische Engine: Eine JavaScript-basierte Logik verwaltet den Pool, berechnet Ergebnisse in Echtzeit und bietet Feedback inkl. Korrekturhinweisen.
+• Modernes Design: Minimalistisches, reaktionsfähiges UI (style.css), optimal für Desktop und Mobile.
+• Client-Side: Die gesamte Logik läuft im Browser (bereitgestellt über Strato).
 
-Technisch besticht das Projekt durch seine Einfachheit und Effizienz, wobei JSON-Datenstrukturen genutzt werden, um Fragen und Antworten modular zu verwalten.
+Technisch besticht das Projekt durch seine Modularität, wobei JSON-Datenstrukturen für eine saubere Trennung von Inhalten und Logik sorgen.
