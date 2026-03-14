@@ -1,11 +1,12 @@
-Milo Radio – Die moderne Progressive Web App (PWA)
+Milo Radio – Die neue Generation der Progressive Web App (PWA)
 
-Dieses Projekt ist weit mehr als ein einfacher Audioplayer. Es ist eine performante Single-Page-Application (SPA), die echtes Radio-Feeling mit modernster Web-Technologie verbindet.
+Dieses Projekt wurde komplett neu aufgebaut und auf ein professionelles Level gehoben. Es ist nun eine leistungsstarke Full-Stack-Lösung, die eine strikte Trennung zwischen Frontend und Backend verfolgt, um maximale Performance und Skalierbarkeit zu gewährleisten.
 
 Die Highlights:
-• Offline-First & PWA: Dank Service-Worker (sw.js) und Web-Manifest ist die App installierbar und bleibt auch ohne stabile Internetverbindung einsatzbereit.
-• Intelligentes Metadaten-Handling: Über einen PHP-Proxy (metadata.php) werden ICY-Streams gepollt, um aktuelle Songtitel in Echtzeit anzuzeigen.
-• Dynamisches Management: Ein PIN-geschützter Admin-Bereich erlaubt die volle Kontrolle (CRUD) über die 69 integrierten Sender direkt im Browser.
-• User-Zentriert: Ein Favoriten-System auf Basis von LocalStorage sorgt dafür, dass die persönliche Auswahl des Nutzers dauerhaft gespeichert bleibt.
+• Frontend & Backend Architektur: Ein modernes JS-Frontend kommuniziert mit einem spezialisierten PHP/PostgreSQL-Backend. Dies sorgt für eine klare Struktur und blitzschnelle Ladezeiten.
+• Datenanalyse & Trends: Milo Radio trackt jetzt anonymisierte Hörgewohnheiten, um persönliche Top-Listen und globale Trends zu erstellen. Nutzer sehen in Echtzeit, was gerade angesagt ist.
+• Offline-First & PWA: Dank fortschrittlichem Service-Worker-Caching bleibt die App installierbar und auch bei instabilem Internet jederzeit einsatzbereit.
+• Echtzeit-Metadaten: Über einen optimierten Backend-Proxy werden Songtitel und Interpreten ohne Verzögerung direkt in der UI angezeigt.
+• Dynamisches Management: Ein geschütztes Admin-Dashboard ermöglicht die vollständige CRUD-Verwaltung der Senderliste direkt über die Web-Oberfläche.
 
-Technisch setzt das Projekt auf eine saubere MVC-Architektur mit ES6-Modulen, was den Code modular und wartbar macht.
+Technisch setzt Milo Radio auf ein modulares Design mit PostgreSQL 18, einer robusten API und modernsten Web-Standards – gebaut für die Zukunft des Radios.

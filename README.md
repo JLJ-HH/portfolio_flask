@@ -17,34 +17,18 @@ Willkommen auf meinem Portfolio-Projekt! Diese Anwendung dient als digitale Visi
 - **Project Showcase**: Dynamische Anzeige von Projekten aus einer zentralen `projects.json`.
 - **Contact Form**: Voll funktionsfähiges Formular mit E-Mail-Integration.
 
-## Installation & Setup
+## Multi-Application Architecture (Blueprints)
 
-1. **Repository klonen**:
-   ```bash
-   git clone [url-des-repos]
-   cd portfolio_flask
-   ```
+Dieses Portfolio nutzt **Flask Blueprints**, um mehrere eigenständige Anwendungen unter einer einzigen Domäne strukturiert zu bündeln. Jede Anwendung ist als modularer Blueprint implementiert:
 
-2. **Virtual Environment erstellen & aktivieren**:
-   ```bash
-   python -m venv venv
-   source venv/Scripts/activate  # Windows
-   ```
+- **Taschenrechner** (`/taschenrechner`): Ein interaktiver Smart-Rechner.
+- **Contact Manager** (`/contact-manager`): Eine Anwendung zur Kontaktverwaltung.
+- **Scrum Quiz** (`/scrum-quiz`): Eine Lern-App für Scrum-Zertifizierungen.
 
-3. **Abhängigkeiten installieren**:
-   ```bash
-   pip install flask flask-mail markdown2
-   ```
-
-4. **Konfiguration**:
-   - Erstelle eine `config.ini` basierend auf den Anforderungen der `app.py`.
-
-5. **Anwendung starten**:
-   ```bash
-   python app.py
-   ```
+Diese Architektur ermöglicht es, spezialisierte Projekte in separaten Verzeichnissen zu entwickeln und sie nahtlos in das Hauptportfolio zu integrieren, ohne den Code der Hauptanwendung zu überladen.
 
 ## Autor
 
 **José Luis Juárez** - Angehender Anwendungsentwickler aus Hamburg.
 [GitHub Profil](https://github.com/Luis-Juarez-Juarez)
+[Strato Portfolio](https://jljuarez.de/)

@@ -1,39 +1,32 @@
-📂 radio2_app (Milo Radio PWA)
+📂 milo_radio (Full-Stack PWA)
 │
-├── 📄 index.html        # [View] Bootstrap-Layout + SPA-Router + PWA-Modals
-├── 📄 manifest.json     # [PWA] Branding, Icons & Theme-Konfiguration (#4f46e5)
-├── 📄 sw.js             # [Service Worker] Cache-First Strategie für Offline-Modus
+├── 📁 frontend/         # [Frontend] Vue/JS-Applikation
+│   ├── 📄 index.html    # [View] App-Shell & SPA-Router
+│   ├── 📄 manifest.json # [PWA] Branding & Offline-Config
+│   ├── 📄 sw.js         # [Service Worker] Smart Caching
+│   ├── 📁 js/           # [Logic] ES6 Modules
+│   │   ├── 📁 services/ # [API] Kommunikation & State
+│   │   └── 📁 views/    # [UI] Dynamische Seiten
+│   └── 📁 css/          # [Design] Modern UI & Transitions
 │
-├── 📁 api/
-│   └── 📄 metadata.php  # [Backend] PHP-Proxy für ICY-Metadata (Songtitel)
+├── 📁 backend/          # [Backend] PHP & SQL Logic
+│   ├── 📄 db.php        # [DB] PostgreSQL 18 Connection
+│   ├── 📁 api/          # [Endpoints] REST-Schnittstellen
+│   │   ├── 📄 trends.php    # Datenanalyse & Charts
+│   │   └── 📄 stations.php  # CRUD für Senderliste
+│   └── 📁 scripts/      # [Tools] Import & Maintenance
 │
-├── 📁 json/
-│   └── 📄 sender.json   # [Daten] 69 Sender (URL, Logo, Genre, Metadata-Links)
-│
-├── 📁 js/               # [Controller/Logic] ES6 Modules & MVC-Architektur
-│   ├── 📄 main.js       # App-Entry: Router & Admin-PIN-Check
-│   ├── 📁 services/     # [Singletons] Logic Layer
-│   │   ├── 📄 radio.js      # Audio-Engine: Play/Stop/Volume Events
-│   │   ├── 📄 station.js    # Data-Master: JSON → localStorage + CRUD
-│   │   └── 📄 user.js       # Favoriten-System & Event-Bus
-│   └── 📁 pages/        # [SPA-Views] Dynamische Seiten-Module
-│       ├── 📄 page1.js      # Player-UI & NowPlaying (15s Poll via PHP)
-│       ├── 📄 page2.js      # Admin-Panel: CRUD-Form & Genre-Filter
-│       └── 📄 page3.js      # Genre-Explorer & Favoriten-Management
-│
-└── 📁 css/
-    └── 📄 style.css     # [Design] Mobile-First, Sticky Navbar & UI-States
-
+└── 📄 index.php         # [Root] Gateway & Landing-Redirect
 
 ===========================================================
 FEATURES IM DETAIL
 ===========================================================
-Feature      | Umsetzung                | Technik
--------------|--------------------------|------------------
-PWA          | Offline-fähig            | sw.js + Manifest
-NowPlaying   | 15s-Updates              | metadata.php Proxy
-Admin        | PIN-geschützt            | CRUD-Form
-Favoriten    | Nutzer-spezifisch        | LocalStorage
-Responsive   | Mobile-First             | CSS Grid + Touch
-SPA          | 3 Seiten                 | ES6 dynamic import
-===========================================================
+Feature         | Umsetzung                | Technik
+----------------|--------------------------|------------------
+Architektur     | Full-Stack               | PHP + PostgreSQL
+Datenanalyse    | Trends & Top-Listen      | SQL Aggregation
+PWA             | Installierbar & Offline  | Service Worker
+Realtime        | NowPlaying Metadata      | Backend Proxy
+Admin           | Full CRUD Dashboard      | API-Schnittstelle
+Navigation      | SPA Routing              | JS Dynamic Imports
+===========================================================
