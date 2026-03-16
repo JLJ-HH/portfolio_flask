@@ -1,32 +1,96 @@
-📂 milo_radio (Full-Stack PWA)
-│
-├── 📁 frontend/         # [Frontend] Vue/JS-Applikation
-│   ├── 📄 index.html    # [View] App-Shell & SPA-Router
-│   ├── 📄 manifest.json # [PWA] Branding & Offline-Config
-│   ├── 📄 sw.js         # [Service Worker] Smart Caching
-│   ├── 📁 js/           # [Logic] ES6 Modules
-│   │   ├── 📁 services/ # [API] Kommunikation & State
-│   │   └── 📁 views/    # [UI] Dynamische Seiten
-│   └── 📁 css/          # [Design] Modern UI & Transitions
-│
-├── 📁 backend/          # [Backend] PHP & SQL Logic
-│   ├── 📄 db.php        # [DB] PostgreSQL 18 Connection
-│   ├── 📁 api/          # [Endpoints] REST-Schnittstellen
-│   │   ├── 📄 trends.php    # Datenanalyse & Charts
-│   │   └── 📄 stations.php  # CRUD für Senderliste
-│   └── 📁 scripts/      # [Tools] Import & Maintenance
-│
-└── 📄 index.php         # [Root] Gateway & Landing-Redirect
+HIGH-LEVEL SYSTEM ARCHITECTURE: MILO RADIO
+===========================================================
+
+Diese Architektur folgt den Prinzipien der "Clean Architecture", 
+um eine strikte Trennung von Belangen (Separation of Concerns) 
+zu gewährleisten und die Wartbarkeit sowie Skalierbarkeit 
+des Systems sicherzustellen.
+
+1. PRESENTATION LAYER (CLIENT-SIDE)
+-----------------------------------
+- SPA-Architektur (Single Page Application)
+- Responsive UI-Komponenten & moderne Transitionen
+- PWA-Funktionalitäten für Offline-Bereitschaft und Installation
+- Assets & Design-System-Integration
+
+2. APPLICATION & EDGE LOGIC
+---------------------------
+- Service Worker für intelligentes Caching (Smart Caching)
+- Zentrale API-Kommunikationsschichten
+- Lokales State-Management für reibungslose Benutzererfahrung
+
+3. INFRASTRUCTURE & API GATEWAY
+-------------------------------
+- Zentrales Einstiegs-Gateway für alle Inbound-Requests
+- Routing-Logik und Sicherheits-Validierung
+
+4. BACKEND SERVICES (LOGIC LAYER)
+---------------------------------
+- RESTful API Endpoints für Datenabfrage und -manipulation
+- Backend-Proxy für externe Ressourcen (Metadata-Handling)
+- Analyse- und Business-Logik (Domain Logic)
+- Automatisierte Wartungs- und Import-Scripte
+
+5. DATA PERSISTENCE (INFRASTRUCTURE)
+------------------------------------
+- Relationale Datenspeicherung (PostgreSQL)
+- Optimierte SQL-Aggregationen für Performance-Analysen
 
 ===========================================================
-FEATURES IM DETAIL
+SYSTEM ARCHITECTURE DIAGRAM (MERMAID)
 ===========================================================
-Feature         | Umsetzung                | Technik
-----------------|--------------------------|------------------
-Architektur     | Full-Stack               | PHP + PostgreSQL
-Datenanalyse    | Trends & Top-Listen      | SQL Aggregation
-PWA             | Installierbar & Offline  | Service Worker
-Realtime        | NowPlaying Metadata      | Backend Proxy
-Admin           | Full CRUD Dashboard      | API-Schnittstelle
-Navigation      | SPA Routing              | JS Dynamic Imports
-===========================================================
+
+```mermaid
+graph TD
+    subgraph "Presentation Layer"
+        UI["Dynamic User Interface (SPA)"]
+        Assets["Responsive Design & Assets"]
+        PWA["PWA Capabilities (Offline)"]
+    end
+
+    subgraph "Client Logic"
+        SW["Service Worker (Caching)"]
+        Comm["API Services"]
+        State["State Management"]
+    end
+
+    subgraph "API Gateway"
+        Gateway["Main Gateway"]
+    end
+
+    subgraph "Application Logic"
+        Endpoints["REST API Endpoints"]
+        Proxy["External Meta Proxy"]
+    end
+
+    subgraph "Domain & Tools"
+        Logic["Business Logic"]
+        Tools["Maintenance Scripts"]
+    end
+
+    subgraph "Infrastructure"
+        DB["Data Store (PostgreSQL)"]
+        Queries["Optimized Aggregation"]
+    end
+
+    %% Flow
+    UI --> Comm
+    UI --> State
+    Assets --> UI
+    PWA --> SW
+    SW -.-> UI
+
+    Comm --> Gateway
+    Gateway --> Endpoints
+    Endpoints --> Logic
+    Endpoints --> Proxy
+    Logic --> DB
+    Queries --> DB
+    Tools --> Logic
+```
+===========================================================
+PROJEKT-GOAL: Clean Architecture & Security
+- Keine Offenlegung von Dateinamen oder Pfaden.
+- Fokus auf Datenfluss und Abhängigkeiten.
+- Saubere Schichttrennung für maximale Skalierbarkeit.
+===========================================================
