@@ -5,7 +5,7 @@
     "live_url": "https://milo-radio.de/",
     "info_file": "radio_info.txt",
     "tech": "HTML, CSS, JS, PHP, JSON",
-    "struct_file": "radio_structure.txt"
+    "struct_file": "radio_app_structure.mmd"
   },
   {
     "title": "Scrum Quiz App",
@@ -13,7 +13,7 @@
     "live_url": "/scrum-quiz",
     "info_file": "scrum_info.txt",
     "tech": "HTML, CSS, JavaScript",
-    "struct_file": "scrum_structure.txt"
+    "struct_file": "scrum_structure.mmd"
   },
   {
     "title": "SmartCalc \u2013 Taschenrechner",
@@ -22,7 +22,7 @@
     "live_url": "/taschenrechner",
     "info_file": "rechner_info.txt",
     "tech": "Python (Flask), Jinja2, CSS, JS",
-    "struct_file": "rechner_structure.txt"
+    "struct_file": "rechner_structure.mmd"
   },
   {
     "title": "Portfolio-Flask",
@@ -30,7 +30,7 @@
     "live_url": "https://jljuarez.de/",
     "info_file": "portfolio_info.txt",
     "tech": "Python (Flask), Jinja2, CSS, JS",
-    "struct_file": "portfolio_structure.txt"
+    "struct_file": "portfolio_structure.mmd"
   },
   {
     "title": "Contact Manager Livio",
@@ -38,6 +38,6 @@
     "live_url": "/contact-manager",
     "info_file": "contact_manager_info.txt",
     "tech": "Python (Flask) , Jinja2, CSS, JS",
-    "struct_file": "contact_manager_structure.txt"
+    "struct_file": "contact_manager_structure.mmd"
   }
 ]

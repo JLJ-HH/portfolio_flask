@@ -76,6 +76,11 @@
             targetOverlay.style.display = "block";
             card.style.overflow = "visible";
             card.style.zIndex = "2000"; // Vor alle anderen Karten bringen
+            
+            // Trigger Mermaid re-render if function exists
+            if (typeof window.renderMermaid === 'function') {
+                window.renderMermaid();
+            }
         } else {
             targetOverlay.style.display = "none";
             // Z-Index nur zurücksetzen, wenn gar kein Fenster mehr offen ist

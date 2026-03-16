@@ -145,15 +145,16 @@ body {
   width: 150%;
   max-height: 520px;
   overflow-y: auto !important;
-  background-color: rgba(255, 255, 255, 0.99);
-  color: #111;
+  background-color: rgba(15, 15, 15, 0.98);
+  backdrop-filter: blur(10px);
+  color: #fff;
   padding: 25px 0 0 0;
   border-radius: 20px;
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
   transform: translateZ(200px);
   z-index: 10000 !important;
   box-sizing: border-box;
-  border: 1px solid #ddd;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   text-align: left;
 }
 
@@ -162,14 +163,15 @@ body {
   padding-left: 20px;
   margin-bottom: 15px;
   font-weight: 600;
-  color: #333;
+  color: #4d96ff;
 }
 
 .card-info p,
 .card-info small {
   padding: 0 20px;
   display: block;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: #ddd;
 }
 
 .close-info {

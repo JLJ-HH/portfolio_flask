@@ -1,0 +1,47 @@
+graph TD
+    subgraph UI ["User Experience Layer"]
+        PlayerUI["Radio Stream Interface"]
+        Controls["Playback Control System"]
+        Visualizer["Audio Signal Visualizer"]
+    end
+
+    subgraph Service ["Audio Connection Layer"]
+        StreamServer["Cast & Stream Registry"]
+        Buffer["Audio Buffer & Processing"]
+        Metadata["Track Info Handler"]
+    end
+
+    subgraph Analytics ["Insights & Analysis Layer"]
+        Tracker["Usage & Event Tracker"]
+        Report["Stream Performance Analysis"]
+    end
+
+    subgraph External ["Provider Layer"]
+        RadioAPI["Radio Station API"]
+        Streams["Livestream Sources"]
+    end
+
+    PlayerUI -->|Requests Stream| StreamServer
+    StreamServer -->|Fetches From| RadioAPI
+    RadioAPI -->|Provides Links| Streams
+    Streams -->|Audio Data| Buffer
+    Buffer -->|Output| Controls
+    Controls -->|Directs| Visualizer
+    Visualizer -->|Renders feedback| PlayerUI
+    
+    StreamServer -->|Updates| Metadata
+    Metadata -->|Display Info| PlayerUI
+
+    StreamServer -->|Logs Event| Tracker
+    Tracker -->|Processes| Report
+    Report -->|Optimizes| StreamServer
+
+[DESCRIPTION]
+### Milo Central Streaming Architecture
+Die Milo Radio App basiert auf einer **Event-Driven Streaming-Architektur** mit integrierter **Analyse-Schnittstelle**.
+
+**Architektur-Highlights:**
+- **Signal Abstraction:** Die Audio-Logik ist vom User Interface entkoppelt, was eine unterbrechungsfreie Wiedrebgabe garantiert.
+- **Analytics Integration:** Ein dediziertes Monitoring-System (In-App Analysis) trackt Stream-Performance und Nutzerinteraktionen, um die Verbindungsstabilität zu optimieren.
+- **Provider Agnostic:** Durch die Zwischenschicht des "Stream Servers" können verschiedene Radio-Provider nahtlos angebunden werden.
+- **Visual Signal Processing:** Eine dedizierte Pipeline verarbeitet Audiodaten für visuelle Effekte, getrennt vom eigentlichen Audio-Thread.

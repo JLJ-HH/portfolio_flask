@@ -31,13 +31,36 @@
             <div class="card-structure">
                 <span class="close-info" onclick="event.stopPropagation(); toggleOverlay(this, '.card-structure');">&times;</span>
                 <h3 style="margin: 0 0 10px 0; color: #4d96ff;">Strukturplan</h3>
-                <pre class="structure-text">{{ p.structure }}</pre>
+                <div class="structure-content">
+                    {% if p.structure and ('graph ' in p.structure or 'flowchart ' in p.structure) %}
+                        {% set parts = p.structure.split('[DESCRIPTION]') %}
+                        <div class="mermaid-outer" onclick="openGlobalZoom(this)">
+                            <div class="mermaid-render-target" data-diagram="{{ parts[0] | e }}">
+                                <div class="rendering-msg">Lade Diagramm...</div>
+                            </div>
+                            <div class="zoom-hint">Klicken zum Vergrößern</div>
+                        </div>
+                        {% if parts|length > 1 %}
+                            <div class="structure-description">
+                                {{ parts[1] | safe }}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <pre class="structure-text">{{ p.structure }}</pre>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% endfor %}
     </div>
     <button type="button" id="prev">&lt;</button>
     <button type="button" id="next">&gt;</button>
+</div>
+
+<!-- Global Mermaid Zoom Modal -->
+<div id="mermaid-modal" onclick="closeGlobalZoom()">
+    <span class="close-modal">&times;</span>
+    <div id="modal-content"></div>
 </div>
 {% endblock %}
 
@@ -47,4 +70,195 @@
 
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/slider.js') }}"></script>
+<script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    mermaid.initialize({ 
+        startOnLoad: true, 
+        theme: 'dark',
+        securityLevel: 'loose'
+    });
+
+    console.log("Mermaid initialized");
+
+    window.renderMermaid = async () => {
+        console.log("Starting manual mermaid render...");
+        const targets = document.querySelectorAll('.mermaid-render-target');
+        
+        for (const target of targets) {
+            // Only render if it's in the active/visible card
+            const card = target.closest('.item');
+            if (window.getComputedStyle(card).opacity === "0") continue;
+
+            const diagramText = target.getAttribute('data-diagram');
+            if (!diagramText) continue;
+
+            // Generate a unique ID for this render
+            const id = 'svg-' + Math.random().toString(36).substr(2, 9);
+            
+            try {
+                const { svg } = await mermaid.render(id, diagramText);
+                target.innerHTML = svg;
+                console.log("Rendered diagram:", id);
+            } catch (err) {
+                console.error("Mermaid Render Error:", err);
+                target.innerHTML = '<div class="error-msg">Diagramm-Fehler. Bitte lade die Seite neu.</div>';
+                // Reset mermaid to clear the error state
+                mermaid.initialize({ startOnLoad: false, theme: 'dark' });
+            }
+        }
+    };
+
+    window.openGlobalZoom = (el) => {
+        const target = el.querySelector('.mermaid-render-target');
+        const modal = document.getElementById('mermaid-modal');
+        const content = document.getElementById('modal-content');
+        
+        if (target && modal && content) {
+            content.innerHTML = target.innerHTML;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeGlobalZoom = () => {
+        const modal = document.getElementById('mermaid-modal');
+        if (modal) {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    };
+</script>
+<style>
+    .mermaid-outer {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        padding: 25px;
+        margin: 15px 0;
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+        cursor: zoom-in;
+        transition: transform 0.3s ease, background 0.3s ease;
+        position: relative;
+    }
+    .mermaid-outer:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+    }
+    
+    /* Global Modal Styles */
+    #mermaid-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(10, 10, 10, 0.98);
+        backdrop-filter: blur(25px);
+        z-index: 999999;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        padding: 40px;
+        cursor: zoom-out;
+    }
+    #mermaid-modal.active {
+        display: flex;
+    }
+    #modal-content {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #modal-content svg {
+        width: 95% !important;
+        height: 90% !important;
+        max-width: 100%;
+        max-height: 100%;
+        filter: drop-shadow(0 0 30px rgba(77, 150, 255, 0.4));
+    }
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 50px;
+        color: #fff;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.3s, color 0.3s;
+    }
+    .close-modal:hover {
+        opacity: 1;
+        color: #4d96ff;
+    }
+
+    .zoom-hint {
+        position: absolute;
+        bottom: 15px;
+        right: 20px;
+        font-size: 0.75rem;
+        color: rgba(77, 150, 255, 0.5);
+        pointer-events: none;
+    }
+
+    .mermaid-render-target {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .mermaid-render-target svg {
+        max-width: 100%;
+        height: auto !important;
+        filter: drop-shadow(0 0 15px rgba(77, 150, 255, 0.25));
+    }
+
+    @media (max-width: 768px) {
+        #mermaid-modal {
+            padding: 20px;
+        }
+        .close-modal {
+            top: 10px;
+            right: 20px;
+            font-size: 40px;
+        }
+    }
+    .rendering-msg { color: #888; font-style: italic; }
+    .error-msg { color: #ff4d4d; font-size: 0.8rem; }
+    
+    .structure-content {
+        max-height: 80vh;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        padding: 5px 25px 25px 25px;
+    }
+    
+    .structure-description {
+        margin-top: 25px;
+        padding: 20px;
+        background: rgba(77, 150, 255, 0.05);
+        border-left: 5px solid #4d96ff;
+        border-radius: 8px;
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #fff;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .structure-description h3 {
+        margin-top: 0;
+        color: #4d96ff;
+        font-size: 1.25rem;
+        padding-left: 0 !important; /* Resetting padding from global h3 */
+    }
+    .structure-description strong {
+        color: #4d96ff;
+        font-weight: 600;
+    }
+</style>
 {% endblock %}

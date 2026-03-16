@@ -1,0 +1,32 @@
+graph TD
+    subgraph Client ["Client Interface"]
+        WebUI["Management Dashboard"]
+        Forms["Input & Validation Logic"]
+    end
+
+    subgraph Core ["Service Layer (API)"]
+        App["REST API Service"]
+        Middleware["Security & Auth Middleware"]
+        Handlers["Request Handler Hub"]
+    end
+
+    subgraph Persistence ["Persistence Layer"]
+        Registry["Central Entity Registry"]
+        Storage["Object Storage System"]
+    end
+
+    WebUI -->|REST Requests| App
+    App -->|Intercepts| Middleware
+    Middleware -->|Routes to| Handlers
+    Handlers -->|CRUD Operations| Registry
+    Registry -->|Stores In| Storage
+    Handlers -->|JSON Response| WebUI
+
+[DESCRIPTION]
+### Livio Contact Gateway
+Der Contact Manager "Livio" ist als **RESTful Service Architecture** konzipiert.
+
+**Technische Merkmale:**
+- **Entkopplung:** Das Frontend agiert als "Consumer" der Backend-API, was eine einfache Erweiterung auf Mobile-Apps ermöglicht.
+- **Layered Persistence:** Daten werden über eine Abstraktionsschicht (Registry) verwaltet, um Unabhängigkeit von der finalen Speichertechnologie zu gewährleisten.
+- **Modulares Setup:** Als gekapseltes Modul (Blueprint) bietet es eine skalierbare Basis für professionelles Kontaktmanagement.

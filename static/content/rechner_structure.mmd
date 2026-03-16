@@ -1,0 +1,41 @@
+graph TD
+    subgraph ViewLayer ["Frontend Layer (View)"]
+        UI["Interactive Web Interface"]
+        Styles["Adaptive Styles (CSS)"]
+        Actions["Client-Side Logic (JS)"]
+    end
+
+    subgraph ControllerLayer ["Application Layer (Controller)"]
+        API["REST API Endpoints"]
+        Auth["Security & Validation"]
+    end
+
+    subgraph LogicLayer ["Core Logic (Model)"]
+        Parser["Mathematical Parser Engine"]
+        Calc["Computation Core"]
+    end
+
+    subgraph ResourceLayer ["Resources & Assets"]
+        Docs["Documentation Store"]
+        Config["Module Configuration"]
+    end
+
+    UI -->|Triggers| Actions
+    Actions -->|API Call| API
+    API -->|Validates| Auth
+    Auth -->|Passes to| Parser
+    Parser -->|Executes| Calc
+    API -->|Returns Result| Actions
+    Actions -->|Updates| UI
+    
+    API -->|Reads| Config
+    API -->|Serves| Docs
+
+[DESCRIPTION]
+### Modulare Berechnungs-Architektur
+Die SmartCalc App folgt dem **Model-View-Controller (MVC)** Muster innerhalb eines autonomen Moduls.
+
+**Highlights:**
+- **Entkopplung:** Das UI kommuniziert ausschließlich über eine RESTful API mit der Logik.
+- **Sicherer Parser:** Die mathematische Engine validiert Eingaben über eine Whitelist, bevor sie berechnet werden.
+- **Modularität:** Das gesamte Modul ist als Flask Blueprint gekapselt und kann einfach in andere Systeme migriert werden.

@@ -1,0 +1,46 @@
+graph TD
+    subgraph UI ["Client-Side UI Layer"]
+        Browser["User Web Browser"]
+        Templates["Dynamic View Templates"]
+        Assets["Static UI Assets"]
+    end
+
+    subgraph Gateway ["API Gateway & Controller"]
+        Router["Central Application Router"]
+        Config["Environment Configuration"]
+    end
+
+    subgraph BusinessLogic ["Business Logic Layer"]
+        CalcModule["Logic & Computation Module"]
+        ContactModule["REST API & Contact Module"]
+        QuizModule["Interactive Engine Module"]
+    end
+
+    subgraph DataLayer ["Data Persistence Layer"]
+        DataStore["JSON Data Source"]
+        StaticContent["Markdown Content Store"]
+    end
+
+    Browser -->|HTTP Requests| Router
+    Router -->|Renders| Templates
+    Templates -->|Loads| Assets
+    
+    Router -->|Reads Settings| Config
+    
+    Router -->|Delegates to| CalcModule
+    Router -->|Delegates to| ContactModule
+    Router -->|Delegates to| QuizModule
+    
+    Router -->|Fetches Data| DataStore
+    CalcModule -.->|Queries| DataStore
+    ContactModule -.->|Queries/Updates| DataStore
+    QuizModule -.->|Loads Document| StaticContent
+
+[DESCRIPTION]
+### Die Hub-and-Spoke Architektur
+Dieses Portfolio basiert auf einer **Clean Architecture**. Der zentrale Kern (Controller) orchestriert den Datenfluss zwischen den verschiedenen spezialisierten Modulen (Spokes). 
+
+**Vorteile dieses Ansatzes:**
+- **Sicherheit:** Strikte Trennung von Geschäftslogik und Datenhaltung.
+- **Skalierbarkeit:** Neue Features (wie der Taschenrechner oder das Quiz) lassen sich als unabhängige Blueprints integrieren.
+- **Wartbarkeit:** Klare Abhängigkeiten ohne zirkuläre Referenzen.

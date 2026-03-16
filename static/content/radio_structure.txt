@@ -1,4 +1,4 @@
-HIGH-LEVEL SYSTEM ARCHITECTURE: MILO RADIO
+   SYSTEM ARCHITECTURE: MILO RADIO
 ===========================================================
 
 Diese Architektur folgt den Prinzipien der "Clean Architecture", 

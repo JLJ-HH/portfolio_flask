@@ -1,0 +1,34 @@
+graph TD
+    subgraph View ["Interaction Layer (View)"]
+        UI["Quiz Dashboard UI"]
+        Feedback["Real-time Result Feedback"]
+        Timer["Dynamic Timer Engine"]
+    end
+
+    subgraph Logic ["Processing Layer (Engine)"]
+        Session["Quiz Session Manager"]
+        Validator["Answer Validation Hub"]
+        Scoring["Metric & Scoring System"]
+    end
+
+    subgraph Data ["Knowledge Layer (Source)"]
+        QB["Question Bank (Structured Data)"]
+        Rules["Exam Evaluation Rules"]
+    end
+
+    UI -->|Submits Answer| Session
+    Session -->|Passes To| Validator
+    Validator -->|Checks Against| QB
+    Validator -->|Updates| Scoring
+    Scoring -->|Returns Delta| UI
+    
+    Session -->|Follows| Rules
+
+[DESCRIPTION]
+### Interactive Exam Engine
+Die Scrum Quiz App nutzt eine **Stateful Engine**, die den Prüfungsstatus in Echtzeit verwaltet.
+
+**Architektur-Highlights:**
+- **Encapsulation:** Die Prüfungsfragen sind strikt von der Logik getrennt und werden dynamisch geladen.
+- **Real-time Processing:** Das System validiert Antworten on-the-fly, ohne die Seite neu laden zu müssen.
+- **Data Integrity:** Durch die Verwendung von strukturierten Datenquellen ist die Erweiterung um neue Fragenkataloge nahtlos möglich.
