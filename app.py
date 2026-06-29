@@ -3,6 +3,7 @@ import json
 import configparser
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
+from flask_wtf.csrf import CSRFProtect
 from calculator.routes import calculator_bp
 from contact_manager.routes import contact_manager_bp
 from scrum_quiz.routes import scrum_quiz_bp
@@ -25,6 +26,7 @@ if not config.read(config_path, encoding='utf-8'):
 
 app = Flask(__name__)
 app.secret_key = config['APP']['SECRET_KEY']
+csrf = CSRFProtect(app)
 
 # Blueprint Registrierung
 app.register_blueprint(calculator_bp, url_prefix='/taschenrechner')
@@ -139,6 +141,12 @@ def projects():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
+        # Anti-Spam Honeypot check
+        if request.form.get("honeypot"):
+            # Lautlos verwerfen, um Ressourcen zu schonen und Spam zu verhindern
+            flash("Nachricht erfolgreich gesendet!", "success")
+            return redirect(url_for('contact'))
+
         name = request.form.get("name")
         email = request.form.get("email")
         subject = request.form.get("subject")

@@ -58,6 +58,14 @@
   margin-bottom: 0;
 }
 
+/* Clickable card links */
+.home-card-link {
+  text-decoration: none !important;
+  color: inherit !important;
+  display: block;
+  height: 100%;
+}
+
 /* CTA Buttons */
 .home-cta-group {
   margin-top: 4rem;

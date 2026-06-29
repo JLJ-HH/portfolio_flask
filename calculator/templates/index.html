@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ url_for('calculator.static', filename='css/style.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="light-mode">
     <div class="container">

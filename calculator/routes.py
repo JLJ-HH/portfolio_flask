@@ -1,10 +1,103 @@
 import math
 import re
-from flask import Blueprint, render_template, request, jsonify, url_for
+import ast
+import operator
+from flask import Blueprint, render_template, request, jsonify, url_for, session
 
 calculator_bp = Blueprint('calculator', __name__, 
                           template_folder='templates', 
                           static_folder='static')
+
+# -----------------------------------------------------------------------------
+# Safe AST Evaluator
+# -----------------------------------------------------------------------------
+
+class SafeMathEvaluator:
+    # Supported operators
+    OPERATORS = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.Pow: operator.pow,
+        ast.USub: operator.neg,
+        ast.UAdd: lambda x: x
+    }
+
+    # Supported math functions
+    FUNCTIONS = {
+        'math.sin': math.sin,
+        'math.cos': math.cos,
+        'math.tan': math.tan,
+        'math.asin': math.asin,
+        'math.acos': math.acos,
+        'math.atan': math.atan,
+        'math.log10': math.log10,
+        'math.log': math.log,
+        'math.exp': math.exp,
+        'math.sqrt': math.sqrt,
+        'math.radians': math.radians,
+        'math.degrees': math.degrees
+    }
+
+    # Supported math constants
+    CONSTANTS = {
+        'math.pi': math.pi,
+        'math.e': math.e
+    }
+
+    @classmethod
+    def evaluate(cls, expression: str):
+        try:
+            tree = ast.parse(expression, mode='eval')
+            return cls._eval(tree.body)
+        except Exception as e:
+            raise ValueError(f"Invalid math expression: {e}")
+
+    @classmethod
+    def _eval(cls, node):
+        if hasattr(ast, 'Constant') and isinstance(node, ast.Constant):  # Python 3.8+
+            return node.value
+        elif hasattr(ast, 'Num') and isinstance(node, getattr(ast, 'Num')):  # Python < 3.8 fallback
+            return node.n
+        elif isinstance(node, ast.BinOp):
+            left = cls._eval(node.left)
+            right = cls._eval(node.right)
+            op_type = type(node.op)
+            if op_type in cls.OPERATORS:
+                return cls.OPERATORS[op_type](left, right)
+            raise TypeError(f"Unsupported binary operator: {op_type}")
+        elif isinstance(node, ast.UnaryOp):
+            operand = cls._eval(node.operand)
+            op_type = type(node.op)
+            if op_type in cls.OPERATORS:
+                return cls.OPERATORS[op_type](operand)
+            raise TypeError(f"Unsupported unary operator: {op_type}")
+        elif isinstance(node, ast.Call):
+            func_name = cls._get_func_name(node.func)
+            if func_name in cls.FUNCTIONS:
+                args = [cls._eval(arg) for arg in node.args]
+                return cls.FUNCTIONS[func_name](*args)
+            raise NameError(f"Unsupported function: {func_name}")
+        elif isinstance(node, ast.Attribute):
+            name = cls._get_func_name(node)
+            if name in cls.CONSTANTS:
+                return cls.CONSTANTS[name]
+            raise NameError(f"Unsupported attribute: {name}")
+        elif isinstance(node, ast.Name):
+            if node.id in cls.CONSTANTS:
+                return cls.CONSTANTS[node.id]
+            raise NameError(f"Unsupported name: {node.id}")
+        else:
+            raise TypeError(f"Unsupported node type: {type(node)}")
+
+    @classmethod
+    def _get_func_name(cls, node):
+        if isinstance(node, ast.Name):
+            return node.id
+        elif isinstance(node, ast.Attribute):
+            return f"{cls._get_func_name(node.value)}.{node.attr}"
+        raise TypeError("Could not resolve function name")
 
 # -----------------------------------------------------------------------------
 # Business Logic: Calculation Parser
@@ -76,8 +169,7 @@ class CalculationParser:
                 clean_expr = re.sub(pattern, replacement, clean_expr)
 
             # 7. Evaluate the sanitized expression
-            # Note: eval() is used for simplicity but with strict character filtering
-            result = eval(clean_expr, {"__builtins__": {}}, {"math": math})
+            result = SafeMathEvaluator.evaluate(clean_expr)
 
             # 8. Post-processing
             if isinstance(result, float):
@@ -97,25 +189,32 @@ class CalculationParser:
 
 class HistoryManager:
     """
-    Manages a simple in-memory list of past calculations.
+    Manages a list of past calculations stored in the user's session.
+    Ensures calculations persist in stateless environments like CGI.
     """
-    def __init__(self):
-        self.entries = []
+    @property
+    def entries(self):
+        if 'calc_history' not in session:
+            session['calc_history'] = []
+        return session['calc_history']
 
     def add(self, expression, result):
         """Adds a new calculation entry to the list."""
-        self.entries.append({
+        history_list = list(self.entries)
+        history_list.append({
             "expression": expression,
             "result": result
         })
+        # Keep only the last 20 entries to prevent session cookie size limit issues
+        session['calc_history'] = history_list[-20:]
 
     def get_all(self):
         """Returns the full list of calculation history."""
-        return self.entries[::-1]  # Return reversed for 'newest first'
+        return self.entries[::-1]
 
     def clear(self):
         """Clears all entries from history."""
-        self.entries = []
+        session['calc_history'] = []
 
 # Initialize global instances
 history = HistoryManager()

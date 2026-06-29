@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     const contactForm = document.getElementById('contact-form');
     const contactResults = document.getElementById('contact-results');
     const searchInput = document.getElementById('search-input');
@@ -26,6 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderResults(contacts) {
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>"']/g, function(m) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                }[m];
+            });
+        }
+
         if (contacts.length === 0) {
             listSection.classList.add('hidden');
             return;
@@ -40,10 +54,13 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = `contact-card ${selectedContactIndex === actualIndex ? 'active' : ''}`;
             
             const initials = (contact.vorname?.[0] || '') + (contact.nachname?.[0] || '');
+            const safeInitials = escapeHTML(initials.toUpperCase());
+            const safeVorname = escapeHTML(contact.vorname || '');
+            const safeNachname = escapeHTML(contact.nachname || '');
             
             card.innerHTML = `
-                <div class="initials">${initials.toUpperCase()}</div>
-                <h3>${contact.vorname || ''} ${contact.nachname || ''}</h3>
+                <div class="initials">${safeInitials}</div>
+                <h3>${safeVorname} ${safeNachname}</h3>
             `;
             
             card.addEventListener('click', () => selectContact(actualIndex));
@@ -101,7 +118,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const response = await fetch(url, {
                 method: method,
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
                 body: JSON.stringify(data)
             });
 
@@ -170,7 +190,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (confirm('Soll dieser Kontakt wirklich gelöscht werden?')) {
             try {
-                const response = await fetch(`/contact-manager/api/contacts/${selectedContactIndex}`, { method: 'DELETE' });
+                const response = await fetch(`/contact-manager/api/contacts/${selectedContactIndex}`, { 
+                    method: 'DELETE',
+                    headers: {
+                        'X-CSRFToken': csrfToken
+                    }
+                });
                 if (response.ok) {
                     resetForm();
                     await loadContacts();

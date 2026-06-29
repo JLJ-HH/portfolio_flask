@@ -10,6 +10,12 @@
           {% endif %}
         {% endwith %}
 
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div style="display:none;">
+            <label for="honeypot">Bitte freilassen / Leave blank</label>
+            <input type="text" id="honeypot" name="honeypot" autocomplete="off">
+        </div>
+
         <div class="left-col">
             <label for="name">Name*</label>
             <input type="text" id="name" name="name" placeholder="Dein Name" required>

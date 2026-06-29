@@ -8,6 +8,7 @@
  */
 
 // Global State
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 const display = document.getElementById('calc-display');
 const historyList = document.getElementById('history-list');
 const themeToggle = document.getElementById('theme-toggle');
@@ -50,7 +51,10 @@ async function calculate() {
     try {
         const response = await fetch('calculate', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
             body: JSON.stringify({ expression: expression })
         });
 
@@ -108,7 +112,12 @@ async function clearHistory() {
     if (!confirm('Verlauf wirklich löschen?')) return;
 
     try {
-        await fetch('clear_history', { method: 'POST' });
+        await fetch('clear_history', { 
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        });
         loadHistory();
     } catch (error) {
         console.error('Clear History Error:', error);

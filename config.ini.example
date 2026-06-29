@@ -1,0 +1,12 @@
+[APP]
+DEBUG = True
+SECRET_KEY = deingrossergeheimerappschluessel
+
+[MAIL]
+SERVER = smtp.gmail.com
+PORT = 587
+USE_TLS = True
+USERNAME = deine-email@gmail.com
+PASSWORD = google-app-password
+DEFAULT_SENDER = deine-email@gmail.com
+RECIPIENT = deine-email@gmail.com

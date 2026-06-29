@@ -1,3 +1,5 @@
 .env
 .ini
 .venv
+config.ini
+contacts.txt

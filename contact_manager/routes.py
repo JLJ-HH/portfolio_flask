@@ -77,14 +77,26 @@ def laden():
 
 def speichern(contact_liste):
     """Speichert die Liste alphabetisch sortiert nach Nachname."""
-    contact_liste.sort(key=lambda e: (e["nachname"].lower(), e["vorname"].lower()))
+    contact_liste.sort(key=lambda e: (e.get("nachname", "").lower(), e.get("vorname", "").lower()))
     base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     file_path = os.path.join(base_path, DATEINAME)
+    
+    def clean_field(val):
+        if not val:
+            return ""
+        return str(val).replace("|", " ").strip()
+
     try:
         with open(file_path, "w", encoding="utf-8") as datei:
             for e in contact_liste:
-                mobil = e.get("mobil", "")
-                datei.write(f"{e['vorname']}|{e['nachname']}|{e['strasse']}|{e['plz']}|{e['email']}|{e['rufnummer']}|{mobil}\n")
+                vorname = clean_field(e.get("vorname"))
+                nachname = clean_field(e.get("nachname"))
+                strasse = clean_field(e.get("strasse"))
+                plz = clean_field(e.get("plz"))
+                email = clean_field(e.get("email"))
+                rufnummer = clean_field(e.get("rufnummer"))
+                mobil = clean_field(e.get("mobil"))
+                datei.write(f"{vorname}|{nachname}|{strasse}|{plz}|{email}|{rufnummer}|{mobil}\n")
     except IOError as e:
         print(f"Fehler beim Speichern: {e}")
 

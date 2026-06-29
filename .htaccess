@@ -1,10 +1,16 @@
 RewriteEngine On
 RewriteBase /
 
-# 1. Statische Dateien (Bilder, CSS, JS) direkt ausliefern
+# 1. Zugriff auf sensible Dateien explizit verbieten
+# (.cgi-Dateien dürfen nicht blockiert werden, da Apache sie ausführen muss)
+<FilesMatch "\.(ini|txt|py|sh|log|gitignore|git|env)$">
+    Require all denied
+</FilesMatch>
+
+# 2. Statische Dateien (Bilder, CSS, JS) direkt ausliefern
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(static/.*)$ $1 [L]
 
-# 2. Alles andere an die Flask-App leiten
+# 3. Alles andere an die Flask-App leiten
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ app.cgi/$1 [L,QSA]

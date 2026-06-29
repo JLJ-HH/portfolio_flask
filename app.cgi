@@ -16,6 +16,21 @@ if os.path.exists(site_packages_root):
 # App-Verzeichnis zum Pfad hinzufügen
 sys.path.insert(0, basedir)
 
+# Live-Installer für fehlende Bibliotheken (z.B. Flask-WTF bei Basic-Hosting ohne SSH)
+try:
+    import flask_wtf
+except ImportError:
+    import subprocess
+    try:
+        req_path = os.path.join(basedir, 'requirements.txt')
+        subprocess.check_output([sys.executable, "-m", "pip", "install", "-r", req_path], stderr=subprocess.STDOUT)
+    except Exception as e:
+        print("Content-Type: text/html\n")
+        print(f"<h3>Abhängigkeits-Installation fehlgeschlagen: {str(e)}</h3>")
+        if hasattr(e, 'output') and e.output:
+            print(f"<pre>{e.output.decode('utf-8', errors='ignore')}</pre>")
+        sys.exit(1)
+
 from wsgiref.handlers import CGIHandler
 from app import app
 
