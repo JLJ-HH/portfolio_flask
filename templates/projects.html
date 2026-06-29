@@ -6,6 +6,7 @@
     <div id="slider" class="slider fade-in">
         {% for p in projects %}
         <div class="item">
+            <div class="card-header-overlay">{{ p.title }}</div>
             {% if p.video %}
             <video class="card-image" autoplay loop muted playsinline>
                 <source src="{{ p.video }}" type="video/mp4">

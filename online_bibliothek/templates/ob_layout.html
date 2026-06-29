@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitale Bibliothek</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/library.css') }}?v=1.4">
+</head>
+<body>
+    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+        {% if session.get('nutzer_id') %}
+        <!-- Bibliothek Sub-Navbar (originalgetreuer Look) -->
+        <div class="ob-navbar">
+            <div class="ob-navbar-info">
+                Digitale Bibliothek | Angemeldet als: <strong>{{ session.get('nutzer_name') }}</strong> 
+                (Rolle: <em>{{ session.get('rolle') }}</em>)
+            </div>
+            <div class="ob-navbar-links">
+                | <a href="{{ url_for('online_bibliothek.index') }}">Hauptseite</a>
+                {% if session.get('rolle') == 'mitarbeiter' %}
+                    | <a href="{{ url_for('online_bibliothek.buch_uebersicht') }}">Buchbestand bearbeiten</a>
+                    | <a href="{{ url_for('online_bibliothek.buch_anlegen') }}">Neues Buch / PDF hochladen</a>
+                {% endif %}
+                | <a href="{{ url_for('online_bibliothek.logout') }}" style="color: red; font-weight: bold;">[Ausloggen]</a>
+            </div>
+        </div>
+        <hr>
+        {% endif %}
+
+        <!-- Flash Messages in schlichtem Design -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ 'danger' if category == 'error' or category == 'danger' else 'success' }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <!-- Spezifischer Bibliotheksinhalt -->
+        {% block lib_content %}{% endblock %}
+    </div>
+</body>
+</html>

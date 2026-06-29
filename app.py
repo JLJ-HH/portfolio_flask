@@ -5,7 +5,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mail import Mail, Message
 from flask_wtf.csrf import CSRFProtect
 from calculator.routes import calculator_bp
-from contact_manager.routes import contact_manager_bp
+from online_bibliothek import online_bibliothek_bp
 from scrum_quiz.routes import scrum_quiz_bp
 
 # Falls du Markdown-Formatierung im Text nutzen willst: pip install markdown2
@@ -30,7 +30,7 @@ csrf = CSRFProtect(app)
 
 # Blueprint Registrierung
 app.register_blueprint(calculator_bp, url_prefix='/taschenrechner')
-app.register_blueprint(contact_manager_bp, url_prefix='/contact-manager')
+app.register_blueprint(online_bibliothek_bp, url_prefix='/bibliothek')
 app.register_blueprint(scrum_quiz_bp, url_prefix='/scrum-quiz')
 
 # Mail-Setup aus der Config
@@ -114,9 +114,9 @@ def projects():
                 live_url = url_for('calculator.index')
             except Exception:
                 pass
-        elif p["title"].strip() == "Contact Manager":
+        elif "Online-Bibliothek" in p["title"]:
             try:
-                live_url = url_for('contact_manager.index')
+                live_url = url_for('online_bibliothek.index')
             except Exception:
                 pass
         elif p["title"].strip() == "Scrum Quiz App":

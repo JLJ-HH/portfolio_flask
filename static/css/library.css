@@ -1,0 +1,162 @@
+/* Library Specific Styles - Plain HTML & White Background */
+
+body {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+/* Reset main text colors */
+h1, h2, h3, h4, h5, h6, p, span, td, th, label, li, ul, div {
+  color: #000000;
+}
+
+/* Sub-Navbar styling */
+.ob-navbar {
+  background-color: #f4f4f4 !important;
+  padding: 10px !important;
+  margin-bottom: 20px !important;
+  border-bottom: 1px solid #ccc !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-radius: 0 !important;
+}
+
+.ob-navbar a {
+  color: blue !important;
+  text-decoration: underline !important;
+  font-weight: normal !important;
+  padding: 0 !important;
+  background: none !important;
+}
+
+.ob-navbar a:hover {
+  color: darkblue !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.ob-navbar-links {
+  display: flex !important;
+  gap: 10px !important;
+}
+
+/* Standard HTML Table styling */
+table.lib-table, table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin-top: 10px !important;
+  margin-bottom: 30px !important;
+  border: 1px solid #000000 !important;
+}
+
+table.lib-table th, table.lib-table td, table th, table td {
+  border: 1px solid #000000 !important;
+  text-align: left !important;
+  padding: 8px !important;
+  color: #000000 !important;
+  background-color: transparent !important;
+}
+
+table.lib-table th, table th {
+  background-color: #f2f2f2 !important;
+  font-weight: bold !important;
+}
+
+/* Alert boxes */
+.alert {
+  padding: 10px !important;
+  margin-bottom: 15px !important;
+  font-weight: bold !important;
+  border-radius: 0 !important;
+}
+
+.alert-success {
+  color: green !important;
+  border: 1px solid green !important;
+  background-color: #e6ffe6 !important;
+}
+
+.alert-danger {
+  color: red !important;
+  border: 1px solid red !important;
+  background-color: #ffe6e6 !important;
+}
+
+/* AI box for response */
+.ai-box {
+  background: #f0f0f0 !important;
+  border: 1px solid #ccc !important;
+  padding: 15px !important;
+  margin-bottom: 20px !important;
+  max-width: 800px !important;
+  border-radius: 0 !important;
+}
+
+.ai-title {
+  margin-top: 0 !important;
+  font-weight: bold !important;
+  color: #000000 !important;
+}
+
+/* Search form container for chatbot query */
+.search-form-container {
+  border: 1px solid #ccc !important;
+  padding: 15px !important;
+  margin-bottom: 20px !important;
+  background-color: #f9f9f9 !important;
+  max-width: 800px !important;
+  border-radius: 0 !important;
+}
+
+/* Forms, Inputs, Buttons */
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], select, textarea {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #767676 !important;
+  padding: 5px !important;
+  border-radius: 0 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+button, input[type="submit"] {
+  background-color: #f0f0f0 !important;
+  color: #000000 !important;
+  border: 1px solid #767676 !important;
+  padding: 5px 10px !important;
+  cursor: pointer !important;
+  border-radius: 0 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+button:hover, input[type="submit"]:hover {
+  background-color: #e5e5e5 !important;
+}
+
+/* Details toggle */
+summary {
+  cursor: pointer !important;
+  font-weight: bold !important;
+  color: blue !important;
+  text-decoration: underline !important;
+}
+
+/* Generic links */
+a {
+  color: blue !important;
+  text-decoration: underline !important;
+}
+
+a:hover {
+  color: darkblue !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Red text highlights */
+.text-danger-strong {
+  color: red !important;
+  font-weight: bold !important;
+}

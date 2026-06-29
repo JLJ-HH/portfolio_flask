@@ -3,3 +3,6 @@ Flask-Mail==0.9.1
 markdown2==2.4.10
 configparser==6.0.0
 Flask-WTF==1.2.1
+requests>=2.31.0
+pypdf>=4.2.0
+bcrypt>=4.0.0

@@ -16,9 +16,12 @@ if os.path.exists(site_packages_root):
 # App-Verzeichnis zum Pfad hinzufügen
 sys.path.insert(0, basedir)
 
-# Live-Installer für fehlende Bibliotheken (z.B. Flask-WTF bei Basic-Hosting ohne SSH)
+# Live-Installer für fehlende Bibliotheken (z.B. Flask-WTF, requests, pypdf, bcrypt bei Basic-Hosting)
 try:
     import flask_wtf
+    import requests
+    import pypdf
+    import bcrypt
 except ImportError:
     import subprocess
     try:
@@ -32,7 +35,14 @@ except ImportError:
         sys.exit(1)
 
 from wsgiref.handlers import CGIHandler
-from app import app
+try:
+    from app import app
+except Exception as e:
+    import traceback
+    print("Content-Type: text/html\n")
+    print("<h3>Fehler beim Laden der App-Instanz:</h3>")
+    print(f"<pre>{traceback.format_exc()}</pre>")
+    sys.exit(1)
 
 # Fix für saubere URLs bei Strato
 class ScriptNameFixer(object):

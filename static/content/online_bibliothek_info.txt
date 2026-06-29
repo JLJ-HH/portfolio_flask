@@ -1,0 +1,12 @@
+Online-Bibliothek – Sichere Webverwaltung mit RAG-KI-Bibliothekar
+
+Dieses Projekt demonstriert eine hochmoderne Bibliotheksplattform. Sie kombiniert klassische Bibliotheksverwaltung mit modernsten KI-Technologien.
+
+Die Highlights:
+• Rolle-basierter Zugriff: Differenzierte Dashboards für "Mitarbeiter" (CRUD-Kunden- & Buchverwaltung, Ausleih-Historie) und "Kunden" (Medien leihen/zurückgeben, E-Book Reader).
+• RAG-basierter KI-Bibliothekar: Ein interaktiver Chatbot (gemma3:12b via Ollama API), der auf Basis des echten Buchbestands, der Buch-Zusammenfassungen und Inhaltsverzeichnisse personalisierte Empfehlungen gibt.
+• KI-gestütztes E-Book-Parsing: Beim Upload einer PDF liest das System automatisch den Text aus und generiert über die KI den Buchtitel, Autor, ISBN sowie Zusammenfassungen und Inhaltsverzeichnisse.
+• E-Mail Verifikations-Workflow: Maximale Sicherheit bei der Neuregistrierung durch Verifizierungscodes vor der Passwortvergabe.
+• Sichere Datenhaltung: Implementiert über SQLite3 mit sauber getrennten Beziehungen und kaskadierenden Löschungen (ON DELETE CASCADE) für Datenintegrität.
+
+Technisch demonstriert die App ein anspruchsvolles RAG (Retrieval-Augmented Generation) System und zeigt die Verknüpfung von künstlicher Intelligenz mit klassischem Web-CRUD in Python (Flask).

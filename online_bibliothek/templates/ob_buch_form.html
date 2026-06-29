@@ -1,0 +1,89 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>Medium {{ action }}</h2>
+
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung }}</p>
+{% endif %}
+{% if erfolgsmeldung %}
+    <p class="alert alert-success">{{ erfolgsmeldung }}</p>
+{% endif %}
+
+<form method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    {% if action == "Anlegen" %}
+    <input type="hidden" name="timestamp" value="{{ range(1000000000, 2000000000) | random }}">
+    <p>Medium-Typ:<br>
+        <select name="typ" id="typ" onchange="toggleTyp()">
+            <option value="physisch" {{ 'selected' if request.form.get('typ') == 'physisch' }}>Physisches Buch (Gedruckt)</option>
+            <option value="pdf" {{ 'selected' if request.form.get('typ') == 'pdf' }}>Digitales Buch (PDF / E-Book)</option>
+        </select>
+    </p>
+    {% endif %}
+
+    <p>Titel:<br>
+        <input type="text" id="titel" name="titel" required value="{{ b['titel'] if b else request.form.get('titel', '') }}" style="width: 250px;">
+    </p>
+    <p>Autor:<br>
+        <input type="text" id="autor" name="autor" required value="{{ b['autor'] if b else request.form.get('autor', '') }}" style="width: 250px;">
+    </p>
+    <p>ISBN:<br>
+        <input type="text" id="isbn" name="isbn" required value="{{ b['isbn'] if b else request.form.get('isbn', '') }}" style="width: 250px;">
+    </p>
+
+    {% if action == "Anlegen" %}
+    <div id="bestand_section">
+        <p>Physischer Bestand (Stückzahl):<br>
+            <input type="number" name="bestand" min="0" value="{{ request.form.get('bestand', '1') }}" style="width: 80px;">
+        </p>
+    </div>
+
+    <div id="pdf_upload_section" style="display: none; background: #f9f9f9; padding: 10px; border: 1px dashed #bbb; max-width: 500px;">
+        <p><strong>PDF-Datei hochladen:</strong><br>
+            <input type="file" name="pdf_datei" accept=".pdf"><br>
+            <small style="color: #666;">Der Text wird automatisch extrahiert und an Ollama übermittelt.</small>
+        </p>
+    </div>
+    {% else %}
+    <p>Bestand:<br>
+        <input type="number" name="bestand" min="0" value="{{ b['bestand'] }}" style="width: 80px;">
+    </p>
+    {% endif %}
+
+    <br>
+    <p>
+        <button type="submit">Medium speichern</button> or <a href="{{ url_for('online_bibliothek.buch_uebersicht') }}">Zurück zur Übersicht</a>
+    </p>
+</form>
+
+{% if action == "Anlegen" %}
+<script>
+    function toggleTyp() {
+        var typ = document.getElementById('typ').value;
+        var pdfDiv = document.getElementById('pdf_upload_section');
+        var bestandDiv = document.getElementById('bestand_section');
+        
+        var titelInput = document.getElementById('titel');
+        var autorInput = document.getElementById('autor');
+        var isbnInput = document.getElementById('isbn');
+
+        if (typ === 'pdf') {
+            pdfDiv.style.display = 'block';
+            bestandDiv.style.display = 'none';
+            titelInput.required = false;
+            autorInput.required = false;
+            isbnInput.required = false;
+        } else {
+            pdfDiv.style.display = 'none';
+            bestandDiv.style.display = 'block';
+            titelInput.required = true;
+            autorInput.required = true;
+            isbnInput.required = true;
+        }
+    }
+    window.addEventListener('load', toggleTyp);
+</script>
+{% endif %}
+{% endblock %}

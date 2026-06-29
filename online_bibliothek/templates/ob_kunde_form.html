@@ -1,0 +1,37 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>{% if action == "Bearbeiten" %}Kundendaten bearbeiten{% else %}Neuen Kunden registrieren{% endif %}</h2>
+
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung }}</p>
+{% endif %}
+
+<form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <p>Name:<br>
+        <input type="text" name="name" required value="{{ kunde['name'] if kunde else request.form.get('name', '') }}" style="width: 250px;">
+    </p>
+    <p>Adresse:<br>
+        <input type="text" name="adresse" required value="{{ kunde['adresse'] if kunde else request.form.get('adresse', '') }}" style="width: 250px;">
+    </p>
+    <p>E-Mail:<br>
+        <input type="email" name="email" required value="{{ kunde['email'] if kunde else request.form.get('email', '') }}" style="width: 250px;">
+    </p>
+
+    {% if action == "Bearbeiten" %}
+    <p>Status:<br>
+        <select name="ist_aktiv">
+            <option value="1" {{ 'selected' if kunde['ist_aktiv'] == 1 }}>Aktiv (Berechtigt)</option>
+            <option value="0" {{ 'selected' if kunde['ist_aktiv'] == 0 }}>Gesperrt</option>
+        </select>
+    </p>
+    {% endif %}
+
+    <p>
+        <button type="submit">{% if action == "Bearbeiten" %}Änderungen speichern{% else %}Speichern{% endif %}</button> 
+        <a href="{{ url_for('online_bibliothek.index') }}">Abbrechen</a>
+    </p>
+</form>
+{% endblock %}

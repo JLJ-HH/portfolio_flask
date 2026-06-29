@@ -1,0 +1,199 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<div class="container">
+    {% if meldung %}
+        <div class="alert alert-danger">
+            {{ meldung }}
+        </div>
+    {% endif %}
+    {% if leih_erfolg %}
+        <div class="alert alert-success">
+            Medium erfolgreich ausgeliehen!
+        </div>
+    {% endif %}
+    {% if request.args.get('success') == '1' %}
+        <div class="alert alert-success">
+            Aktion erfolgreich ausgeführt!
+        </div>
+    {% endif %}
+
+    {% if rolle == 'mitarbeiter' %}
+        <!-- MITARBEITER ANSICHT: KUNDEN- & AUSLEIHTABELLE -->
+        <h2>Kunden- und Systemverwaltung</h2>
+        <p>
+            <a href="{{ url_for('online_bibliothek.kunde_anlegen') }}">Neuen Kunden registrieren</a> |
+            <a href="{{ url_for('online_bibliothek.buch_uebersicht') }}">Zur Bücher-Übersicht</a> |
+            <a href="{{ url_for('online_bibliothek.buch_anlegen') }}">Neues Buch / PDF hochladen</a>
+        </p>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Adresse</th>
+                    <th>E-Mail</th>
+                    <th>Rolle</th>
+                    <th>Status</th>
+                    <th>Ausgeliehenes Buch</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if not daten %}
+                    <tr>
+                        <td colspan="8">Keine Nutzer im System.</td>
+                    </tr>
+                {% else %}
+                    {% for row in daten %}
+                    <tr>
+                        <td>{{ row['id'] }}</td>
+                        <td>{{ row['name'] }}</td>
+                        <td>{{ row['adresse'] }}</td>
+                        <td>{{ row['email'] }}</td>
+                        <td><strong>{{ row['rolle'] }}</strong></td>
+                        <td>
+                            {{ 'Berechtigt' if row['ist_aktiv'] == 1 else 'Gesperrt' }}
+                        </td>
+                        <td>
+                            {% if row['buch_titel'] %}
+                                {{ row['buch_titel'] }}<br>
+                                <a href="{{ url_for('online_bibliothek.rueckgabe', loan_id=row['ausleihe_id']) }}"
+                                   onclick="return confirm('Buch zurückgeben?');">[Zurückgeben]</a>
+                            {% else %}
+                                <em>Keine Ausleihen</em>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ url_for('online_bibliothek.kunde_bearbeiten', user_id=row['id']) }}">Bearbeiten</a>
+                            {% if row['id'] != session.get('nutzer_id') %}
+                                | <a href="{{ url_for('online_bibliothek.kunde_loeschen', user_id=row['id']) }}"
+                                   onclick="return confirm('Wirklich löschen?');">Löschen</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <!-- KUNDEN ANSICHT: EIGENE AUSLEIHEN & KATALOG -->
+        <h2>Meine ausgeliehenen Medien</h2>
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Medium</th>
+                    <th>Typ</th>
+                    <th>Ausgeliehen am</th>
+                    <th>Aktion / Lesen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if not daten %}
+                    <tr>
+                        <td colspan="4">Du hast aktuell keine Medien ausgeliehen.</td>
+                    </tr>
+                {% else %}
+                    {% for row in daten %}
+                    <tr>
+                        <td><strong>{{ row['buch_titel'] }}</strong></td>
+                        <td>{{ row['typ'] | capitalize }}</td>
+                        <td>{{ row['ausgeliehen_am'] }}</td>
+                        <td>
+                            {% if row['typ'] == 'pdf' and row['pdf_pfad'] %}
+                                <a href="{{ url_for('online_bibliothek.serve_upload', filename=row['pdf_pfad'].replace('uploads/', '')) }}" target="_blank">[PDF öffnen & lesen]</a>
+                            {% else %}
+                                <span style="color: #666;">Physisches Buch (Bitte in Filiale abgeben)</span>
+                            {% endif %}
+                            | <a href="{{ url_for('online_bibliothek.rueckgabe', loan_id=row['ausleihe_id']) }}"
+                               onclick="return confirm('Möchtest du dieses Medium zurückgeben?');">Zurückgeben</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+
+        <!-- OLLAMA KI-BIBLIOTHEKAR -->
+        <div class="search-form-container">
+            <h3>Frage deinen KI-Bibliothekar (Ollama)</h3>
+            <p>
+                Frag mich nach Themen, Autoren oder Buchempfehlungen aus unserem Bestand.
+            </p>
+            <form method="post" action="{{ url_for('online_bibliothek.index') }}">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="text" name="ki_frage" style="width: 70%; padding: 5px;"
+                       placeholder="z. B. Welche Bücher habt ihr über Webentwicklung?" required
+                       value="{{ ki_frage }}">
+                <button type="submit" style="padding: 5px 10px;">Absenden</button>
+            </form>
+        </div>
+
+        {% if ki_antwort %}
+            <div class="ai-box">
+                <div class="ai-title">Antwort des KI-Bibliothekars:</div>
+                <p>{{ ki_antwort | replace('\n', '<br>') | safe }}</p>
+            </div>
+        {% endif %}
+
+        <h2>Verfügbare Bücher & PDFs leihen</h2>
+        <table border="1" cellpadding="8" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Buch-ID</th>
+                    <th>Titel</th>
+                    <th>Autor</th>
+                    <th>ISBN</th>
+                    <th>Format</th>
+                    <th>KI-Inhaltsangabe (Ollama)</th>
+                    <th>Verfügbarkeit / Bestand</th>
+                    <th>Aktion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in buecher_katalog %}
+                <tr>
+                    <td>{{ b['id'] }}</td>
+                    <td><strong>{{ b['titel'] }}</strong></td>
+                    <td>{{ b['autor'] }}</td>
+                    <td>{{ b['isbn'] }}</td>
+                    <td>{{ b['typ'] | capitalize }}</td>
+                    <td>
+                        {% if b['zusammenfassung'] %}
+                            <details>
+                                <summary>Anzeigen</summary>
+                                <div style="margin-top: 5px; font-size: 0.9em; color: #555;">
+                                    {{ b['zusammenfassung'] }}
+                                </div>
+                            </details>
+                        {% else %}
+                            <em>Keine KI-Analyse vorhanden.</em>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if b['typ'] == 'pdf' %}
+                            Digital ({{ b['bestand'] }} Lizenzen)
+                        {% else %}
+                            {{ b['bestand'] }} Stück
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if b['bestand'] > 0 %}
+                            <a href="{{ url_for('online_bibliothek.ausleihen', book_id=b['id']) }}">Jetzt ausleihen</a>
+                        {% else %}
+                            {% if b['typ'] == 'pdf' %}
+                                <span style="color: red; font-weight: bold;">Lizenzen vergriffen</span>
+                            {% else %}
+                                <span style="color: red; font-weight: bold;">Aktuell vergriffen</span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</div>
+{% endblock %}

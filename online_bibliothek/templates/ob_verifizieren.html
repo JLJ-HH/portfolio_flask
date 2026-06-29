@@ -1,0 +1,43 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>E-Mail-Adresse verifizieren</h2>
+<p>
+    Ein Bestätigungscode wurde an Ihre E-Mail gesendet (falls Sie die Seite neu laden, geben Sie Ihre E-Mail unten erneut ein).
+</p>
+
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung }}</p>
+{% endif %}
+{% if erfolgsmeldung %}
+    <p class="alert alert-success">{{ erfolgsmeldung }}</p>
+{% endif %}
+
+<!-- Formular 1: Code eingeben -->
+<form method="post" action="{{ url_for('online_bibliothek.verifizieren') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <p>6-stelliger Bestätigungscode:<br>
+        <input type="text" name="code" required style="width: 150px; font-weight: bold; text-align: center;" placeholder="z. B. 123456" autofocus>
+    </p>
+    <p>
+        <button type="submit">Code verifizieren</button>
+    </p>
+</form>
+
+<hr>
+
+<!-- Formular 2: Neuen Code senden -->
+<form method="post" action="{{ url_for('online_bibliothek.verifizieren') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <input type="hidden" name="resend" value="1">
+    <h3>Bestätigungscode erneut senden</h3>
+    <p>E-Mail-Adresse:<br>
+        <input type="email" name="resend_email" required value="{{ email }}" style="width: 250px;">
+    </p>
+    <p>
+        <button type="submit">Neuen Code anfordern</button>
+    </p>
+</form>
+
+<p><a href="{{ url_for('online_bibliothek.login') }}">Zurück zum Login</a></p>
+{% endblock %}

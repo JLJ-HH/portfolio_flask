@@ -1,0 +1,41 @@
+graph TD
+    subgraph UI ["Interaction Layer (Flask Templates)"]
+        Dash["Library Dashboard"]
+        Reader["E-Book PDF Reader"]
+        Chat["RAG AI Chatbot UI"]
+        AuthForm["Auth / Verification Portal"]
+    end
+
+    subgraph Service ["Service Layer (Flask Blueprint & AI)"]
+        BP["Library Blueprint Engine"]
+        PDFParser["pypdf Text Extractor"]
+        OllamaAPI["Ollama RAG Gateway (gemma3:12b)"]
+        Mailer["Flask-Mail Verification Dispatcher"]
+    end
+
+    subgraph DB ["Persistence Layer (SQLite3)"]
+        Nutzer["nutzer Table (Users & Roles)"]
+        Buecher["buecher Table (Inventory)"]
+        Ausleihen["ausleihen Table (M:N Mapping)"]
+        Analysen["buch_analysen Table (1:1 KI Meta)"]
+    end
+
+    Dash -->|Web Requests| BP
+    AuthForm -->|Sign-up/Verify| BP
+    BP -->|Triggers Verification| Mailer
+    BP -->|Reads Text| PDFParser
+    BP -->|Builds Context & Queries| OllamaAPI
+    
+    BP -->|CRUD / Authenticate| Nutzer
+    BP -->|Manage Stock| Buecher
+    BP -->|Record Loan/Return| Ausleihen
+    BP -->|Read/Store Summaries| Analysen
+
+[DESCRIPTION]
+### RAG-gestützte Bibliotheks-Architektur
+Die Online-Bibliothek ist als modulares Flask-Blueprint konzipiert und implementiert ein RAG (Retrieval-Augmented Generation) System.
+
+**Technische Kernaspekte:**
+- **RAG-Integration (Retrieval-Augmented Generation):** Bei Benutzerfragen extrahiert das System den Buchbestand und die KI-Zusammenfassungen aus der Datenbank und injiziert diese als Kontext in den System-Prompt für die Ollama API (`gemma3:12b`).
+- **Asynchrones E-Book-Parsing:** PDF-Dokumente werden serverseitig via `pypdf` zerlegt. Die Texte werden per API an Ollama übermittelt, um vollautomatisch strukturierte Metadaten (Titel, Autor, ISBN, Zusammenfassungen, Inhaltsverzeichnis) zu generieren.
+- **Relationales Schema:** Das SQLite3-Schema sichert Datenintegrität durch Foreign Keys und automatisches kaskadierendes Löschen (`ON DELETE CASCADE`) verknüpfter Ausleihen und Analysen.

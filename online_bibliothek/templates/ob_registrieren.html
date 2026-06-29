@@ -1,0 +1,34 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>Konto registrieren</h2>
+
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung }}</p>
+{% endif %}
+
+<form method="post" action="{{ url_for('online_bibliothek.registrieren') }}" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <!-- Honeypot Feld gegen Bots (für echte Nutzer unsichtbar) -->
+    <div style="display: none;">
+        <label for="username_hp">Bitte leer lassen:</label>
+        <input type="text" id="username_hp" name="username_hp" autocomplete="off">
+    </div>
+
+    <p>Name:<br>
+        <input type="text" name="name" required value="{{ request.form.get('name', '') }}" style="width: 250px;">
+    </p>
+    <p>Adresse:<br>
+        <input type="text" name="adresse" required value="{{ request.form.get('adresse', '') }}" style="width: 250px;">
+    </p>
+    <p>E-Mail-Adresse:<br>
+        <input type="email" name="email" required value="{{ request.form.get('email', '') }}" style="width: 250px;">
+    </p>
+    <p>
+        <button type="submit">Registrieren & Code senden</button>
+    </p>
+</form>
+
+<p><a href="{{ url_for('online_bibliothek.login') }}">Zurück zum Login</a></p>
+{% endblock %}

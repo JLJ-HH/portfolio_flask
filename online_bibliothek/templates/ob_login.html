@@ -1,0 +1,49 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>Anmeldung zur Digitalen Bibliothek</h2>
+
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung | safe }}</p>
+{% endif %}
+{% if erfolgsmeldung %}
+    <p class="alert alert-success">{{ erfolgsmeldung }}</p>
+{% endif %}
+
+<form method="post" action="{{ url_for('online_bibliothek.login') }}" autocomplete="off">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    
+    <!-- Honeypot Feld gegen Bots (für echte Nutzer unsichtbar) -->
+    <div style="display: none;">
+        <label for="username_hp">Bitte leer lassen:</label>
+        <input type="text" id="username_hp" name="username_hp" autocomplete="off">
+    </div>
+
+    <!-- Unsichtbare Dummy-Felder zur Überlistung des Browser-Passwortmanagers -->
+    <input type="text" name="username_dummy" style="position: absolute; top: -1000px; left: -1000px; width: 1px; height: 1px; opacity: 0;" tabindex="-1">
+    <input type="password" name="password_dummy" style="position: absolute; top: -1000px; left: -1000px; width: 1px; height: 1px; opacity: 0;" tabindex="-1">
+
+    <p>E-Mail-Adresse:<br>
+        <input type="email" id="email" name="email" required autocomplete="new-username" style="width: 250px;">
+    </p>
+    <p>Passwort:<br>
+        <input type="password" id="passwort" name="passwort" required autocomplete="new-password" style="width: 250px;">
+    </p>
+    <p>
+        <button type="submit">Einloggen</button>
+    </p>
+</form>
+
+<p><a href="{{ url_for('online_bibliothek.registrieren') }}">Noch kein Konto? Jetzt registrieren</a></p>
+
+<script>
+    window.addEventListener('load', function() {
+        setTimeout(function() {
+            var emailField = document.getElementById('email');
+            var passwortField = document.getElementById('passwort');
+            if (emailField) emailField.value = '';
+            if (passwortField) passwortField.value = '';
+        }, 50);
+    });
+</script>
+{% endblock %}

@@ -33,11 +33,11 @@
     "struct_file": "portfolio_structure.mmd"
   },
   {
-    "title": "Contact Manager Livio",
-    "image": "/static/images/müde3.png",
-    "live_url": "/contact-manager",
-    "info_file": "contact_manager_info.txt",
-    "tech": "Python (Flask) , Jinja2, CSS, JS",
-    "struct_file": "contact_manager_structure.mmd"
+    "title": "Online-Bibliothek mit Ollama einbindung",
+    "image": "/static/images/library_minimal.png",
+    "live_url": "/bibliothek",
+    "info_file": "online_bibliothek_info.txt",
+    "tech": "Python (Flask), SQLite, Bootstrap, Ollama AI, Jinja2",
+    "struct_file": "online_bibliothek_structure.mmd"
   }
 ]

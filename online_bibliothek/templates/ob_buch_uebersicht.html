@@ -1,0 +1,63 @@
+{% extends "ob_layout.html" %}
+
+{% block lib_content %}
+<h2>Systemverwaltung: Aktueller Medienbestand</h2>
+
+{% if success %}
+    <p class="alert alert-success">Medium erfolgreich aus dem System gelöscht!</p>
+{% endif %}
+{% if meldung %}
+    <p class="alert alert-danger">{{ meldung }}</p>
+{% endif %}
+
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Titel</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Typ</th>
+            <th>Bestand</th>
+            <th>KI-Zusammenfassung (Ollama)</th>
+            <th>System-Zeitstempel</th>
+            <th>Aktionen</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if not buecher %}
+            <tr>
+                <td colspan="9">Keine Medien im System.</td>
+            </tr>
+        {% else %}
+            {% for b in buecher %}
+            <tr>
+                <td>{{ b['id'] }}</td>
+                <td><strong>{{ b['titel'] }}</strong></td>
+                <td>{{ b['autor'] }}</td>
+                <td>{{ b['isbn'] }}</td>
+                <td>{{ b['typ'] | capitalize }}</td>
+                <td>{{ b['bestand'] }} Stück</td>
+                <td>
+                    <div style="max-width: 300px; font-size: 0.9em;">
+                        {% if b['zusammenfassung'] %}
+                            <strong>Inhalt:</strong> {{ b['zusammenfassung'] }}
+                        {% else %}
+                            <span style="color: #999;">Keine KI-Analyse (Physisches Buch)</span>
+                        {% endif %}
+                    </div>
+                </td>
+                <td>
+                    <small>Erstellt: {{ b['angelegt_am'] }}<br>
+                    Geändert: {{ b['aktualisiert_am'] }}</small>
+                </td>
+                <td>
+                    <a href="{{ url_for('online_bibliothek.buch_bearbeiten', book_id=b['id']) }}">Bearbeiten</a> | 
+                    <a href="{{ url_for('online_bibliothek.buch_loeschen', book_id=b['id']) }}" onclick="return confirm('Medium wirklich löschen?');">Löschen</a>
+                </td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+{% endblock %}
