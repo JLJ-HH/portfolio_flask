@@ -119,7 +119,7 @@ Folge diesen Schritten, um das Portfolio-Ökosystem lokal auszuführen:
 ### 1. Repository klonen
 
 ```bash
-git clone https://github.com/Luis-Juarez-Juarez/portfolio_flask.git
+git clone https://github.com/JLJ-HH/portfolio_flask.git
 cd portfolio_flask
 ```
 
@@ -178,6 +178,6 @@ Das Portfolio ist speziell für die Ausführung in Shared-Hosting-Umgebungen via
 - **Name:** José Luis Juárez
 - **Beruf:** Angehender Anwendungsentwickler
 - **Standort:** Hamburg, Deutschland
-- **GitHub:** [@Luis-Juarez-Juarez](https://github.com/Luis-Juarez-Juarez)
+- **GitHub:** [@JLJ-HH](https://github.com/JLJ-HH)
 - **LinkedIn:** [José Luis Juárez](https://www.linkedin.com/in/jose-luis-juarez/)
 - **Live-Portfolio:** [jljuarez.de](https://jljuarez.de/)
