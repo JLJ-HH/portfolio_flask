@@ -3,3 +3,5 @@
 .venv
 config.ini
 contacts.txt
+*.pyc
+__pycache__/

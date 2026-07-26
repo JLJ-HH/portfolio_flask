@@ -11,9 +11,9 @@
         {% endwith %}
 
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <div style="display:none;">
-            <label for="honeypot">Bitte freilassen / Leave blank</label>
-            <input type="text" id="honeypot" name="honeypot" autocomplete="off">
+        <div class="visually-hidden-hp">
+            <label for="website">Bitte freilassen / Leave blank</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
         </div>
 
         <div class="left-col">
@@ -40,6 +40,11 @@
         <div class="message-col">
             <label for="message">Nachricht*</label>
             <textarea id="message" name="message" rows="6" placeholder="Schreibe deine Nachricht..." required></textarea>
+        </div>
+
+        <div class="captcha-col">
+            <label for="captcha">Sicherheitsfrage: Was ist {{ num1 }} + {{ num2 }}?*</label>
+            <input type="number" id="captcha" name="captcha" placeholder="Ergebnis eingeben" required>
         </div>
 
         <button type="submit">Senden</button>

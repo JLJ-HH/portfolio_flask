@@ -2,7 +2,10 @@ import os
 import random
 import re
 import json
-import bcrypt
+try:
+    import bcrypt
+except ImportError:
+    bcrypt = None
 import requests
 from flask import render_template, request, redirect, url_for, flash, session, current_app, send_from_directory, jsonify
 from flask_mail import Message
@@ -38,6 +41,9 @@ def mitarbeiter_required(f):
 
 def check_password(password_plain, password_hash):
     """Verifies a bcrypt password hash, converting PHP $2y$ prefix if necessary."""
+    if bcrypt is None:
+        print("Fehler: bcrypt ist nicht geladen!")
+        return False
     try:
         hash_bytes = password_hash.encode('utf-8')
         if hash_bytes.startswith(b'$2y$'):
@@ -49,6 +55,8 @@ def check_password(password_plain, password_hash):
 
 def hash_password(password_plain):
     """Hashes a password using bcrypt."""
+    if bcrypt is None:
+        raise ImportError("bcrypt-Bibliothek ist nicht geladen und Passwort-Hashing ist fehlgeschlagen.")
     hashed = bcrypt.hashpw(password_plain.encode('utf-8'), bcrypt.gensalt())
     return hashed.decode('utf-8')
 

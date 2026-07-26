@@ -103,7 +103,21 @@ input:focus, textarea:focus {
     transform: translateY(-2px);
 }
 
+/* Honeypot Feld unsichtbar machen */
+.visually-hidden-hp {
+    position: absolute !important;
+    left: -9999px !important;
+    top: auto !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+}
+
 .message-col { grid-column: span 2; }
+
+.captcha-col {
+    grid-column: span 2;
+}
 
 .privacy-label {
     grid-column: span 2;

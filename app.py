@@ -1,7 +1,9 @@
 import os
 import json
 import configparser
-from flask import Flask, render_template, request, redirect, url_for, flash
+import time
+import random
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mail import Mail, Message
 from flask_wtf.csrf import CSRFProtect
 from calculator.routes import calculator_bp
@@ -141,10 +143,29 @@ def projects():
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        # Anti-Spam Honeypot check
-        if request.form.get("honeypot"):
-            # Lautlos verwerfen, um Ressourcen zu schonen und Spam zu verhindern
+        # 1. Honeypot check (Feld 'website' statt 'honeypot')
+        if request.form.get("website"):
+            # Lautlos verwerfen
             flash("Nachricht erfolgreich gesendet!", "success")
+            return redirect(url_for('contact'))
+
+        # 2. Zeitbasierte Überprüfung (mindestens 3 Sekunden)
+        load_time = session.get('contact_load_time')
+        if not load_time or (time.time() - load_time) < 3.0:
+            # Lautlos verwerfen
+            flash("Nachricht erfolgreich gesendet!", "success")
+            return redirect(url_for('contact'))
+
+        # 3. Rechenaufgabe (Math Captcha) Überprüfung
+        expected_answer = session.get('captcha_answer')
+        user_answer = request.form.get("captcha")
+        
+        try:
+            if expected_answer is None or int(user_answer) != expected_answer:
+                flash("Ungültige Sicherheitsantwort. Bitte versuche es erneut.", "danger")
+                return redirect(url_for('contact'))
+        except (ValueError, TypeError):
+            flash("Bitte gib eine Zahl als Sicherheitsantwort ein.", "danger")
             return redirect(url_for('contact'))
 
         name = request.form.get("name")
@@ -153,13 +174,22 @@ def contact():
         message = request.form.get("message")
 
         if send_contact_email(name, email, subject, message):
+            # Lösche Session-Daten nach erfolgreichem Versand
+            session.pop('captcha_answer', None)
+            session.pop('contact_load_time', None)
             flash("Nachricht erfolgreich gesendet!", "success")
         else:
             flash("Fehler beim Senden. Bitte versuche es erneut.", "danger")
         
         return redirect(url_for('contact'))
 
-    return render_template('contact.html')
+    # GET-Request: Generiere neue Rechenaufgabe und speichere Ladezeit
+    num1 = random.randint(1, 10)
+    num2 = random.randint(1, 10)
+    session['captcha_answer'] = num1 + num2
+    session['contact_load_time'] = time.time()
+
+    return render_template('contact.html', num1=num1, num2=num2)
 
 if __name__ == "__main__":
     app.run(debug=config.getboolean('APP', 'DEBUG'))
