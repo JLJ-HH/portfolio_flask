@@ -49,6 +49,9 @@ Eine moderne Bibliotheksplattform, die klassisches Web-CRUD mit modernster Küns
 - **RAG-KI-Bibliothekar:** Ein interaktiver Chatbot (ausgeführt mit `gemma4:31b` via Ollama-API), der auf Basis des echten Buchbestandes und kompakter Zusammenfassungen personalisierte Empfehlungen ausspricht (inkl. Antwort-Cache und Ausfall-Fallback).
 - **Intelligentes E-Book-Parsing:** Beim Upload einer E-Book-PDF liest das System automatisch den Text aus und generiert über die KI automatisch Metadaten wie Autor, ISBN, Zusammenfassung und Inhaltsverzeichnisse.
 - **Sicherheit & E-Mail-Verifikation:** OTP-Verifikationsworkflow bei der Registrierung und sichere SQLite3-Datenhaltung mit Kaskadierung (`ON DELETE CASCADE`).
+- **Test-Zugangsdaten:**
+  - **Admin / Bibliothekar:** `admin@bib.de` (Passwort: `admin123`)
+  - **Kunde / Standard-Nutzer:** `jan@va.de` (Passwort: `user123`)
 
 ### 2. SmartCalc – Wissenschaftlicher Web-Taschenrechner (`/taschenrechner`)
 
@@ -160,6 +163,10 @@ Die Anwendung ist nun unter `http://127.0.0.1:5000` erreichbar.
 
 > [!NOTE]
 > **Hinweis für die Online-Bibliothek mit KI-Funktion:** Stelle sicher, dass [Ollama](https://ollama.com/) lokal läuft und das Modell `gemma4:31b` (oder ein in der Konfiguration/Route definiertes Modell) geladen ist.
+>
+> **Test-Zugangsdaten für den Login:**
+> - **Admin / Bibliothekar:** `admin@bib.de` / `admin123`
+> - **Kunde / Standard-Nutzer:** `jan@va.de` / `user123`
 
 ---
 
