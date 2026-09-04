@@ -9,7 +9,7 @@ graph TD
     subgraph Service ["Service Layer (Flask Blueprint & AI)"]
         BP["Library Blueprint Engine"]
         PDFParser["pypdf Text Extractor"]
-        OllamaAPI["Ollama RAG Gateway (gemma3:12b)"]
+        OllamaAPI["Ollama RAG Gateway (gemma4:31b)"]
         Mailer["Flask-Mail Verification Dispatcher"]
     end
 
@@ -18,6 +18,7 @@ graph TD
         Buecher["buecher Table (Inventory)"]
         Ausleihen["ausleihen Table (M:N Mapping)"]
         Analysen["buch_analysen Table (1:1 KI Meta)"]
+        Cache["ki_cache Table (AI Response Cache)"]
     end
 
     Dash -->|Web Requests| BP
@@ -30,12 +31,13 @@ graph TD
     BP -->|Manage Stock| Buecher
     BP -->|Record Loan/Return| Ausleihen
     BP -->|Read/Store Summaries| Analysen
+    BP -->|Read/Store Cached Answers| Cache
 
 [DESCRIPTION]
 ### RAG-gestützte Bibliotheks-Architektur
 Die Online-Bibliothek ist als modulares Flask-Blueprint konzipiert und implementiert ein RAG (Retrieval-Augmented Generation) System.
 
 **Technische Kernaspekte:**
-- **RAG-Integration (Retrieval-Augmented Generation):** Bei Benutzerfragen extrahiert das System den Buchbestand und die KI-Zusammenfassungen aus der Datenbank und injiziert diese als Kontext in den System-Prompt für die Ollama API (`gemma3:12b`).
+- **RAG-Integration (Retrieval-Augmented Generation):** Bei Benutzerfragen extrahiert das System den Buchbestand und die KI-Zusammenfassungen aus der Datenbank und injiziert diese als Kontext in den System-Prompt für die Ollama API (`gemma4:31b`).
 - **Asynchrones E-Book-Parsing:** PDF-Dokumente werden serverseitig via `pypdf` zerlegt. Die Texte werden per API an Ollama übermittelt, um vollautomatisch strukturierte Metadaten (Titel, Autor, ISBN, Zusammenfassungen, Inhaltsverzeichnis) zu generieren.
 - **Relationales Schema:** Das SQLite3-Schema sichert Datenintegrität durch Foreign Keys und automatisches kaskadierendes Löschen (`ON DELETE CASCADE`) verknüpfter Ausleihen und Analysen.

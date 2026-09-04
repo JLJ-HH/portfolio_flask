@@ -3,7 +3,7 @@
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0.0-black.svg?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-3.x-blue.svg?style=for-the-badge&logo=sqlite&logoColor=white)](https://sqlite.org/)
-[![AI-Ollama](https://img.shields.io/badge/Ollama_AI-Gemma3-orange.svg?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
+[![AI-Ollama](https://img.shields.io/badge/Ollama_AI-Gemma4-orange.svg?style=for-the-badge&logo=ollama&logoColor=white)](https://ollama.com/)
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple.svg?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 
 Willkommen auf dem Repository meines persönlichen Portfolio-Ökosystems! Diese Webanwendung dient als digitale Visitenkarte und interaktiver Showcase meiner Fähigkeiten als angehender **Anwendungsentwickler**.
@@ -46,7 +46,7 @@ graph TD
 Eine moderne Bibliotheksplattform, die klassisches Web-CRUD mit modernster Künstlicher Intelligenz verbindet.
 
 - **Rollenbasierter Zugriff (RBAC):** Eigene Dashboards für Mitarbeiter (CRUD-Verwaltung von Kunden/Büchern, Verleihhistorie) und Kunden (Ausleihen, Rückgaben, integrierter E-Book-Reader).
-- **RAG-KI-Bibliothekar:** Ein interaktiver Chatbot (ausgeführt mit `gemma3:12b` via Ollama-API), der auf Basis des echten Buchbestandes, der Buchzusammenfassungen und Inhaltsverzeichnisse personalisierte Empfehlungen ausspricht.
+- **RAG-KI-Bibliothekar:** Ein interaktiver Chatbot (ausgeführt mit `gemma4:31b` via Ollama-API), der auf Basis des echten Buchbestandes und kompakter Zusammenfassungen personalisierte Empfehlungen ausspricht (inkl. Antwort-Cache und Ausfall-Fallback).
 - **Intelligentes E-Book-Parsing:** Beim Upload einer E-Book-PDF liest das System automatisch den Text aus und generiert über die KI automatisch Metadaten wie Autor, ISBN, Zusammenfassung und Inhaltsverzeichnisse.
 - **Sicherheit & E-Mail-Verifikation:** OTP-Verifikationsworkflow bei der Registrierung und sichere SQLite3-Datenhaltung mit Kaskadierung (`ON DELETE CASCADE`).
 
@@ -107,6 +107,7 @@ Eine Progressive Web App der nächsten Generation (extern verlinkt, aber Teil de
 ├── config.ini.example     # Vorlage für Umgebungsvariablen und E-Mail-Einstellungen
 ├── projects.json          # Zentrale JSON-Datenquelle für die Portfolio-Projekte
 ├── requirements.txt       # Python-Abhängigkeiten
+├── CHANGELOG.md           # Änderungshistorie und Release-Dokumentation
 └── README.md              # Diese Dokumentation
 ```
 
@@ -158,7 +159,7 @@ python app.py
 Die Anwendung ist nun unter `http://127.0.0.1:5000` erreichbar.
 
 > [!NOTE]
-> **Hinweis für die Online-Bibliothek mit KI-Funktion:** Stelle sicher, dass [Ollama](https://ollama.com/) lokal läuft und das Modell `gemma3:12b` (oder ein in der Konfiguration/Route definiertes Modell) geladen ist.
+> **Hinweis für die Online-Bibliothek mit KI-Funktion:** Stelle sicher, dass [Ollama](https://ollama.com/) lokal läuft und das Modell `gemma4:31b` (oder ein in der Konfiguration/Route definiertes Modell) geladen ist.
 
 ---
 

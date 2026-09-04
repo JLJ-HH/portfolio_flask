@@ -4,7 +4,7 @@ Dieses Projekt demonstriert eine hochmoderne Bibliotheksplattform. Sie kombinier
 
 Die Highlights:
 • Rolle-basierter Zugriff: Differenzierte Dashboards für "Mitarbeiter" (CRUD-Kunden- & Buchverwaltung, Ausleih-Historie) und "Kunden" (Medien leihen/zurückgeben, E-Book Reader).
-• RAG-basierter KI-Bibliothekar: Ein interaktiver Chatbot (gemma3:12b via Ollama API), der auf Basis des echten Buchbestands, der Buch-Zusammenfassungen und Inhaltsverzeichnisse personalisierte Empfehlungen gibt.
+• RAG-basierter KI-Bibliothekar: Ein interaktiver Chatbot (gemma4:31b via Ollama API), der auf Basis des echten Buchbestands und kompakter Buch-Zusammenfassungen personalisierte Empfehlungen gibt (mit Token-Optimierung, Antwort-Caching und automatischem Katalog-Fallback).
 • KI-gestütztes E-Book-Parsing: Beim Upload einer PDF liest das System automatisch den Text aus und generiert über die KI den Buchtitel, Autor, ISBN sowie Zusammenfassungen und Inhaltsverzeichnisse.
 • E-Mail Verifikations-Workflow: Maximale Sicherheit bei der Neuregistrierung durch Verifizierungscodes vor der Passwortvergabe.
 • Sichere Datenhaltung: Implementiert über SQLite3 mit sauber getrennten Beziehungen und kaskadierenden Löschungen (ON DELETE CASCADE) für Datenintegrität.

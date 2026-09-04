@@ -86,6 +86,17 @@ def init_db():
                 FOREIGN KEY (buch_id) REFERENCES buecher(id) ON DELETE CASCADE
             )
         """)
+        
+        # 5. KI-Cache (spart Tokens und beschleunigt wiederholte Fragen)
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS ki_cache (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                frage_hash TEXT UNIQUE NOT NULL,
+                frage TEXT NOT NULL,
+                antwort TEXT NOT NULL,
+                angelegt_am DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
         conn.commit()
     except Exception as e:
         print(f"Fehler bei der Datenbankinitialisierung: {e}")
