@@ -43,12 +43,14 @@ graph TD
 
 ### 1. Online-Bibliothek mit Ollama-RAG-KI (`/bibliothek`)
 
-Eine moderne Bibliotheksplattform, die klassisches Web-CRUD mit modernster Künstlicher Intelligenz verbindet.
+Eine moderne Bibliotheksplattform, die klassisches Web-CRUD mit modernster Künstlicher Intelligenz (Retrieval-Augmented Generation) verbindet.
 
-- **Rollenbasierter Zugriff (RBAC):** Eigene Dashboards für Mitarbeiter (CRUD-Verwaltung von Kunden/Büchern, Verleihhistorie) und Kunden (Ausleihen, Rückgaben, integrierter E-Book-Reader).
-- **RAG-KI-Bibliothekar:** Ein interaktiver Chatbot (ausgeführt mit `gemma4:31b` via Ollama-API), der auf Basis des echten Buchbestandes und kompakter Zusammenfassungen personalisierte Empfehlungen ausspricht (inkl. Antwort-Cache und Ausfall-Fallback).
-- **Intelligentes E-Book-Parsing:** Beim Upload einer E-Book-PDF liest das System automatisch den Text aus und generiert über die KI automatisch Metadaten wie Autor, ISBN, Zusammenfassung und Inhaltsverzeichnisse.
-- **Sicherheit & E-Mail-Verifikation:** OTP-Verifikationsworkflow bei der Registrierung und sichere SQLite3-Datenhaltung mit Kaskadierung (`ON DELETE CASCADE`).
+- **Rollenbasierter Zugriff (RBAC):** Eigene Dashboards für Mitarbeiter (CRUD-Kundenverwaltung inkl. Aktivitätsstatus `ist_aktiv`, Buch- & E-Book-Katalog, globale Verleih- und Rückgabeübersicht) und Kunden (physische Buchausleihe nach Bestand, digitale E-Book-Lizenzen, In-Browser PDF-Reader).
+- **RAG-KI-Bibliothekar:** Ein interaktiver Chatbot (ausgeführt mit `gemma4:31b` via Ollama-API), der auf Basis des echten Buchbestandes und kompakter Zusammenfassungen personalisierte Empfehlungen ausspricht.
+- **Token-Ökonomie & Antwort-Cache:** Optimiertes Antwortbudget (`max_tokens: 500`) für strukturierte 3-Absatz-Antworten, bis zu 80 % Token-Ersparnis durch Kontext-Kompression sowie SQLite-Antwort-Cache (`ki_cache`) für latenzfreie Antworten (0,01s, 0 Tokens) bei wiederholten Fragen.
+- **Graceful Degradation (Ausfallschutz):** Automatischer Heuristik-Fallback auf eine integrierte Katalogsuche bei Ausfall oder Rate-Limits des KI-Dienstes.
+- **Intelligentes E-Book-Parsing & Sammel-Import:** Beim PDF-Upload liest das System automatisch den Text aus und generiert über die KI strukturierte Metadaten (Titel, Autor, ISBN, Zusammenfassung). Erkennt bei Sammel-Dokumenten mehrere Bücher oder Nutzer und legt alle Einträge automatisch in einem einzigen Durchlauf an.
+- **Sicherheit & Verifikations-Workflow:** Zwei-Schritt-Registrierung mit 6-stelligem Verifizierungstoken, konsequente Prepared Statements (SQL-Injection-Schutz), XSS-Maskierung, BCRYPT-Passworthashing, Session-/Cache-Control (`no-store, no-cache`) und SQLite3-Kaskadierung (`ON DELETE CASCADE`).
 - **Test-Zugangsdaten:**
   - **Admin / Bibliothekar:** `admin@bib.de` (Passwort: `admin123`)
   - **Kunde / Standard-Nutzer:** `jan@va.de` (Passwort: `user123`)

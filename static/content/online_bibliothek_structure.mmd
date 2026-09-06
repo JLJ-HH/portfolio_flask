@@ -1,43 +1,63 @@
 graph TD
     subgraph UI ["Interaction Layer (Flask Templates)"]
-        Dash["Library Dashboard"]
-        Reader["E-Book PDF Reader"]
-        Chat["RAG AI Chatbot UI"]
-        AuthForm["Auth / Verification Portal"]
+        Dash["Library Dashboard & Medienkatalog"]
+        Reader["E-Book In-Browser PDF Reader"]
+        Chat["RAG AI Chatbot Interface"]
+        AuthForm["Auth & Token-Verifikations-Portal"]
     end
 
-    subgraph Service ["Service Layer (Flask Blueprint & AI)"]
+    subgraph Service ["Service & Processing Layer"]
         BP["Library Blueprint Engine"]
-        PDFParser["pypdf Text Extractor"]
+        BatchParser["PDF-Parser & Sammel-Import Engine"]
+        CacheEngine["SHA256 Cache Engine (ki_cache)"]
         OllamaAPI["Ollama RAG Gateway (gemma4:31b)"]
-        Mailer["Flask-Mail Verification Dispatcher"]
+        FallbackEngine["Graceful Degradation Fallback (Katalogsuche)"]
+        Mailer["Flask-Mail Token Dispatcher"]
     end
 
     subgraph DB ["Persistence Layer (SQLite3)"]
-        Nutzer["nutzer Table (Users & Roles)"]
-        Buecher["buecher Table (Inventory)"]
-        Ausleihen["ausleihen Table (M:N Mapping)"]
-        Analysen["buch_analysen Table (1:1 KI Meta)"]
-        Cache["ki_cache Table (AI Response Cache)"]
+        Nutzer["nutzer (Accounts, Rollen & Tokens)"]
+        Buecher["buecher (Bestand & PDF-Lizenzen)"]
+        Ausleihen["ausleihen (M:N Verleih-Historie)"]
+        Analysen["buch_analysen (1:1 KI Metadaten)"]
+        Cache["ki_cache (Persistente KI-Antworten)"]
     end
 
-    Dash -->|Web Requests| BP
-    AuthForm -->|Sign-up/Verify| BP
-    BP -->|Triggers Verification| Mailer
-    BP -->|Reads Text| PDFParser
-    BP -->|Builds Context & Queries| OllamaAPI
+    Dash -->|Web-Anfragen & Leihe| BP
+    AuthForm -->|Registrierung / Verifizierung| BP
+    BP -->|6-stelliges Token| Mailer
     
-    BP -->|CRUD / Authenticate| Nutzer
-    BP -->|Manage Stock| Buecher
-    BP -->|Record Loan/Return| Ausleihen
-    BP -->|Read/Store Summaries| Analysen
-    BP -->|Read/Store Cached Answers| Cache
+    BP -->|PDF-Upload & Sammel-Import| BatchParser
+    BatchParser -->|Metadaten & Analysen anfordern| OllamaAPI
+    BatchParser -->|Multi-Book / Multi-User anlegen| Buecher
+    BatchParser -->|Benutzerdaten erfassen| Nutzer
+    BatchParser -->|Zusammenfassungen speichern| Analysen
+
+    BP -->|Chat-Anfrage prüfen| CacheEngine
+    CacheEngine -->|Cache-Hit: 0 Tokens / 0.01s| Chat
+    CacheEngine -->|Cache-Miss: Prompt mit RAG-Kontext| OllamaAPI
+    OllamaAPI -->|Antwort cachen & anzeigen| CacheEngine
+    OllamaAPI -.->|Bei Timeout / Offline-API| FallbackEngine
+    FallbackEngine -->|Heuristische Volltextsuche| Buecher
+    FallbackEngine -.->|Katalogtreffer als Fallback| Chat
+
+    BP -->|CRUD & Authentifizierung| Nutzer
+    BP -->|Bestandsverwaltung| Buecher
+    BP -->|Ausleihen / Rückgaben erfassen| Ausleihen
+    BP -->|Analysen abrufen| Analysen
 
 [DESCRIPTION]
-### RAG-gestützte Bibliotheks-Architektur
-Die Online-Bibliothek ist als modulares Flask-Blueprint konzipiert und implementiert ein RAG (Retrieval-Augmented Generation) System.
+### RAG-gestützte Bibliotheks-Architektur & Sicherheitsstandards
+Die Online-Bibliothek ist als modulares Flask-Blueprint konzipiert und vereint Enterprise-Web-Architektur mit einem ausfallsicheren RAG-System (Retrieval-Augmented Generation).
 
-**Technische Kernaspekte:**
-- **RAG-Integration (Retrieval-Augmented Generation):** Bei Benutzerfragen extrahiert das System den Buchbestand und die KI-Zusammenfassungen aus der Datenbank und injiziert diese als Kontext in den System-Prompt für die Ollama API (`gemma4:31b`).
-- **Asynchrones E-Book-Parsing:** PDF-Dokumente werden serverseitig via `pypdf` zerlegt. Die Texte werden per API an Ollama übermittelt, um vollautomatisch strukturierte Metadaten (Titel, Autor, ISBN, Zusammenfassungen, Inhaltsverzeichnis) zu generieren.
-- **Relationales Schema:** Das SQLite3-Schema sichert Datenintegrität durch Foreign Keys und automatisches kaskadierendes Löschen (`ON DELETE CASCADE`) verknüpfter Ausleihen und Analysen.
+**Technische Kernaspekte & Features:**
+- **RAG-Integration & Token-Ökonomie:** Bei Benutzeranfragen injiziert das System den aktuellen Buchbestand und komprimierte Buchanalysen als Kontext in den System-Prompt für das LLM (`gemma4:31b`). Durch Kontext-Kompaktierung (Kürzung auf max. 180 Zeichen, Verzicht auf rohe Inhaltsverzeichnisse) wird der Input-Token-Verbrauch um bis zu 80 % gesenkt. Das Antwortbudget ist auf `max_tokens: 500` für prägnante 3-Absatz-Antworten optimiert.
+- **Smartes Antwort-Caching (`ki_cache`):** Jede KI-Anfrage wird als SHA256-Hash in der SQLite-Tabelle `ki_cache` hinterlegt. Wiederholte oder identische Fragen werden mit 0 Token-Kosten in nur 0,01 Sekunden beantwortet.
+- **Graceful Degradation (Ausfallschutz):** Sollte der Ollama-Dienst offline, überlastet oder ratelimited sein, greift automatisch eine heuristische SQL-Katalogsuche (`LIKE`-Query), die passende Bücher aus dem Bestand liefert.
+- **KI-gestützte PDF-Analyse & Sammel-Import:** Der integrierte Parser liest hochgeladene PDFs serverseitig aus und erfasst via KI Titel, Autor, ISBN und Zusammenfassungen. Enthält ein Dokument mehrere Bücher oder Nutzerdatensätze, erkennt das System diese Strukturen und legt alle Entitäten vollautomatisch in einem einzigen Durchlauf an.
+- **Enterprise-Sicherheit & Datenintegrität:**
+  - **SQL-Injection-Prävention:** Konsequenter Einsatz parametrisierter SQL-Abfragen (Prepared Statements).
+  - **XSS-Schutz:** Vollständige Maskierung aller dynamischen Ein- und Ausgaben mittels HTML-Escaping.
+  - **Passwortsicherheit:** Sicheres Passworthashing via BCRYPT mit individuellen Salts.
+  - **Session- & Cache-Schutz:** Vollständiges Zerstören von Sessions beim Logout und restriktive `Cache-Control`-Header (`no-store, no-cache`), um Ausspähen über die Browser-Historie zu unterbinden.
+  - **Relationale Integrität:** Fremdschlüsselbeziehungen mit automatischer Kaskadierung (`ON DELETE CASCADE`) zur sauberen Bereinigung abhängiger Datensätze.

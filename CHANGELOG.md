@@ -5,6 +5,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.2] - 2026-09-06
+
+### Geändert (Changed)
+- **Showcase- & Dokumentationsabgleich (Online-Bibliothek)**:
+  - Vollständige Synchronisierung der Dokumentation, Slide-Bar Card und Modals auf Basis der Fallstudien-Neuerungen aus dem Repository `online-bibliothek`.
+  - Ergänzung des **KI-Sammel-Imports** (automatische Erfassung mehrerer Bücher und Benutzerdatensätze in einem einzigen PDF-Upload-Durchlauf) in [README.md](file:///c:/github/portfolio_flask/README.md), [online_bibliothek_info.txt](file:///c:/github/portfolio_flask/static/content/online_bibliothek_info.txt) und im Mermaid-Strukturplan [online_bibliothek_structure.mmd](file:///c:/github/portfolio_flask/static/content/online_bibliothek_structure.mmd).
+  - Erweiterung des Mermaid-Architekturdiagramms um den **Antwort-Cache (`ki_cache`)** und den **Graceful-Degradation-Fallback** (Heuristische SQLite-Katalogsuche bei LLM-Ausfall/Timeout).
+  - Dokumentation der Enterprise-Sicherheitsarchitektur (Prepared Statements gegen SQL-Injections, XSS-Maskierung, BCRYPT-Passworthashing, Session-/Cache-Control-Header gegen Browser-Historienangriffe).
+  - Typografische Verfeinerung und Tech-Stack-Präzisierung in [projects.json](file:///c:/github/portfolio_flask/projects.json).
+
 ---
 
 ## [1.2.1] - 2026-09-06

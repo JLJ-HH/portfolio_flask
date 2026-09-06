@@ -33,11 +33,11 @@
     "struct_file": "portfolio_structure.mmd"
   },
   {
-    "title": "Online-Bibliothek mit Ollama einbindung",
+    "title": "Online-Bibliothek mit Ollama-Einbindung",
     "image": "/static/images/library_minimal.png",
     "live_url": "/bibliothek",
     "info_file": "online_bibliothek_info.txt",
-    "tech": "Python (Flask), SQLite, Bootstrap, Ollama AI, Jinja2",
+    "tech": "Python (Flask), SQLite3, Bootstrap 5, Ollama AI (RAG), Jinja2, pypdf",
     "struct_file": "online_bibliothek_structure.mmd"
   }
 ]
