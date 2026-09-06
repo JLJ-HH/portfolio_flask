@@ -4,7 +4,7 @@
     "image": "/static/images/milo.png",
     "live_url": "https://milo-radio.de/",
     "info_file": "radio_info.txt",
-    "tech": "HTML, CSS, JS, PHP, JSON",
+    "tech": "Vanilla JS (ES6 Modules), PWA, PHP 8 (REST API), MySQL/MariaDB (PDO), Chart.js, Bootstrap 5",
     "struct_file": "radio_app_structure.mmd"
   },
   {

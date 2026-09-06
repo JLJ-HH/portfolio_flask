@@ -74,11 +74,13 @@ Eine interaktive Anwendung zur zielgerichteten Vorbereitung auf die **PSM I (Pro
 
 ### 4. Milo Radio App (PWA)
 
-Eine Progressive Web App der nächsten Generation (extern verlinkt, aber Teil des Showcases).
+Eine moderne, installierbare Progressive Web App (PWA) für Audio-Streaming mit modularer ES6-SPA-Architektur und performantem REST-Backend ([Live-Demo auf milo-radio.de](https://milo-radio.de/)).
 
-- **Fullstack-Architektur:** JavaScript-Frontend kommuniziert mit einem PHP/PostgreSQL-Backend.
-- **Trends & Analyse:** Anonymisiertes Tracking von Hörgewohnheiten zur Erstellung von Top-Listen in Echtzeit.
-- **Offline-First:** Service-Worker-Caching sorgt dafür, dass die App auch bei instabiler Internetverbindung läuft.
+- **Fullstack- & PWA-Architektur:** Modulares Vanilla-JS-Frontend (ES6-Module) mit SPA-Routing, Touch-/Swipe-Gestensteuerung und Service Worker (`sw.js` mit Network-First-Strategie) für sofortige Smartphone-Updates und Offline-Fähigkeit.
+- **Globale Sticky-Player-Bar:** Dauerhaft sichtbare Player-Leiste am unteren Bildschirmrand mit Glassmorphismus, animiertem Soundwave-Badge und Live-Now-Playing-Metadaten (ICY-Stream-Parsing).
+- **Intelligentes Favoriten-Management:** Lokale Top-6-Senderliste mit automatischem FIFO-Verdrängen älterer Sender und MRU-Sortierung (Wiedergabe rückt Sender auf Platz #1 vor inkl. sanftem Auto-Scroll) sowie 2-Klick-Löschschutz im minimalistischen Slate-Look.
+- **Deep Analytics & Personalisierte Empfehlungen:** Interaktives Hörer-Dashboard via [Chart.js](https://www.chartjs.org/) (Hörverlauf-Linie, Top-5-Balken, Genre-Doughnut), dynamische Musikvorschläge ("Empfehlungen für dich") und 1-Klick-Übernahme der Top 5 in die aktive Playlist.
+- **Abgesichertes Backend (PHP 8 & MySQL):** RESTful APIs mit PDO-Datenbankanbindung, PIN-gesichertes Admin-Panel mit Anti-Brute-Force-Lockout (1,5s Verzögerung + 5-Minuten-Sperre) und automatisierter Wartungs-Cronjob (`maintenance.php`) für 6-Monats-Archivierung.
 
 ---
 
@@ -167,6 +169,7 @@ Die Anwendung ist nun unter `http://127.0.0.1:5000` erreichbar.
 > **Hinweis für die Online-Bibliothek mit KI-Funktion:** Stelle sicher, dass [Ollama](https://ollama.com/) lokal läuft und das Modell `gemma4:31b` (oder ein in der Konfiguration/Route definiertes Modell) geladen ist.
 >
 > **Test-Zugangsdaten für den Login:**
+>
 > - **Admin / Bibliothekar:** `admin@bib.de` / `admin123`
 > - **Kunde / Standard-Nutzer:** `jan@va.de` / `user123`
 

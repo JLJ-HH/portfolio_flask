@@ -1,47 +1,76 @@
 graph TD
-    subgraph UI ["User Experience Layer"]
-        PlayerUI["Radio Stream Interface"]
-        Controls["Playback Control System"]
-        Visualizer["Audio Signal Visualizer"]
+    subgraph Client ["Client Layer (PWA & Modular ES6 SPA)"]
+        SW["Service Worker (sw.js - Network-First)"]
+        Router["SPA Router & Swipe Navigation"]
+        PlayerBar["Sticky-Bottom-Player (Glassmorphism & ICY Audio)"]
+        RadioPage["Radio View (Top 6 MRU & Slate Delete)"]
+        GenresPage["Genres View (Accordion & Instant Play)"]
+        StatsPage["Deep Analytics & Recommendations (Chart.js)"]
+        AdminPage["Admin View (CRUD & Live Listeners)"]
+        UserStore["userStationService (LocalStorage MRU/FIFO)"]
     end
 
-    subgraph Service ["Audio Connection Layer"]
-        StreamServer["Cast & Stream Registry"]
-        Buffer["Audio Buffer & Processing"]
-        Metadata["Track Info Handler"]
+    subgraph Backend ["Backend API Layer (PHP 8 RESTful)"]
+        AuthAPI["auth.php (PIN Lockout & Sessions)"]
+        StationAPI["get_stations.php (Sender-Katalog)"]
+        MetaAPI["metadata.php (Live ICY Stream Parser)"]
+        PingAPI["ping.php (Usage Analytics Tracker)"]
+        StatsAPI["get_stats.php (Aggregate & Trends)"]
+        AdminStats["get_admin_stats.php (Live Monitor)"]
+        Maintenance["maintenance.php (Cronjob Archivierung & OPTIMIZE)"]
+        DBDriver["db.php (PDO Connection & Env Switch)"]
     end
 
-    subgraph Analytics ["Insights & Analysis Layer"]
-        Tracker["Usage & Event Tracker"]
-        Report["Stream Performance Analysis"]
+    subgraph Storage ["Persistence Layer (MySQL / MariaDB)"]
+        TStations["stations (Katalog & Metadaten)"]
+        TUsers["users (Anonyme Hörer-Sessions)"]
+        TEvents["listen_events (Live Pings & Hördauern)"]
+        TArchive["archived_stats (Verdichtete Trend-Historie)"]
     end
 
-    subgraph External ["Provider Layer"]
-        RadioAPI["Radio Station API"]
-        Streams["Livestream Sources"]
-    end
-
-    PlayerUI -->|Requests Stream| StreamServer
-    StreamServer -->|Fetches From| RadioAPI
-    RadioAPI -->|Provides Links| Streams
-    Streams -->|Audio Data| Buffer
-    Buffer -->|Output| Controls
-    Controls -->|Directs| Visualizer
-    Visualizer -->|Renders feedback| PlayerUI
+    SW -->|Offline Cache & Quick Reload| Router
+    Router --> RadioPage
+    Router --> GenresPage
+    Router --> StatsPage
+    Router --> AdminPage
     
-    StreamServer -->|Updates| Metadata
-    Metadata -->|Display Info| PlayerUI
+    RadioPage <-->|Top 6 Sync & Re-order| UserStore
+    GenresPage -->|Add to Top 6| UserStore
+    StatsPage -->|1-Click Top 5 Transfer| UserStore
 
-    StreamServer -->|Logs Event| Tracker
-    Tracker -->|Processes| Report
-    Report -->|Optimizes| StreamServer
+    RadioPage -->|Play Audio| PlayerBar
+    GenresPage -->|Preview Play| PlayerBar
+    StatsPage -->|Recommendation Play| PlayerBar
+
+    PlayerBar -->|Periodischer Event-Ping| PingAPI
+    PlayerBar -->|Fetch Now-Playing| MetaAPI
+    GenresPage -->|Senderliste laden| StationAPI
+    StatsPage -->|Analytics & Empfehlungen abrufen| StatsAPI
+    AdminPage -->|Login mit Brute-Force-Schutz| AuthAPI
+    AdminPage -->|CRUD & Status| StationAPI
+    AdminPage -->|Echtzeit-Hörer abfragen| AdminStats
+
+    PingAPI --> DBDriver
+    StationAPI --> DBDriver
+    StatsAPI --> DBDriver
+    AdminStats --> DBDriver
+    AuthAPI --> DBDriver
+    Maintenance --> DBDriver
+
+    DBDriver --> TStations
+    DBDriver --> TUsers
+    DBDriver --> TEvents
+    DBDriver --> TArchive
+    Maintenance -->|Archive > 6 Monate & OPTIMIZE| TArchive
 
 [DESCRIPTION]
-### Milo Central Streaming Architecture
-Die Milo Radio App basiert auf einer **Event-Driven Streaming-Architektur** mit integrierter **Analyse-Schnittstelle**.
+### Milo Radio – Fullstack PWA- & Streaming-Architektur
+Milo Radio kombiniert eine performante, clientseitige Single Page Application (SPA) mit einem leichtgewichtigen, hochgradig optimierten PHP-8-REST-Backend und relationaler MySQL/MariaDB-Persistenz.
 
-**Architektur-Highlights:**
-- **Signal Abstraction:** Die Audio-Logik ist vom User Interface entkoppelt, was eine unterbrechungsfreie Wiedrebgabe garantiert.
-- **Analytics Integration:** Ein dediziertes Monitoring-System (In-App Analysis) trackt Stream-Performance und Nutzerinteraktionen, um die Verbindungsstabilität zu optimieren.
-- **Provider Agnostic:** Durch die Zwischenschicht des "Stream Servers" können verschiedene Radio-Provider nahtlos angebunden werden.
-- **Visual Signal Processing:** Eine dedizierte Pipeline verarbeitet Audiodaten für visuelle Effekte, getrennt vom eigentlichen Audio-Thread.
+**Technische Kernaspekte:**
+- **PWA & Network-First Caching:** Der Service Worker (`sw.js`) erzwingt eine strikte Network-First-Strategie für HTML, Skripte und Versionierungs-Header mit automatischer Neuinitialisierung bei Updates (`controllerchange`). Dadurch bleibt die App offlinefähig und garantiert gleichzeitig unterbrechungsfreie Updates auf Smartphones.
+- **Modulare ES6-SPA & Gestensteuerung:** Dynamisches View-Routing ohne Page-Reloads. Native Touch- und Swipe-Gesten ermöglichen intuitives Wechseln der Ansichten inklusive 10 % Randschutz zur Vermeidung von Konflikten mit nativen Smartphone-Gesten.
+- **Globale Sticky-Bottom-Player-Bar:** Entkoppelt von Seitenwechseln bleibt die Audiowiedergabe stets aktiv. Über den Backend-Metadaten-Proxy (`metadata.php`) werden ICY-Stream-Titeldaten in Echtzeit abgefragt und mit Cover-Artworks und animierter Soundwave visualisiert.
+- **Intelligentes Favoriten-Handling (`userStationService.js`):** Clientseitige Verwaltung im `localStorage` mit Top-6-Begrenzung und automatischem FIFO-Verdrängen älterer Sender. Beim Abspielen rückt der aktive Sender nach dem MRU-Prinzip (Most Recently Used) auf Platz #1 vor (inkl. sanftem Auto-Scroll). Ein moderner 2-Klick-Bestätigungsdialog im dezenten Slate-Look verhindert versehentliches Löschen.
+- **Deep Analytics & Personalisierte Empfehlungen (Chart.js):** Detaillierte Auswertungen des individuellen Hörverhaltens über Liniendiagramme, Top-5-Balken und Genre-Doughnut. Die Recommendation-Engine schlägt passende neue Sender basierend auf den Lieblingsgenres vor; mit der **1-Klick-Playlist-Übernahme** können die Top-5-Stationen direkt als aktive Favoritenliste übernommen werden.
+- **Admin-Sicherheit & Automatisierte Wartung:** Der Administrationsbereich ist durch PIN-Authentifizierung geschützt, abgesichert durch eine künstliche 1,5s Verzögerung sowie einen 5-Minuten-Lockout nach 5 Fehleingaben. Das Wartungsskript `maintenance.php` komprimiert Hörer-Events älter als 6 Monate in die Tabelle `archived_stats` und führt ein `OPTIMIZE TABLE` durch.

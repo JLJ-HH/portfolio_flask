@@ -5,6 +5,17 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.3] - 2026-09-06
+
+### Geändert (Changed)
+- **Showcase- & Dokumentationsabgleich (Milo Radio PWA)**:
+  - Vollständige Aktualisierung der Präsentation, Modals und Architektur auf Basis der Releases (v1.0.0 bis v1.5.7) aus dem Repository `milo-radio`.
+  - **Technologie-Stack Korrektur:** Umstellung der Dokumentation von PostgreSQL auf die tatsächliche Produktionsumgebung **PHP 8 RESTful API** mit **MySQL / MariaDB (PDO)** in [README.md](file:///c:/github/portfolio_flask/README.md), [projects.json](file:///c:/github/portfolio_flask/projects.json) und [radio_info.txt](file:///c:/github/portfolio_flask/static/content/radio_info.txt).
+  - **Feature-Erweiterung im Info-Modal & README:** Integration der neuen Kernfunktionen (Deep Analytics mit [Chart.js](https://www.chartjs.org/), personalisierte Empfehlungen "Empfehlungen für dich", 1-Klick-Übernahme der Top 5 in die Playlist mit Toast-Feedback, Top-6-MRU/FIFO-Favoritenverwaltung, 2-Klick-Löschschutz im Slate-Look und globale Sticky-Bottom-Player-Bar).
+  - **Vollständige Neugestaltung des Strukturplans ([radio_app_structure.mmd](file:///c:/github/portfolio_flask/static/content/radio_app_structure.mmd)):** Ablösung des generischen Dummy-Diagramms durch ein detailliertes Mermaid-Flowchart der ES6-SPA-Architektur (Pages, Services, PWA Service Worker `sw.js` mit Network-First-Strategie) und des PHP-8-Backends inkl. Wartungs- und Archivierungs-Cronjob (`maintenance.php`).
+
+---
+
 ## [1.2.2] - 2026-09-06
 
 ### Geändert (Changed)
