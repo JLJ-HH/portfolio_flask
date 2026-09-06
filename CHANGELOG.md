@@ -12,6 +12,7 @@ und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lan
 ### Hinzugefügt (Added)
 - **Agent Guidelines & Workflow-Vorgabe (`AGENTS.md`)**:
   - Etablierung verbindlicher Entwicklungsrichtlinien für Code-Änderungen (Planung, schrittweise Umsetzung, Verifikation mit Commit-Sperre sowie standardisierte Dokumentation & Push).
+  - Verbindlicher **Changelog- & Kontext-Check** in Phase 1 (Planung) zur Vermeidung von Halluzinationen, Déjà-vus und redundanter Doppelarbeit.
 
 ### Entfernt (Removed)
 - **Redundante `GEMINI.md`**:

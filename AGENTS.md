@@ -5,6 +5,7 @@
 Für sämtliche Code-Änderungen in diesem Projekt gilt zwingend folgender 4-stufiger Workflow:
 
 ### 1. Planung
+- **Changelog- & Kontext-Check**: Vor jeder Recherche und Planung MUSS zwingend die `CHANGELOG.md` sowie der aktuelle Codebestand geprüft werden, um den exakten Entwicklungsstand zu kennen, Doppelarbeit/Déjà-vus zu verhindern und keine bereits gelösten Probleme oder überholten Ansätze zu wiederholen.
 - Erstelle vor größeren Änderungen immer einen kurzen Implementierungsplan.
 - Kläre Abhängigkeiten, betroffene Dateien und das Vorgehen vor der eigentlichen Umsetzung.
 
