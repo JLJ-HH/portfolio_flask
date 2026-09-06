@@ -10,8 +10,12 @@ und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lan
 ## [1.2.1] - 2026-09-06
 
 ### Hinzugefügt (Added)
-- **Agent Guidelines & Workflow-Vorgabe (`AGENTS.md` / `GEMINI.md`)**:
+- **Agent Guidelines & Workflow-Vorgabe (`AGENTS.md`)**:
   - Etablierung verbindlicher Entwicklungsrichtlinien für Code-Änderungen (Planung, schrittweise Umsetzung, Verifikation mit Commit-Sperre sowie standardisierte Dokumentation & Push).
+
+### Entfernt (Removed)
+- **Redundante `GEMINI.md`**:
+  - Bereinigung redundanter Regel-Dateien zur Vermeidung von Token-Doppelung und Inkonsistenzen zugunsten von `AGENTS.md` als Single Source of Truth.
 
 ---
 
