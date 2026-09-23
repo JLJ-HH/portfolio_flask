@@ -5,6 +5,20 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.5] - 2026-09-23
+
+### Geändert (Changed)
+- **Positionierung & „Über mich“-Profil geschärft ([about_me.md](file:///c:/github/portfolio_flask/static/content/about_me.md))**:
+  - Neuausrichtung des Profils: Schwerpunkt auf autonome **Multi-Agenten-Systeme**, **KI-Integration** und **automatisierte Workflows** (CrewAI, lokale LLMs via Ollama, n8n-Pipelines, Serper API, Playwright und deterministische Quality-Gates mit Self-Healing-Loops).
+  - Umwandlung des Quereinstiegs: Der berufliche Hintergrund als Koch fungiert als prägender strategischer Vorteil (Küchenbrigade-Struktur, *Mise en Place*, Präzision und Arbeitsteilung als Spiegelbild moderner Agenten- und Softwarearchitekturen).
+  - Formale Verankerung: Die IHK-Umschulung zum Fachinformatiker für Anwendungsentwicklung bildet das solide Fundament, tritt jedoch hinter die technologische Spezialisierung.
+- **Startseiten-Teaser geschärft ([home.html](file:///c:/github/portfolio_flask/templates/home.html))**:
+  - Begrüßungstext im Hero-Bereich harmonisiert („Entwickler aus Hamburg mit Fokus auf KI-Integration und automatisierte Workflows“).
+- **Typografie & Listen-Styling ([about.css](file:///c:/github/portfolio_flask/static/css/about.css))**:
+  - CSS-Regeln für `.about-text-minimal ul` und `li` ergänzt für sauberes Layout der Kern-Stack-Aufzählungen.
+
+---
+
 ## [1.2.4] - 2026-09-23
 
 ### Geändert (Changed)

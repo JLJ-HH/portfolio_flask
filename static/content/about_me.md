@@ -1,20 +1,16 @@
-Ich bin José Luis Juárez, angehender **Anwendungsentwickler** mit einem Fokus auf moderne **Webtechnologien**. Kurz gesagt: Ich bin fasziniert von den vielen Möglichkeiten, die dieser Beruf mit sich bringt. Da für mich **Frontend** und **Backend** Teile eines großen Ganzen sind, ist es nur selbstverständlich, dass ich **Fullstack-Entwicklung** lernen möchte.
+Ich entwickle moderne Softwarelösungen mit einem klaren Fokus auf **autonome Multi-Agenten-Systeme**, **KI-Integration** und **automatisierte Workflows**.
 
-Da ich in meinem „vorherigen Leben“ **Koch** war, ist mir die Kontrolle über das gesamte Gericht am liebsten. Dennoch ist **Arbeitsteilung** für mich kein Fremdwort – ganz wie in einer guten Küchenbrigade. Ich arbeite fokussiert und schätze den gezielten Austausch im **Team**, vertiefe mich aber auch gerne eigenständig in meine Aufgaben.
+Für mich bedeutet zeitgemäße Entwicklung, künstliche Intelligenz nicht nur als Chatbot zu nutzen, sondern sie als tragende Säule in reale Prozesse einzubinden: Von der Orchestrierung komplexer Agenten-Teams mit **CrewAI** und lokalen Open-Source-LLMs (**Ollama**) über deterministische **Quality-Gates mit Self-Healing-Loops** bis hin zur nahtlosen Workflow-Automatisierung mit **n8n**, APIs (z. B. **Serper**) und Headless-Rendering via **Playwright**.
 
-Während meiner Ausbildung zum **Fachinformatiker** habe ich fundiertes Wissen über **Softwareentwicklung** erworben und mich privat mit den neuesten **Tools** beschäftigt. Dadurch war es mir möglich, bereits erste praktische Erfahrungen zu sammeln und umzusetzen.
+Mein Hintergrund als **Koch** ist dabei mein größter strategischer Vorteil: Genau wie eine eingespielte Küchenbrigade klare Posten, perfekte Vorbereitung (*Mise en Place*) und höchste Präzision unter Druck verlangt, dirigiere ich heute Software-Komponenten und Agenten-Netzwerke, bei denen jedes Rädchen ineinandergreift.
 
-Im Laufe der Umschulung habe ich Kenntnisse in verschiedenen Sprachen und Methoden aufgebaut:
+Das solide softwaretechnische und methodische Fundament vertiefe ich im Rahmen meiner Umschulung zum **Fachinformatiker für Anwendungsentwicklung**.
 
-- **Java**: Zertifikat erfolgreich erworben.
-- **Scrum Master**: Zertifikat vorhanden.
-- **Python**: Kenntnisse vorhanden, Zertifikat steht noch an.
-- **PHP**: Praktisch vertieft durch eine PHP-Fallstudie, in der ich die hier gezeigte **Online-Bibliothek** entwickelt habe.
-- **AWS**: Kennengelernt, ein Zertifikat ist für die Zukunft geplant.
-- **WordPress**: Kenntnisse erworben und praktische Erfahrungen gesammelt.
-- **Einführung in Künstliche Intelligenz**: Derzeit in Weiterbildung.
-- **KI & Automatisierung**: Erfahrung mit **Ollama** und der Entwicklung automatisierter Multi-Agenten-Systeme mittels **n8n** zur Optimierung von Code- und Testabläufen.
+**Mein Kern-Stack & Spezialisierung:**
 
-Der bewusste Einsatz dieser modernen Assistenten gehört für mich zur zeitgemäßen Softwareentwicklung, um Arbeitsabläufe gezielt zu beschleunigen.
+- **KI & Multi-Agenten:** CrewAI (Multi-Agent Workflows, Pydantic Schemas, Self-Correction Loops), lokale LLMs via Ollama (`qwen2.5-coder`, `gemma4`), Prompt Engineering & RAG-Architekturen
+- **Workflow-Automatisierung:** n8n Pipelines, Serper API Integration, Web-Scraping, Playwright PDF-Automatisierung
+- **Backend & APIs:** Python, PHP 8 (OOP, REST-APIs, PDO/MySQL, SQLite), Java (Zertifiziert)
+- **Agilität & Methoden:** Zertifizierter Scrum Master (PSM I), Docker-Grundlagen, strukturierte Clean-Code-Entwicklung
 
-Besuchen Sie gerne meine **Projekte**, um einen besseren Einblick in meine Arbeit zu bekommen.
+Werfen Sie gerne einen Blick in meine **Projekte**, um zu sehen, wie ich KI und Automatisierung in der Praxis zum Leben erwecke.
