@@ -78,9 +78,11 @@ Eine moderne, installierbare Progressive Web App (PWA) für Audio-Streaming mit 
 
 - **Fullstack- & PWA-Architektur:** Modulares Vanilla-JS-Frontend (ES6-Module) mit SPA-Routing, Touch-/Swipe-Gestensteuerung und Service Worker (`sw.js` mit Network-First-Strategie) für sofortige Smartphone-Updates und Offline-Fähigkeit.
 - **Globale Sticky-Player-Bar:** Dauerhaft sichtbare Player-Leiste am unteren Bildschirmrand mit Glassmorphismus, animiertem Soundwave-Badge und Live-Now-Playing-Metadaten (ICY-Stream-Parsing).
+- **Podcast-Integration & On-Demand Audio:** Intelligente Unterscheidung zwischen Live-Streams und Episoden, echtes Pause & Resume mit Zeiterhalt (kein Zurücksetzen auf 0:00), dynamische Scrubber-Timeline mit Fortschrittsanzeige (`Aktuelle Zeit / Gesamtlänge`), 15s Quick-Skip (`-15s` / `+15s`), ausklappbare Episodenübersicht ("Weitere Folgen") in der Genre-Ansicht und serverseitiger RSS-Feed-Resolver (`podcast.php`) mit 15-Minuten Cache.
+- **Weltweite Online-Radiosendersuche (> 40.000 Sender) & Smartes Admin-Panel:** Integrierte Radio-Browser-Schnittstelle (`radio_search.php` mit 10-Minuten Cache) im Admin-Tab-System. Live-Sendersuche im globalen Verzeichnis mit Treffer-Pool inkl. Senderlogo, Genre, Bitrate und Herkunftsland zur zielsicheren Unterscheidung gleichnamiger Stationen; 1-Klick Auto-Fill ins Formular sowie 1-Klick Podcast-Auto-Import für RSS-/Podigee-Links.
 - **Intelligentes Favoriten-Management:** Lokale Top-6-Senderliste mit automatischem FIFO-Verdrängen älterer Sender und MRU-Sortierung (Wiedergabe rückt Sender auf Platz #1 vor inkl. sanftem Auto-Scroll) sowie 2-Klick-Löschschutz im minimalistischen Slate-Look.
 - **Deep Analytics & Personalisierte Empfehlungen:** Interaktives Hörer-Dashboard via [Chart.js](https://www.chartjs.org/) (Hörverlauf-Linie, Top-5-Balken, Genre-Doughnut), dynamische Musikvorschläge ("Empfehlungen für dich") und 1-Klick-Übernahme der Top 5 in die aktive Playlist.
-- **Abgesichertes Backend (PHP 8 & MySQL):** RESTful APIs mit PDO-Datenbankanbindung, PIN-gesichertes Admin-Panel mit Anti-Brute-Force-Lockout (1,5s Verzögerung + 5-Minuten-Sperre) und automatisierter Wartungs-Cronjob (`maintenance.php`) für 6-Monats-Archivierung.
+- **Abgesichertes Backend (PHP 8 & MySQL):** RESTful APIs mit PDO-Datenbankanbindung, PIN-gesichertes Admin-Panel mit Anti-Brute-Force-Lockout (1,5s Verzögerung + 5-Minuten-Sperre), signierte HMAC-SHA256 Cookies (`milo_admin_token`) für zuverlässige Cluster-Sessions und automatisierter Wartungs-Cronjob (`maintenance.php`) für 6-Monats-Archivierung.
 
 ---
 

@@ -5,6 +5,17 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.4] - 2026-09-23
+
+### Geändert (Changed)
+- **Showcase- & Dokumentationsabgleich (Milo Radio v1.6.0 & v1.7.0)**:
+  - **Podcast-Integration & On-Demand Audio:** Vollständige Dokumentation der Podcast-Features in [radio_info.txt](file:///c:/github/portfolio_flask/static/content/radio_info.txt), [radio_app_structure.mmd](file:///c:/github/portfolio_flask/static/content/radio_app_structure.mmd) und [README.md](file:///c:/github/portfolio_flask/README.md). Beinhaltet intelligentes Audio-Handling mit echtem Pause/Resume (Zeiterhalt ohne 0:00-Reset), interaktiver Scrubber-Timeline, 15-Sekunden Quick-Skip (`-15s` / `+15s`), Episodenauswahl ("Weitere Folgen") in der Genre-Ansicht und serverseitigem Feed-Resolver (`podcast.php`) mit 15-Minuten Cache.
+  - **Weltweite Radiosender-Suchmaschine (> 40.000 Sender) & Smartes Admin-Panel:** Dokumentation der integrierten Radio-Browser-Schnittstelle (`radio_search.php` mit 10-Minuten Cache) im Admin-Tab-System. Ermöglicht die blitzschnelle Suche mit Treffer-Pool inklusive Landesanzeige (Country-Badge) zur zielsicheren Unterscheidung gleichnamiger Stationen, 1-Klick Auto-Fill ins Formular und 1-Klick Podcast-Auto-Import.
+  - **Erweiterung des Strukturplans ([radio_app_structure.mmd](file:///c:/github/portfolio_flask/static/content/radio_app_structure.mmd)):** Ergänzung der externen Datenquellen (Radio-Browser API, Podcast RSS/XML Feeds), der Backend-Endpunkte (`radio_search.php`, `podcast.php`, `manage_station.php` mit HMAC-Cookies) und Frontend-Module (`podcastService.js`, Scrubber/Timeline) sowie detaillierte technische Beschreibung im `[DESCRIPTION]`-Block.
+  - **Technologie-Stack Aktualisierung:** Aufnahme der Radio-Browser API und des Podcast RSS Feed-Resolvers in [projects.json](file:///c:/github/portfolio_flask/projects.json).
+
+---
+
 ## [1.2.3] - 2026-09-06
 
 ### Geändert (Changed)

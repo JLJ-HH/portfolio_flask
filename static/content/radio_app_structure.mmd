@@ -2,23 +2,32 @@ graph TD
     subgraph Client ["Client Layer (PWA & Modular ES6 SPA)"]
         SW["Service Worker (sw.js - Network-First)"]
         Router["SPA Router & Swipe Navigation"]
-        PlayerBar["Sticky-Bottom-Player (Glassmorphism & ICY Audio)"]
+        PlayerBar["Sticky-Bottom-Player (Glassmorphism, Scrubber-Timeline & 15s Skip)"]
         RadioPage["Radio View (Top 6 MRU & Slate Delete)"]
-        GenresPage["Genres View (Accordion & Instant Play)"]
+        GenresPage["Genres View (Accordion, Instant Play & Podcast-Episoden)"]
         StatsPage["Deep Analytics & Recommendations (Chart.js)"]
-        AdminPage["Admin View (CRUD & Live Listeners)"]
+        AdminPage["Admin View (Tabs: Radio-Suche, Podcast-Import, CRUD)"]
         UserStore["userStationService (LocalStorage MRU/FIFO)"]
+        PodcastStore["podcastService (Episoden-Parser & On-Demand Audio)"]
     end
 
     subgraph Backend ["Backend API Layer (PHP 8 RESTful)"]
-        AuthAPI["auth.php (PIN Lockout & Sessions)"]
+        AuthAPI["auth.php (PIN Lockout & HMAC-Cookie)"]
         StationAPI["get_stations.php (Sender-Katalog)"]
+        ManageStationAPI["manage_station.php (CRUD & MySQL Persistenz)"]
+        RadioSearchAPI["radio_search.php (Radio-Browser Query & 10m Cache)"]
+        PodcastAPI["podcast.php (RSS/XML Feed Parser & 15m Cache)"]
         MetaAPI["metadata.php (Live ICY Stream Parser)"]
         PingAPI["ping.php (Usage Analytics Tracker)"]
         StatsAPI["get_stats.php (Aggregate & Trends)"]
         AdminStats["get_admin_stats.php (Live Monitor)"]
         Maintenance["maintenance.php (Cronjob Archivierung & OPTIMIZE)"]
         DBDriver["db.php (PDO Connection & Env Switch)"]
+    end
+
+    subgraph External ["External Services & Data Sources"]
+        RadioBrowser["Radio-Browser API (> 40.000 Sender weltweit)"]
+        PodcastFeeds["Podcast RSS / XML Feeds (Podigee, iTunes, etc.)"]
     end
 
     subgraph Storage ["Persistence Layer (MySQL / MariaDB)"]
@@ -38,20 +47,29 @@ graph TD
     GenresPage -->|Add to Top 6| UserStore
     StatsPage -->|1-Click Top 5 Transfer| UserStore
 
-    RadioPage -->|Play Audio| PlayerBar
+    RadioPage -->|Play Live Audio| PlayerBar
     GenresPage -->|Preview Play| PlayerBar
+    GenresPage -->|Episoden abfragen| PodcastStore
     StatsPage -->|Recommendation Play| PlayerBar
+    PlayerBar <-->|Audio-Lebenszyklus & Zeiterhalt| PodcastStore
 
     PlayerBar -->|Periodischer Event-Ping| PingAPI
     PlayerBar -->|Fetch Now-Playing| MetaAPI
     GenresPage -->|Senderliste laden| StationAPI
     StatsPage -->|Analytics & Empfehlungen abrufen| StatsAPI
     AdminPage -->|Login mit Brute-Force-Schutz| AuthAPI
-    AdminPage -->|CRUD & Status| StationAPI
+    AdminPage -->|Sender verwalten / CRUD| ManageStationAPI
+    AdminPage -->|Live-Sendersuche| RadioSearchAPI
+    AdminPage -->|Podcast-Metadaten Auto-Import| PodcastAPI
     AdminPage -->|Echtzeit-Hörer abfragen| AdminStats
+
+    PodcastStore -->|Auflösen der Audio-URL| PodcastAPI
+    RadioSearchAPI -->|Echtzeit-Verzeichnisabfrage| RadioBrowser
+    PodcastAPI -->|Feed abrufen & parsen| PodcastFeeds
 
     PingAPI --> DBDriver
     StationAPI --> DBDriver
+    ManageStationAPI --> DBDriver
     StatsAPI --> DBDriver
     AdminStats --> DBDriver
     AuthAPI --> DBDriver
@@ -64,13 +82,40 @@ graph TD
     Maintenance -->|Archive > 6 Monate & OPTIMIZE| TArchive
 
 [DESCRIPTION]
-### Milo Radio – Fullstack PWA- & Streaming-Architektur
-Milo Radio kombiniert eine performante, clientseitige Single Page Application (SPA) mit einem leichtgewichtigen, hochgradig optimierten PHP-8-REST-Backend und relationaler MySQL/MariaDB-Persistenz.
+### Milo Radio – Fullstack PWA-, Streaming- & Podcast-Architektur
+Milo Radio kombiniert eine performante, clientseitige Single Page Application (SPA) mit einem leichtgewichtigen, hochgradig optimierten PHP-8-REST-Backend, relationaler MySQL/MariaDB-Persistenz und Schnittstellen zu globalen Audio-Verzeichnissen.
 
 **Technische Kernaspekte:**
-- **PWA & Network-First Caching:** Der Service Worker (`sw.js`) erzwingt eine strikte Network-First-Strategie für HTML, Skripte und Versionierungs-Header mit automatischer Neuinitialisierung bei Updates (`controllerchange`). Dadurch bleibt die App offlinefähig und garantiert gleichzeitig unterbrechungsfreie Updates auf Smartphones.
-- **Modulare ES6-SPA & Gestensteuerung:** Dynamisches View-Routing ohne Page-Reloads. Native Touch- und Swipe-Gesten ermöglichen intuitives Wechseln der Ansichten inklusive 10 % Randschutz zur Vermeidung von Konflikten mit nativen Smartphone-Gesten.
-- **Globale Sticky-Bottom-Player-Bar:** Entkoppelt von Seitenwechseln bleibt die Audiowiedergabe stets aktiv. Über den Backend-Metadaten-Proxy (`metadata.php`) werden ICY-Stream-Titeldaten in Echtzeit abgefragt und mit Cover-Artworks und animierter Soundwave visualisiert.
-- **Intelligentes Favoriten-Handling (`userStationService.js`):** Clientseitige Verwaltung im `localStorage` mit Top-6-Begrenzung und automatischem FIFO-Verdrängen älterer Sender. Beim Abspielen rückt der aktive Sender nach dem MRU-Prinzip (Most Recently Used) auf Platz #1 vor (inkl. sanftem Auto-Scroll). Ein moderner 2-Klick-Bestätigungsdialog im dezenten Slate-Look verhindert versehentliches Löschen.
-- **Deep Analytics & Personalisierte Empfehlungen (Chart.js):** Detaillierte Auswertungen des individuellen Hörverhaltens über Liniendiagramme, Top-5-Balken und Genre-Doughnut. Die Recommendation-Engine schlägt passende neue Sender basierend auf den Lieblingsgenres vor; mit der **1-Klick-Playlist-Übernahme** können die Top-5-Stationen direkt als aktive Favoritenliste übernommen werden.
-- **Admin-Sicherheit & Automatisierte Wartung:** Der Administrationsbereich ist durch PIN-Authentifizierung geschützt, abgesichert durch eine künstliche 1,5s Verzögerung sowie einen 5-Minuten-Lockout nach 5 Fehleingaben. Das Wartungsskript `maintenance.php` komprimiert Hörer-Events älter als 6 Monate in die Tabelle `archived_stats` und führt ein `OPTIMIZE TABLE` durch.
+
+- **Podcast-Integration & On-Demand Audio:**
+  - *Intelligente Stream-Erkennung:* Die App unterscheidet automatisch zwischen endlosen Live-Streams und zeitbegrenzten Podcast-Episoden (`podcastService.js`).
+  - *Echtes Pause & Resume mit Zeiterhalt:* Beim Pausieren von Podcasts bleibt die aktuelle Spielzeit (`currentTime`) im HTML5-Audio-Element exakt erhalten. Beim Fortsetzen spielt die Episode an genau derselben Stelle weiter (kein versehentliches Zurücksetzen auf 0:00).
+  - *Interaktive Scrubber-Timeline:* Bei Podcast-Wiedergabe schaltet die Player-Bar dynamisch eine sekundengenaue Zeitleiste (`Aktuelle Zeit / Gesamtlänge`) frei, über die frei vor- und zurückgesprungen werden kann.
+  - *15-Sekunden Quick-Skip:* Tasten für `-15s` und `+15s` ermöglichen schnelles Überspringen oder Wiederholen von Passagen.
+  - *Episodenauswahl in der Genre-Ansicht:* Podcast-Karten bieten neben dem Sofortstart der neuesten Episode den Button *"Weitere Folgen"*, der eine aufklappbare Liste der letzten Episoden samt Publikationsdatum, Laufzeit und Einzel-Play-Button anzeigt.
+  - *Server-seitiger RSS-Feed-Resolver (`podcast.php`):* Parst XML/RSS-Feeds mit Namespace-Unterstützung (`itunes:image`, `itunes:duration`, `enclosure`) und nutzt einen 15-Minuten Server-Cache zur Entlastung externer Hosts und für minimale Ladezeiten.
+
+- **Weltweite Online-Radiosendersuche (> 40.000 Sender) & Admin-Tab-System:**
+  - *Echtzeit-Verzeichnissuche (`radio_search.php`):* Ermöglicht im Admin-Panel das Durchsuchen des weltweiten Radio-Browser-Verzeichnisses mit über 40.000 Stationen in Sekundenbruchteilen (inkl. 10-Minuten Server-Cache).
+  - *Treffer-Pool mit Länderunterscheidung:* Suchergebnisse zeigen neben Name, Genre, Bitrate und Favicon/Logo das **Herkunftsland (Country-Flag)** an. Dies ermöglicht es dem Administrator, bei Sendern mit identischen oder ähnlichen Namen (z. B. "Rock Antenne", "Sunshine Live", "1LIVE", "BBC") zielsicher den gewünschten Sender auszuwählen.
+  - *1-Klick Auto-Fill:* Ein Klick auf *"Übernehmen"* füllt alle Formularfelder (Name, Audio-Stream-URL, Genre, Logo) automatisch aus.
+  - *1-Klick Podcast-Auto-Import:* Importiert beliebige RSS-/Podigee-Links und extrahiert Metadaten und Stream-URL vollautomatisch.
+  - *Übersichtliches Tab-System:* Klare Trennung zwischen *"Radiosender suchen"* und *"Podcast importieren"* mit schlichter Bootstrap-Icons-Typografie.
+
+- **PWA & Network-First Caching:**
+  - Der Service Worker (`sw.js`) erzwingt eine strikte Network-First-Strategie für HTML, Skripte und Versionierungs-Header mit automatischer Neuinitialisierung bei Updates (`controllerchange`). Dadurch bleibt die App offlinefähig und garantiert gleichzeitig sofortige Updates auf Smartphones.
+
+- **Modulare ES6-SPA & Gestensteuerung:**
+  - Dynamisches View-Routing ohne Page-Reloads. Native Touch- und Swipe-Gesten ermöglichen intuitives Wechseln der Ansichten inklusive 10 % Randschutz zur Vermeidung von Konflikten mit nativen Smartphone-Gesten.
+
+- **Globale Sticky-Bottom-Player-Bar:**
+  - Entkoppelt von Seitenwechseln bleibt die Audiowiedergabe stets aktiv. Über den Backend-Metadaten-Proxy (`metadata.php`) werden ICY-Stream-Titeldaten in Echtzeit abgefragt und mit Cover-Artworks und animierter Soundwave visualisiert.
+
+- **Intelligentes Favoriten-Handling (`userStationService.js`):**
+  - Clientseitige Verwaltung im `localStorage` mit Top-6-Begrenzung und automatischem FIFO-Verdrängen älterer Sender. Beim Abspielen rückt der aktive Sender nach dem MRU-Prinzip (Most Recently Used) auf Platz #1 vor (inkl. sanftem Auto-Scroll). Ein moderner 2-Klick-Bestätigungsdialog im dezenten Slate-Look verhindert versehentliches Löschen.
+
+- **Deep Analytics & Personalisierte Empfehlungen (Chart.js):**
+  - Detaillierte Auswertungen des individuellen Hörverhaltens über Liniendiagramme, Top-5-Balken und Genre-Doughnut. Die Recommendation-Engine schlägt passende neue Sender basierend auf den Lieblingsgenres vor; mit der **1-Klick-Playlist-Übernahme** können die Top-5-Stationen direkt als aktive Favoritenliste übernommen werden.
+
+- **Admin-Sicherheit & Automatisierte Wartung:**
+  - PIN-Authentifizierung mit künstlicher 1,5s Verzögerung sowie 5-Minuten-Lockout nach 5 Fehleingaben. Sichere, signierte HMAC-SHA256 Cookies (`milo_admin_token`) garantieren zuverlässige Sessions auch auf Shared-Hosting FastCGI-Clustern. Das Wartungsskript `maintenance.php` komprimiert Hörer-Events älter als 6 Monate in die Tabelle `archived_stats` und führt ein `OPTIMIZE TABLE` durch.
