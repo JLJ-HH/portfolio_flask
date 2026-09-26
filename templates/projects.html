@@ -58,10 +58,28 @@
     <button type="button" id="next">&gt;</button>
 </div>
 
-<!-- Global Mermaid Zoom Modal -->
-<div id="mermaid-modal" onclick="closeGlobalZoom()">
-    <span class="close-modal">&times;</span>
-    <div id="modal-content"></div>
+<!-- Global Mermaid Zoom Modal with Interactive Pan & Zoom Controls -->
+<div id="mermaid-modal">
+    <div class="zoom-controls-panel" onclick="event.stopPropagation()">
+        <button type="button" class="zoom-btn" onclick="zoomInDiagram()" title="Vergrößern (Mausrad vorwärts)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button type="button" class="zoom-btn" onclick="zoomOutDiagram()" title="Verkleinern (Mausrad rückwärts)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button type="button" class="zoom-btn reset-btn" onclick="resetDiagramZoom()" title="Originalgröße / Zentrieren">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span style="margin-left: 5px; font-size: 0.85rem; font-weight: 500;">Reset</span>
+        </button>
+        <span class="zoom-badge" id="zoom-badge">100%</span>
+        <button type="button" class="zoom-btn close-modal-btn" onclick="closeGlobalZoom()" title="Schließen (Esc)">&times;</button>
+    </div>
+    <div class="zoom-instruction-banner">
+        <span>💡 <strong>Interaktive Ansicht:</strong> Mausrad zum Zoomen &bull; Ziehen zum Verschieben &bull; Esc zum Schließen</span>
+    </div>
+    <div id="modal-viewport">
+        <div id="modal-content"></div>
+    </div>
 </div>
 {% endblock %}
 
@@ -109,6 +127,43 @@
         }
     };
 
+    // --- Interactive Pan & Zoom State ---
+    let currentZoom = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startPanX = 0;
+    let startPanY = 0;
+    let didPan = false;
+
+    function applyTransform() {
+        const content = document.getElementById('modal-content');
+        const badge = document.getElementById('zoom-badge');
+        if (content) {
+            content.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+        }
+        if (badge) {
+            badge.textContent = Math.round(currentZoom * 100) + '%';
+        }
+    }
+
+    window.zoomInDiagram = () => {
+        currentZoom = Math.min(currentZoom * 1.25, 5.0);
+        applyTransform();
+    };
+
+    window.zoomOutDiagram = () => {
+        currentZoom = Math.max(currentZoom / 1.25, 0.4);
+        applyTransform();
+    };
+
+    window.resetDiagramZoom = () => {
+        currentZoom = 1.0;
+        panX = 0;
+        panY = 0;
+        applyTransform();
+    };
+
     window.openGlobalZoom = (el) => {
         const target = el.querySelector('.mermaid-render-target');
         const modal = document.getElementById('mermaid-modal');
@@ -116,6 +171,13 @@
         
         if (target && modal && content) {
             content.innerHTML = target.innerHTML;
+
+            // Reset pan and zoom to clean 100% state
+            currentZoom = 1.0;
+            panX = 0;
+            panY = 0;
+            applyTransform();
+
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -128,14 +190,118 @@
             document.body.style.overflow = '';
         }
     };
+
+    // Keyboard navigation: Escape closes, +/- zooms, 0 resets
+    document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('mermaid-modal');
+        if (!modal || !modal.classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            closeGlobalZoom();
+        } else if (e.key === '+' || e.key === '=') {
+            zoomInDiagram();
+        } else if (e.key === '-' || e.key === '_') {
+            zoomOutDiagram();
+        } else if (e.key === '0') {
+            resetDiagramZoom();
+        }
+    });
+
+    // Viewport drag & wheel event bindings
+    const viewport = document.getElementById('modal-viewport');
+    if (viewport) {
+        viewport.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return;
+            isPanning = true;
+            didPan = false;
+            startPanX = e.clientX - panX;
+            startPanY = e.clientY - panY;
+            viewport.style.cursor = 'grabbing';
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isPanning) return;
+            const newPanX = e.clientX - startPanX;
+            const newPanY = e.clientY - startPanY;
+            if (Math.abs(newPanX - panX) > 3 || Math.abs(newPanY - panY) > 3) {
+                didPan = true;
+            }
+            panX = newPanX;
+            panY = newPanY;
+            applyTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            if (isPanning) {
+                isPanning = false;
+                if (viewport) viewport.style.cursor = 'grab';
+            }
+        });
+
+        viewport.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const factor = e.deltaY < 0 ? 1.15 : 0.87;
+            currentZoom = Math.min(Math.max(0.4, currentZoom * factor), 5.0);
+            applyTransform();
+        }, { passive: false });
+
+        // Touch support (1 finger pan, 2 fingers pinch)
+        let initialDistance = 0;
+        let initialZoom = 1.0;
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        viewport.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                isPanning = true;
+                touchStartX = e.touches[0].clientX - panX;
+                touchStartY = e.touches[0].clientY - panY;
+            } else if (e.touches.length === 2) {
+                isPanning = false;
+                initialDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                initialZoom = currentZoom;
+            }
+        }, { passive: true });
+
+        viewport.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1 && isPanning) {
+                panX = e.touches[0].clientX - touchStartX;
+                panY = e.touches[0].clientY - touchStartY;
+                applyTransform();
+            } else if (e.touches.length === 2 && initialDistance > 0) {
+                const currentDistance = Math.hypot(
+                    e.touches[0].clientX - e.touches[1].clientX,
+                    e.touches[0].clientY - e.touches[1].clientY
+                );
+                const ratio = currentDistance / initialDistance;
+                currentZoom = Math.min(Math.max(0.4, initialZoom * ratio), 5.0);
+                applyTransform();
+            }
+        }, { passive: true });
+
+        viewport.addEventListener('touchend', () => {
+            isPanning = false;
+            initialDistance = 0;
+        });
+
+        // Click outside on backdrop closes modal if user didn't drag
+        viewport.addEventListener('click', (e) => {
+            if (!didPan && (e.target === viewport || e.target === document.getElementById('mermaid-modal'))) {
+                closeGlobalZoom();
+            }
+            didPan = false;
+        });
+    }
 </script>
 <style>
     .mermaid-outer {
         background: rgba(255, 255, 255, 0.05);
         border-radius: 15px;
-        padding: 25px;
+        padding: 20px;
         margin: 15px 0;
-        min-height: 400px;
+        min-height: 380px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -143,11 +309,13 @@
         border: 1px solid rgba(255, 255, 255, 0.15);
         box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
         cursor: zoom-in;
-        transition: transform 0.3s ease, background 0.3s ease;
+        transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
         position: relative;
+        overflow: hidden;
     }
     .mermaid-outer:hover {
-        background: rgba(255, 255, 255, 0.08);
+        background: rgba(77, 150, 255, 0.08);
+        border-color: rgba(77, 150, 255, 0.4);
         transform: translateY(-2px);
     }
     
@@ -158,17 +326,97 @@
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: rgba(10, 10, 10, 0.98);
+        background: rgba(8, 12, 22, 0.96);
         backdrop-filter: blur(25px);
         z-index: 999999;
         display: none;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 40px;
-        cursor: zoom-out;
+        overflow: hidden;
+        user-select: none;
     }
     #mermaid-modal.active {
         display: flex;
+    }
+    
+    /* Interactive Floating Zoom Controls */
+    .zoom-controls-panel {
+        position: absolute;
+        top: 25px;
+        right: 35px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: rgba(18, 25, 42, 0.88);
+        border: 1px solid rgba(77, 150, 255, 0.35);
+        border-radius: 40px;
+        padding: 6px 14px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        z-index: 1000000;
+        backdrop-filter: blur(12px);
+    }
+    .zoom-btn {
+        background: transparent;
+        border: none;
+        color: #e0e8ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 10px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s, transform 0.15s;
+    }
+    .zoom-btn:hover {
+        background: rgba(77, 150, 255, 0.25);
+        color: #fff;
+        transform: scale(1.08);
+    }
+    .zoom-btn.close-modal-btn {
+        font-size: 26px;
+        line-height: 1;
+        padding: 4px 12px;
+        color: #ff6b6b;
+    }
+    .zoom-btn.close-modal-btn:hover {
+        background: rgba(255, 77, 77, 0.25);
+        color: #fff;
+    }
+    .zoom-badge {
+        font-family: 'Outfit', 'Segoe UI', monospace;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4d96ff;
+        padding: 3px 8px;
+        background: rgba(77, 150, 255, 0.12);
+        border-radius: 12px;
+        min-width: 48px;
+        text-align: center;
+    }
+    .zoom-instruction-banner {
+        position: absolute;
+        bottom: 25px;
+        background: rgba(18, 25, 42, 0.88);
+        border: 1px solid rgba(77, 150, 255, 0.25);
+        border-radius: 30px;
+        padding: 8px 22px;
+        color: #9cb3d8;
+        font-size: 0.82rem;
+        pointer-events: none;
+        z-index: 1000000;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    
+    #modal-viewport {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        cursor: grab;
+        position: relative;
     }
     #modal-content {
         width: 100%;
@@ -176,58 +424,67 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        transform-origin: center center;
+        will-change: transform;
+        transition: transform 0.05s ease-out;
+        pointer-events: auto;
     }
     #modal-content svg {
-        width: 95% !important;
-        height: 90% !important;
-        max-width: 100%;
-        max-height: 100%;
+        width: 90vw !important;
+        height: 80vh !important;
+        max-width: 95vw;
+        max-height: 85vh;
+        object-fit: contain;
         filter: drop-shadow(0 0 30px rgba(77, 150, 255, 0.4));
-    }
-    .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        font-size: 50px;
-        color: #fff;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.3s, color 0.3s;
-    }
-    .close-modal:hover {
-        opacity: 1;
-        color: #4d96ff;
     }
 
     .zoom-hint {
         position: absolute;
-        bottom: 15px;
-        right: 20px;
-        font-size: 0.75rem;
-        color: rgba(77, 150, 255, 0.5);
+        bottom: 12px;
+        right: 16px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #4d96ff;
+        background: rgba(10, 16, 30, 0.8);
+        border: 1px solid rgba(77, 150, 255, 0.3);
+        border-radius: 20px;
+        padding: 4px 12px;
         pointer-events: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+        transition: color 0.2s, background 0.2s;
+    }
+    .mermaid-outer:hover .zoom-hint {
+        background: rgba(77, 150, 255, 0.25);
+        color: #fff;
     }
 
     .mermaid-render-target {
         width: 100%;
+        min-height: 280px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     .mermaid-render-target svg {
-        max-width: 100%;
+        width: 100% !important;
+        max-height: 480px !important;
         height: auto !important;
         filter: drop-shadow(0 0 15px rgba(77, 150, 255, 0.25));
     }
 
     @media (max-width: 768px) {
-        #mermaid-modal {
-            padding: 20px;
+        .zoom-controls-panel {
+            top: 15px;
+            right: 15px;
+            padding: 4px 10px;
+            gap: 5px;
         }
-        .close-modal {
-            top: 10px;
-            right: 20px;
-            font-size: 40px;
+        .zoom-instruction-banner {
+            bottom: 15px;
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            max-width: 90%;
+            text-align: center;
         }
     }
     .rendering-msg { color: #888; font-style: italic; }

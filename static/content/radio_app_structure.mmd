@@ -1,87 +1,90 @@
-graph TD
+flowchart TD
     subgraph Client ["Client Layer (PWA & Modular ES6 SPA)"]
-        SW["Service Worker (sw.js - Network-First)"]
-        Router["SPA Router & Swipe Navigation"]
-        PlayerBar["Sticky-Bottom-Player (Glassmorphism, Scrubber-Timeline & 15s Skip)"]
-        RadioPage["Radio View (Top 6 MRU & Slate Delete)"]
-        GenresPage["Genres View (Accordion, Sub-Rubriken & Podcast-Episoden)"]
-        StatsPage["Deep Analytics & Recommendations (Chart.js)"]
-        AdminPage["Admin View (Tabs: Radio- & Podcast-Suche, Feed-Import, CRUD)"]
-        UserStore["userStationService (LocalStorage MRU/FIFO)"]
-        PodcastStore["podcastService (Episoden-Parser & On-Demand Audio)"]
+        direction TB
+        SW["Service Worker (sw.js)<br/>Network-First Caching & Offline-Sync"]
+        Router["SPA Router & Gestensteuerung<br/>10% Randschutz gegen Smartphone-Gesten"]
+
+        subgraph Views ["SPA Seiten-Module"]
+            RadioPage["Radio View<br/>Top-6 Favoriten & Slate Delete"]
+            GenresPage["Genres View<br/>Katalog & Podcast-Rubriken"]
+            StatsPage["Analytics View<br/>Chart.js Dashboard & Empfehlungen"]
+            AdminPage["Admin View<br/>Duale Suche (Radio & Podcasts)"]
+        end
+
+        subgraph AudioServices ["Audio- & Storage-Services"]
+            PlayerBar["Sticky-Bottom-Player<br/>Glassmorphism, Timeline & 15s Skip"]
+            UserStore["userStationService<br/>LocalStorage (FIFO / MRU-Sortierung)"]
+            PodcastStore["podcastService<br/>Feed-Auflösung & Episoden-Parser"]
+        end
+    end
+
+    subgraph External ["Externe Schnittstellen & Feeds"]
+        RadioBrowser["Radio-Browser API<br/>> 40.000 Sender weltweit"]
+        ApplePodcasts["Apple Podcasts API<br/>Weltweite Namenssuche (iTunes)"]
+        PodcastFeeds["Podcast RSS / XML Feeds<br/>Podigee, iTunes, XML-Feeds"]
     end
 
     subgraph Backend ["Backend API Layer (PHP 8 RESTful)"]
-        AuthAPI["auth.php (PIN Lockout & HMAC-Cookie)"]
-        StationAPI["get_stations.php (Sender-Katalog)"]
-        ManageStationAPI["manage_station.php (CRUD & MySQL Persistenz)"]
-        RadioSearchAPI["radio_search.php (Radio-Browser Query & 10m Cache)"]
-        PodcastAPI["podcast.php (Apple Podcasts Search, RSS Parser & Cache)"]
-        MetaAPI["metadata.php (Live ICY Stream Parser)"]
-        PingAPI["ping.php (Usage Analytics Tracker)"]
-        StatsAPI["get_stats.php (Aggregate & Trends)"]
-        AdminStats["get_admin_stats.php (Live Monitor)"]
-        Maintenance["maintenance.php (Cronjob Archivierung & OPTIMIZE)"]
-        DBDriver["db.php (PDO Connection & Env Switch)"]
+        direction TB
+        subgraph AdminSearch ["Admin- & Such-APIs"]
+            AuthAPI["auth.php<br/>PIN-Schutz & 5m Lockout"]
+            ManageStationAPI["manage_station.php<br/>Sender-CRUD & Auto-Fill"]
+            RadioSearchAPI["radio_search.php<br/>Live-Sendersuche (10m Cache)"]
+            PodcastAPI["podcast.php<br/>Apple Search & RSS (15m/1h Cache)"]
+        end
+
+        subgraph CoreBackend ["Streaming-, Telemetrie- & Wartungs-APIs"]
+            StationAPI["get_stations.php<br/>Sender-Katalog & MySQL-Fetch"]
+            MetaAPI["metadata.php<br/>Live ICY-Metadaten & Cover"]
+            StatsAPI["get_stats.php & ping.php<br/>Echtzeit-Hörer & Trend-Analytics"]
+            Maintenance["maintenance.php<br/>Cronjob (6-Monats-Archivierung)"]
+        end
+
+        DBDriver["db.php<br/>PDO MySQL/MariaDB Connection & Env Switch"]
     end
 
-    subgraph External ["External Services & Data Sources"]
-        RadioBrowser["Radio-Browser API (> 40.000 Sender weltweit)"]
-        ApplePodcasts["Apple Podcasts API (iTunes Search Verzeichnis)"]
-        PodcastFeeds["Podcast RSS / XML Feeds (Podigee, iTunes, etc.)"]
+    subgraph Storage ["Persistenzschicht (MySQL / MariaDB)"]
+        TStations[("stations<br/>Senderkatalog & Metadaten")]
+        TUsers[("users & listen_events<br/>Hörer-Sessions & Live-Pings")]
+        TArchive[("archived_stats<br/>Verdichtete Langzeit-Statistiken")]
     end
 
-    subgraph Storage ["Persistence Layer (MySQL / MariaDB)"]
-        TStations["stations (Katalog & Metadaten)"]
-        TUsers["users (Anonyme Hörer-Sessions)"]
-        TEvents["listen_events (Live Pings & Hördauern)"]
-        TArchive["archived_stats (Verdichtete Trend-Historie)"]
-    end
-
-    SW -->|Offline Cache & Quick Reload| Router
+    %% Client interne Verknüpfungen
+    SW --> Router
     Router --> RadioPage
     Router --> GenresPage
     Router --> StatsPage
     Router --> AdminPage
-    
-    RadioPage <-->|Top 6 Sync & Re-order| UserStore
-    GenresPage -->|Add to Top 6| UserStore
-    StatsPage -->|1-Click Top 5 Transfer| UserStore
 
-    RadioPage -->|Play Live Audio| PlayerBar
-    GenresPage -->|Preview Play| PlayerBar
-    GenresPage -->|Episoden abfragen| PodcastStore
-    StatsPage -->|Recommendation Play| PlayerBar
-    PlayerBar <-->|Audio-Lebenszyklus & Zeiterhalt| PodcastStore
+    RadioPage <--> UserStore
+    GenresPage --> PodcastStore
+    StatsPage --> UserStore
+    Views --> PlayerBar
 
-    PlayerBar -->|Periodischer Event-Ping| PingAPI
-    PlayerBar -->|Fetch Now-Playing| MetaAPI
-    GenresPage -->|Senderliste laden| StationAPI
-    StatsPage -->|Analytics & Empfehlungen abrufen| StatsAPI
-    AdminPage -->|Login mit Brute-Force-Schutz| AuthAPI
-    AdminPage -->|Sender verwalten / CRUD| ManageStationAPI
-    AdminPage -->|Live-Sendersuche| RadioSearchAPI
-    AdminPage -->|Podcast-Namenssuche & Auto-Import| PodcastAPI
-    AdminPage -->|Echtzeit-Hörer abfragen| AdminStats
+    %% Client zu Backend
+    PlayerBar --> MetaAPI
+    PlayerBar --> StatsAPI
+    RadioPage --> StationAPI
+    GenresPage --> StationAPI
+    PodcastStore --> PodcastAPI
 
-    PodcastStore -->|Auflösen der Audio-URL| PodcastAPI
-    RadioSearchAPI -->|Echtzeit-Verzeichnisabfrage| RadioBrowser
-    PodcastAPI -->|Namenssuche| ApplePodcasts
-    PodcastAPI -->|Feed abrufen & parsen| PodcastFeeds
+    AdminPage --> AuthAPI
+    AdminPage --> ManageStationAPI
+    AdminPage --> RadioSearchAPI
+    AdminPage --> PodcastAPI
 
-    PingAPI --> DBDriver
-    StationAPI --> DBDriver
-    ManageStationAPI --> DBDriver
-    StatsAPI --> DBDriver
-    AdminStats --> DBDriver
-    AuthAPI --> DBDriver
-    Maintenance --> DBDriver
+    %% Backend zu Extern
+    RadioSearchAPI --> RadioBrowser
+    PodcastAPI --> ApplePodcasts
+    PodcastAPI --> PodcastFeeds
 
+    %% Backend zu DB
+    AdminSearch --> DBDriver
+    CoreBackend --> DBDriver
     DBDriver --> TStations
     DBDriver --> TUsers
-    DBDriver --> TEvents
     DBDriver --> TArchive
-    Maintenance -->|Archive > 6 Monate & OPTIMIZE| TArchive
+    Maintenance --> TArchive
 
 [DESCRIPTION]
 ### Milo Radio – Fullstack PWA-, Streaming- & Podcast-Architektur

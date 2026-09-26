@@ -5,6 +5,19 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.8] - 2026-09-26
+
+### Behoben & Verbessert (Fixed & Improved)
+- **Interaktive Pan- & Zoom-Steuerung für alle Strukturpläne ([projects.html](file:///c:/github/portfolio_flask/templates/projects.html))**:
+  - Vollständige Neugestaltung des Vollbild-Zoom-Modals (`#mermaid-modal`) für gestochen scharfe, lesbare Diagramme.
+  - Integration intuitiver Steuerungen: Stufenloses Mausrad-Zoomen (Zoom-In / Zoom-Out von 40 % bis 500 %), Drag & Pan mit der Maus (flüssiges Verschieben per Hand-Cursor), Touch-Gesten (1-Finger-Pan, 2-Finger-Pinch) und Tastatur-Shortcuts (`+`, `-`, `0` für Reset, `Esc` zum Schließen).
+  - Elegante Floating-Toolbar mit Schnellwahl-Buttons (`+`, `-`, `Reset`), dynamischem Prozent-Badge und informativem Bedienhinweis-Banner.
+- **Re-Architektur des Mermaid-Strukturplans (Milo Radio App, [radio_app_structure.mmd](file:///c:/github/portfolio_flask/static/content/radio_app_structure.mmd))**:
+  - Vollständige Neuorganisation von überbreiten, flachen 11-Knoten-Reihen zu einem vertikal ausbalancierten `flowchart TD`-Layout mit logischen Sub-Clustern (`Admin- & Such-APIs`, `Streaming & Core`, `Audio & Store Services`, `Externe Feeds`).
+  - Zweizeilige, kompakte Knotenbeschriftungen mit `<br/>` verhindern überbreite Boxen und garantieren optimale Lesbarkeit sowohl in der Kartenvorschau als auch im interaktiven Zoom-Modal.
+
+---
+
 ## [1.2.7] - 2026-09-26
 
 ### Geändert (Changed)
