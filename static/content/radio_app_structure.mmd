@@ -4,9 +4,9 @@ graph TD
         Router["SPA Router & Swipe Navigation"]
         PlayerBar["Sticky-Bottom-Player (Glassmorphism, Scrubber-Timeline & 15s Skip)"]
         RadioPage["Radio View (Top 6 MRU & Slate Delete)"]
-        GenresPage["Genres View (Accordion, Instant Play & Podcast-Episoden)"]
+        GenresPage["Genres View (Accordion, Sub-Rubriken & Podcast-Episoden)"]
         StatsPage["Deep Analytics & Recommendations (Chart.js)"]
-        AdminPage["Admin View (Tabs: Radio-Suche, Podcast-Import, CRUD)"]
+        AdminPage["Admin View (Tabs: Radio- & Podcast-Suche, Feed-Import, CRUD)"]
         UserStore["userStationService (LocalStorage MRU/FIFO)"]
         PodcastStore["podcastService (Episoden-Parser & On-Demand Audio)"]
     end
@@ -16,7 +16,7 @@ graph TD
         StationAPI["get_stations.php (Sender-Katalog)"]
         ManageStationAPI["manage_station.php (CRUD & MySQL Persistenz)"]
         RadioSearchAPI["radio_search.php (Radio-Browser Query & 10m Cache)"]
-        PodcastAPI["podcast.php (RSS/XML Feed Parser & 15m Cache)"]
+        PodcastAPI["podcast.php (Apple Podcasts Search, RSS Parser & Cache)"]
         MetaAPI["metadata.php (Live ICY Stream Parser)"]
         PingAPI["ping.php (Usage Analytics Tracker)"]
         StatsAPI["get_stats.php (Aggregate & Trends)"]
@@ -27,6 +27,7 @@ graph TD
 
     subgraph External ["External Services & Data Sources"]
         RadioBrowser["Radio-Browser API (> 40.000 Sender weltweit)"]
+        ApplePodcasts["Apple Podcasts API (iTunes Search Verzeichnis)"]
         PodcastFeeds["Podcast RSS / XML Feeds (Podigee, iTunes, etc.)"]
     end
 
@@ -60,11 +61,12 @@ graph TD
     AdminPage -->|Login mit Brute-Force-Schutz| AuthAPI
     AdminPage -->|Sender verwalten / CRUD| ManageStationAPI
     AdminPage -->|Live-Sendersuche| RadioSearchAPI
-    AdminPage -->|Podcast-Metadaten Auto-Import| PodcastAPI
+    AdminPage -->|Podcast-Namenssuche & Auto-Import| PodcastAPI
     AdminPage -->|Echtzeit-Hörer abfragen| AdminStats
 
     PodcastStore -->|Auflösen der Audio-URL| PodcastAPI
     RadioSearchAPI -->|Echtzeit-Verzeichnisabfrage| RadioBrowser
+    PodcastAPI -->|Namenssuche| ApplePodcasts
     PodcastAPI -->|Feed abrufen & parsen| PodcastFeeds
 
     PingAPI --> DBDriver
@@ -92,15 +94,15 @@ Milo Radio kombiniert eine performante, clientseitige Single Page Application (S
   - *Echtes Pause & Resume mit Zeiterhalt:* Beim Pausieren von Podcasts bleibt die aktuelle Spielzeit (`currentTime`) im HTML5-Audio-Element exakt erhalten. Beim Fortsetzen spielt die Episode an genau derselben Stelle weiter (kein versehentliches Zurücksetzen auf 0:00).
   - *Interaktive Scrubber-Timeline:* Bei Podcast-Wiedergabe schaltet die Player-Bar dynamisch eine sekundengenaue Zeitleiste (`Aktuelle Zeit / Gesamtlänge`) frei, über die frei vor- und zurückgesprungen werden kann.
   - *15-Sekunden Quick-Skip:* Tasten für `-15s` und `+15s` ermöglichen schnelles Überspringen oder Wiederholen von Passagen.
-  - *Episodenauswahl in der Genre-Ansicht:* Podcast-Karten bieten neben dem Sofortstart der neuesten Episode den Button *"Weitere Folgen"*, der eine aufklappbare Liste der letzten Episoden samt Publikationsdatum, Laufzeit und Einzel-Play-Button anzeigt.
-  - *Server-seitiger RSS-Feed-Resolver (`podcast.php`):* Parst XML/RSS-Feeds mit Namespace-Unterstützung (`itunes:image`, `itunes:duration`, `enclosure`) und nutzt einen 15-Minuten Server-Cache zur Entlastung externer Hosts und für minimale Ladezeiten.
+  - *Episodenauswahl & Sub-Rubriken:* Podcast-Karten bieten neben dem Sofortstart der neuesten Episode den Button *"Weitere Folgen"* mit aufklappbarer Liste aller Episoden. Eine interaktive Sub-Filterleiste auf der Genre-Seite erlaubt schnelles Filtern nach Rubriken wie Politik, Finanzen, Technik oder Musik.
+  - *Server-seitiger RSS-Feed-Resolver (`podcast.php`):* Parst XML/RSS-Feeds mit cURL-Engine, Browser-Signatur und Namespace-Unterstützung (`itunes:image`, `itunes:duration`, `enclosure`) inkl. 15-Minuten Server-Cache.
 
-- **Weltweite Online-Radiosendersuche (> 40.000 Sender) & Admin-Tab-System:**
-  - *Echtzeit-Verzeichnissuche (`radio_search.php`):* Ermöglicht im Admin-Panel das Durchsuchen des weltweiten Radio-Browser-Verzeichnisses mit über 40.000 Stationen in Sekundenbruchteilen (inkl. 10-Minuten Server-Cache).
-  - *Treffer-Pool mit Länderunterscheidung:* Suchergebnisse zeigen neben Name, Genre, Bitrate und Favicon/Logo das **Herkunftsland (Country-Flag)** an. Dies ermöglicht es dem Administrator, bei Sendern mit identischen oder ähnlichen Namen (z. B. "Rock Antenne", "Sunshine Live", "1LIVE", "BBC") zielsicher den gewünschten Sender auszuwählen.
-  - *1-Klick Auto-Fill:* Ein Klick auf *"Übernehmen"* füllt alle Formularfelder (Name, Audio-Stream-URL, Genre, Logo) automatisch aus.
-  - *1-Klick Podcast-Auto-Import:* Importiert beliebige RSS-/Podigee-Links und extrahiert Metadaten und Stream-URL vollautomatisch.
-  - *Übersichtliches Tab-System:* Klare Trennung zwischen *"Radiosender suchen"* und *"Podcast importieren"* mit schlichter Bootstrap-Icons-Typografie.
+- **Weltweite Radio- & Podcast-Suche (> 40.000 Sender & Apple Podcasts API):**
+  - *Duales Admin-Suchsystem:* Umschaltbare Tabs für Radiosender und Podcasts mit identisch intuitivem Workflow.
+  - *Echtzeit-Sendersuche (`radio_search.php`):* Durchsucht das weltweite Radio-Browser-Verzeichnis (> 40.000 Stationen) mit 10-Minuten Server-Cache.
+  - *Podcast-Namenssuche (`podcast.php` mit Apple Podcasts API):* Findet reale Feeds weltweit durch einfache Namenseingabe (ohne manuelle Recherche kryptischer URLs) mit 1-stündigem Server-Cache.
+  - *Treffer-Pool mit Unterscheidungsmerkmalen:* Zeigt Name, Genre/Host, Cover/Logo, Bitrate und Herkunftsland (Country-Flag) zur zielsicheren Unterscheidung gleichnamiger Stationen oder Sendereihen.
+  - *1-Klick Auto-Fill & Import:* Übernimmt alle Audio- und Metadaten per Mausklick ins Speicherformular; ergänzt durch klappbare RSS-Direkteingabe und Komfort-Reset ("X"-Button und "Ausblenden").
 
 - **PWA & Network-First Caching:**
   - Der Service Worker (`sw.js`) erzwingt eine strikte Network-First-Strategie für HTML, Skripte und Versionierungs-Header mit automatischer Neuinitialisierung bei Updates (`controllerchange`). Dadurch bleibt die App offlinefähig und garantiert gleichzeitig sofortige Updates auf Smartphones.

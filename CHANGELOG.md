@@ -5,6 +5,16 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.7] - 2026-09-26
+
+### Geändert (Changed)
+- **Showcase- & Infotext-Aktualisierung (Milo Radio App)**:
+  - **Duale Sendersuche & Apple Podcasts Namenssuche ([radio_info.txt](file:///c:/github/portfolio_flask/static/content/radio_info.txt), [README.md](file:///c:/github/portfolio_flask/README.md)):** Präzisierung der Projekt-Info-Karte im Animations-Cards-Slider. Dokumentation der weltweiten Radio- und Podcast-Suche über das erweiterte Admin-Tab-System (> 40.000 Sender via Radio-Browser API und Podcast-Namenssuche via Apple Podcasts API) inklusive Treffer-Pool mit Länderanzeige zur Unterscheidung gleichnamiger Stationen, 1-Klick Auto-Fill und dynamischen Reset-Funktionen ("X"-Löschbutton, "Ausblenden").
+  - **Podcast-Rubriken & On-Demand-Features:** Ergänzung der Themenrubriken-Filterung (Politik, Finanzen, Technik, Musik) und der cURL-Engine für Podcast-Feeds.
+  - **Technologie-Stack & Strukturplan ([projects.json](file:///c:/github/portfolio_flask/projects.json), [radio_app_structure.mmd](file:///c:/github/portfolio_flask/static/content/radio_app_structure.mmd)):** Aufnahme der *Apple Podcasts API* in die Tech-Stack-Definition sowie Erweiterung des Mermaid-Architekturdiagramms und der technischen Beschreibung im `[DESCRIPTION]`-Block.
+
+---
+
 ## [1.2.6] - 2026-09-26
 
 ### Geändert (Changed)
