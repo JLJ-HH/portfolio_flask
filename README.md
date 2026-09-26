@@ -14,7 +14,7 @@ Die App ist nicht nur eine statische Website, sondern ein **modulares Hub**, das
 
 ## Über mich: Vom Koch zum Coder
 
-Als ehemaliger Koch weiß ich, wie wichtig das perfekte Zusammenspiel aller Zutaten ist. In der Softwareentwicklung sehe ich Frontend und Backend als zwei Seiten desselben Gerichts. Die **Fullstack-Entwicklung** ist mein Fokus: Ich liebe es, die volle Kontrolle über das Endprodukt zu behalten, schätze aber auch die Arbeitsteilung und den strukturierten Austausch im Team – genau wie in einer gut eingespielten Küchenbrigade.
+Als ehemaliger Koch weiß ich, wie wichtig das perfekte Zusammenspiel aller Zutaten ist. Heute liegt mein Schwerpunkt auf **autonomen Multi-Agenten-Systemen**, **KI-Integration** (CrewAI, JAF, Model Context Protocol / MCP) und **automatisierten Workflows**. Genau wie eine eingespielte Küchenbrigade klare Posten, perfekte Vorbereitung (*Mise en Place*) und höchste Präzision verlangt, orchestriere ich modulare Software-Komponenten und Agenten-Teams (wie den „A-Team“-Workflow), bei denen jedes Rädchen ineinandergreift.
 
 ---
 

@@ -5,6 +5,18 @@ Alle nennenswerten Änderungen an diesem Projekt werden in dieser Datei dokument
 Das Format basiert auf [Keep a Changelog](https://keepachangelog.com/de/1.0.0/)
 und dieses Projekt folgt weitgehend [Semantic Versioning](https://semver.org/lang/de/).
 
+## [1.2.6] - 2026-09-26
+
+### Geändert (Changed)
+- **Erweiterung des „Über mich“-Profils & Stacks ([about_me.md](file:///c:/github/portfolio_flask/static/content/about_me.md))**:
+  - Integration neuester Kernkompetenzen: Standardisierte Tool- und Kontextanbindung über das **Model Context Protocol (MCP)** sowie das moderne, schlanke Agentenframework **JAF**.
+  - Verankerung des **„A-Team“-Workflows** als Referenz-Architektur für strukturierte, autonome Multi-Agenten-Zusammenarbeit.
+  - Ergänzung der Spezialisierung im Kern-Stack unter *KI & Multi-Agenten* (CrewAI & JAF, Multi-Agent Workflows wie das „A-Team“, Model Context Protocol / MCP).
+- **Harmonisierung der Dokumentation ([README.md](file:///c:/github/portfolio_flask/README.md))**:
+  - Angleichung des Abschnitts *„Über mich: Vom Koch zum Coder“* an die geschärfte Spezialisierung auf Multi-Agenten-Systeme, JAF, MCP und automatisierte Workflows.
+
+---
+
 ## [1.2.5] - 2026-09-23
 
 ### Geändert (Changed)
